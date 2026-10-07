@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0f6b63">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+
+
+<title>Aide USP — Diagnostic et posologie</title>
+<style>
+:root{
+  --bg:#f4f7f6; --card:#fff; --ink:#18262b; --muted:#5b6c70; --line:#dbe4e2;
+  --brand:#0f6b63; --brand-ink:#fff; --brand-soft:#e0f1ee;
+  --red:#b3261e; --red-soft:#fde8e6; --amber:#8a5a00; --amber-soft:#fff2d6; --green:#1b6b37; --green-soft:#e1f4e6;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#0f1719; --card:#172226; --ink:#e8f0ef; --muted:#9fb2b5; --line:#2a3a3e;
+    --brand:#3fb6a8; --brand-ink:#06201d; --brand-soft:#17332f;
+    --red:#ff8a80; --red-soft:#3a1a18; --amber:#ffcc66; --amber-soft:#33280f; --green:#7ddc9a; --green-soft:#12301c; }
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--ink);font-size:17px;line-height:1.45;padding-bottom:84px}
+header{background:var(--brand);color:var(--brand-ink);padding:12px 16px 12px;position:sticky;top:0;z-index:5}
+header h1{margin:0;font-size:18px;font-weight:700}
+header small{opacity:.85;font-size:12.5px}
+.draft{background:var(--amber-soft);color:var(--amber);font-size:12.5px;padding:6px 16px;text-align:center;font-weight:600}
+main{padding:14px 16px;max-width:720px;margin:0 auto}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:12px}
+h2{font-size:20px;margin:4px 0 10px}
+h3{font-size:16px;margin:14px 0 6px}
+p{margin:6px 0}
+.muted{color:var(--muted);font-size:14.5px}
+.row{display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap}
+.field{display:flex;flex-direction:column;gap:3px;flex:1;min-width:90px}
+.field label{font-size:13px;color:var(--muted);font-weight:600}
+input,select{font:inherit;padding:10px 10px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);width:100%}
+.btn{display:block;width:100%;text-align:left;font:inherit;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:14px 16px;border-radius:12px;margin-bottom:10px;cursor:pointer}
+.btn:active{background:var(--brand-soft)}
+.btn b{display:block;font-size:17px}
+.btn span{color:var(--muted);font-size:14px}
+.btn.primary{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.btn.primary span{color:inherit;opacity:.85}
+.back{background:none;border:none;color:var(--brand);font:inherit;font-weight:600;padding:6px 0;cursor:pointer;margin-bottom:6px}
+nav{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:1px solid var(--line);display:flex;padding-bottom:env(safe-area-inset-bottom);z-index:6}
+nav button{flex:1;border:none;background:none;color:var(--muted);padding:9px 2px 8px;font:inherit;font-size:12.5px;cursor:pointer}
+nav button .i{display:block;font-size:22px;line-height:1.1}
+nav button.on{color:var(--brand);font-weight:700}
+.badge{display:inline-block;font-size:12.5px;font-weight:700;border-radius:20px;padding:3px 10px}
+.b-urgence{background:var(--red-soft);color:var(--red)}
+.b-attention{background:var(--amber-soft);color:var(--amber)}
+.b-ok{background:var(--green-soft);color:var(--green)}
+.res-urgence{border-left:6px solid var(--red)}
+.res-attention{border-left:6px solid var(--amber)}
+.res-ok{border-left:6px solid var(--green)}
+ul{padding-left:20px;margin:6px 0}
+li{margin:5px 0}
+.dose{background:var(--brand-soft);border-radius:12px;padding:12px 14px;margin:8px 0}
+.dose .big{font-size:22px;font-weight:700}
+.warn{background:var(--red-soft);color:var(--red);border-radius:10px;padding:9px 12px;margin:8px 0;font-size:15px}
+.info{background:var(--amber-soft);color:var(--amber);border-radius:10px;padding:9px 12px;margin:8px 0;font-size:15px}
+.dim{opacity:.55}
+.src{font-size:13px;font-style:italic}
+.search{margin-bottom:12px}
+.hint{background:var(--brand-soft);border-radius:10px;padding:9px 12px;font-size:14.5px;margin:6px 0 12px}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:20;display:flex;align-items:center;justify-content:center;padding:18px}
+.modal .box{background:var(--card);border-radius:16px;padding:18px;max-width:480px;max-height:90vh;overflow:auto}
+</style>
+</head>
+<body>
+<header>
+  <h1>Aide USP · Diagnostic &amp; posologie</h1>
+  <small>Fonctionne hors ligne · Outil d'aide à la décision</small>
+</header>
+<div class="draft" id="draft"></div>
+<main id="app"></main>
+<nav id="nav"></nav>
+<div id="modal"></div>
+
+<script src="data.js"></script>
+<script>
+"use strict";
+/* ============ État ============ */
+const S = { age: "", unite: "ans", poids: "", enceinte: false };
+const V = { voirTous: false, onglet: "diag", algo: null, noeud: null, chemin: [], drug: null, calcDrug: "" };
+
+const $ = (s) => document.querySelector(s);
+const esc = (t) => String(t == null ? "" : t).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+function ageMois(){ if (S.age === "" || isNaN(+S.age)) return null; return S.unite === "ans" ? +S.age*12 : +S.age; }
+function poids(){ return (S.poids === "" || isNaN(+S.poids) || +S.poids <= 0) ? null : +S.poids; }
+
+/* ============ Formatage ============ */
+function frac(n){
+  const q = Math.round(n*4)/4, ent = Math.floor(q), r = q - ent;
+  const f = {0:"",0.25:"¼",0.5:"½",0.75:"¾"}[r];
+  if (q === 0) return "moins de ¼";
+  return (ent ? ent : "") + (ent && f ? " " : "") + f;
+}
+function num(n){ return (Math.round(n*10)/10).toString().replace(".", ","); }
+function ml(n){ return num(Math.round(n*2)/2); }
+
+/* ============ Calcul ============ */
+function applicable(r){
+  const am = ageMois(), p = poids(); let inconnu = false;
+  if (r.ageMin != null){ if (am == null) inconnu = true; else if (am < r.ageMin) return "non"; }
+  if (r.ageMax != null){ if (am == null) inconnu = true; else if (am >= r.ageMax) return "non"; }
+  if (r.poidsMin != null){ if (p == null) inconnu = true; else if (p < r.poidsMin) return "non"; }
+  if (r.poidsMax != null){ if (p == null) inconnu = true; else if (p >= r.poidsMax) return "non"; }
+  return inconnu ? "?" : "oui";
+}
+function dureeTxt(r){ return r.jours ? " pendant " + r.jours + " jour" + (r.jours>1?"s":"") : ""; }
+function parJourTxt(r){ return r.parJour ? (r.parJour === 1 ? "1 fois par jour" : r.parJour + " fois par jour") : ""; }
+
+function calcul(drug, r){
+  const p = poids(); let h = "", alertes = [];
+  if (r.type === "fixe"){
+    h += `<div class="dose"><div class="big">${esc(r.texte)}</div></div>`;
+  } else if (r.type === "tranches"){
+    if (p == null){ return `<div class="info">Saisissez le poids du patient pour obtenir la dose.</div>` + meta(r); }
+    const t = r.tranches.find(x => p >= x.poidsMin && p < x.poidsMax);
+    if (!t) return `<div class="warn">Poids hors des tranches prévues (${p} kg). Avis médical.</div>` + meta(r);
+    h += `<div class="dose"><div class="big">${esc(t.texte)}</div></div>`;
+  } else if (r.type === "totalkg"){
+    if (p == null){ return `<div class="info">Saisissez le poids du patient pour obtenir la dose.</div>` + meta(r); }
+    h += `<div class="dose"><div class="big">${ml(r.dose*p)} ${esc(r.unit)} au total</div><div class="muted">${r.dose} ${esc(r.unit)}/kg × ${num(p)} kg</div></div>`;
+  } else if (r.type === "mgkg"){
+    if (p == null){ return `<div class="info">Saisissez le poids du patient pour obtenir la dose.</div>` + meta(r); }
+    const n = r.parJour || 1;
+    /* bornes en mg/kg par prise */
+    let lo = r.mgkgJour != null ? r.mgkgJour / n : r.mgkg;
+    let hi = r.mgkgJourMax != null ? r.mgkgJourMax / n : (r.mgkgMax != null ? r.mgkgMax : lo);
+    let plafond = false;
+    let maxJ = null;
+    if (r.maxJour != null) maxJ = r.maxJour;
+    const borne = (mgkg) => {
+      let d = mgkg * p;
+      if (r.maxPrise != null && d > r.maxPrise){ d = r.maxPrise; plafond = true; }
+      if (maxJ != null && r.parJour && d*n > maxJ){ d = maxJ/n; plafond = true; }
+      return d;
+    };
+    const dLo = borne(lo), dHi = borne(hi);
+    const range = Math.round(dLo) !== Math.round(dHi);
+    const doseTxt = range ? `${Math.round(dLo)} à ${Math.round(dHi)} mg` : `${Math.round(dLo)} mg`;
+    const vir = (x) => String(x).replace(".", ",");
+    const schema = r.mgkgJour != null
+      ? `${vir(r.mgkgJour)}${r.mgkgJourMax!=null ? " à " + vir(r.mgkgJourMax) : ""} mg/kg/jour en ${n} prise${n>1?"s":""}`
+      : `${vir(r.mgkg)}${r.mgkgMax!=null ? " à " + vir(r.mgkgMax) : ""} mg/kg par prise`;
+    h += `<div class="dose"><div class="big">${doseTxt} par prise</div>
+      <div>${esc(parJourTxt(r))}${esc(dureeTxt(r))}</div>
+      <div class="muted">${schema} × ${num(p)} kg${plafond ? " — dose plafonnée" : ""}${maxJ!=null ? " · max " + maxJ + " mg/jour" : ""}</div></div>`;
+    if (plafond) alertes.push("Dose plafonnée à la dose maximale autorisée.");
+    const conv = drug.formes.filter(f => f.mg > 0 && f.conv !== false).map(f => {
+      const val = (d) => f.ml ? ml(d/(f.mg/f.ml)) : frac(d/f.mg);
+      const unit = f.ml ? " mL" : "";
+      const txt = range ? `${val(dLo)} à ${val(dHi)}${unit}` : `${val(dLo)}${unit}`;
+      return `<li>${esc(f.nom)} : <b>${txt}</b> par prise</li>`;
+    });
+    if (conv.length) h += `<h3>Équivalence par forme</h3><ul>${conv.join("")}</ul><p class="muted">Arrondis au ¼ de comprimé / 0,5 mL. Choisir la forme adaptée à l'âge.</p>`;
+  }
+  if (r.type !== "mgkg" && r.parJour) h += `<p>${esc(parJourTxt(r))}${esc(dureeTxt(r))}</p>`;
+  if (alertes.length) h += alertes.map(a => `<div class="warn">${esc(a)}</div>`).join("");
+  return h + meta(r);
+}
+function meta(r){
+  let h = "";
+  if (r.note) h += `<p class="muted">${esc(r.note)}</p>`;
+  if (r.valider) h += `<div class="info">À valider : ${esc(r.valider)}</div>`;
+  if (r.source) h += `<p class="muted src">Source : ${esc(r.source)}</p>`;
+  return h;
+}
+
+/* ============ Alertes patient ============ */
+function alertesPatient(drug){
+  const am = ageMois(), out = [];
+  if (S.enceinte){
+    if (["ibuprofene","albendazole","ciprofloxacine","diclofenac","indometacine","aspirine","doxycycline","glibenclamide","metformine","antihta","allopurinol","acyclovir"].includes(drug.id)) out.push("Patiente enceinte : ce médicament est contre-indiqué ou à éviter. Avis médical.");
+    if (["act-al","asaq","metronidazole"].includes(drug.id)) out.push("Patiente enceinte : vérifier le protocole national selon le trimestre.");
+  }
+  if (am != null && am < 2 && drug.id !== "paracetamol") out.push("Nourrisson de moins de 2 mois : avis médical / référer.");
+  return out;
+}
+
+/* ============ Barre patient ============ */
+function barrePatient(){
+  return `<div class="card">
+    <div class="row">
+      <div class="field"><label>Âge</label><input id="p-age" type="number" inputmode="decimal" min="0" value="${esc(S.age)}" placeholder="ex. 3"></div>
+      <div class="field" style="max-width:110px"><label>Unité</label><select id="p-unite"><option value="ans"${S.unite==="ans"?" selected":""}>ans</option><option value="mois"${S.unite==="mois"?" selected":""}>mois</option></select></div>
+      <div class="field"><label>Poids (kg)</label><input id="p-poids" type="number" inputmode="decimal" min="0" step="0.1" value="${esc(S.poids)}" placeholder="ex. 12"></div>
+    </div>
+    <label style="display:flex;gap:8px;margin-top:10px;font-size:15px"><input id="p-enc" type="checkbox" style="width:auto"${S.enceinte?" checked":""}> Femme enceinte</label>
+  </div>`;
+}
+function brancherPatient(rerender){
+  const maj = () => {
+    S.age = $("#p-age").value; S.unite = $("#p-unite").value; S.poids = $("#p-poids").value; S.enceinte = $("#p-enc").checked;
+  };
+  ["#p-age","#p-poids"].forEach(id => { const el = $(id); if(el) el.addEventListener("input", () => { maj(); rerender && rerender(true); }); });
+  ["#p-unite","#p-enc"].forEach(id => { const el = $(id); if(el) el.addEventListener("change", () => { maj(); rerender && rerender(true); }); });
+}
+
+/* ============ Vues ============ */
+function render(){
+  const app = $("#app");
+  $("#draft").textContent = APP_META.statut + " · contenu du " + APP_META.dateContenu + " · v" + APP_META.version;
+  $("#nav").innerHTML = [["diag","🩺","Diagnostic"],["calc","💊","Posologie"],["fiches","📋","Fiches"],["info","ℹ️","Infos"]]
+    .map(([k,i,t]) => `<button class="${V.onglet===k?"on":""}" onclick="go('${k}')"><span class="i">${i}</span>${t}</button>`).join("");
+  if (V.onglet === "diag") app.innerHTML = vueDiag();
+  else if (V.onglet === "calc") app.innerHTML = vueCalc();
+  else if (V.onglet === "fiches") app.innerHTML = vueFiches();
+  else app.innerHTML = vueInfo();
+  if (V.onglet === "diag") brancherPatient(partiel);
+  if (V.onglet === "calc") { brancherPatient(partiel); const s = $("#calc-sel"); if (s) s.addEventListener("change", () => { V.calcDrug = s.value; partiel(); }); }
+  window.scrollTo(0,0);
+}
+/* rafraîchit uniquement les zones dépendantes du patient, sans perdre le focus */
+function partiel(){
+  const z = $("#zone-dyn");
+  if (!z) return;
+  if (V.onglet === "calc") z.innerHTML = zoneCalc();
+  if (V.onglet === "diag") z.innerHTML = V.algo ? zoneDiag() : zoneMenu();
+}
+function go(k){
+  V.drug = null;
+  /* revenir sur « Diagnostic » depuis un résultat terminé = nouvelle consultation */
+  if (k === "diag" && V.algo && algoById(V.algo).noeuds[V.noeud].res && (V.onglet !== "diag" || true)) { V.algo = null; V.noeud = null; V.chemin = []; }
+  V.onglet = k; render();
+}
+function algoById(id){ return ALGORITHMES.find(a => a.id === id); }
+function drugById(id){ return MEDICAMENTS.find(m => m.id === id); }
+
+/* --- Diagnostic --- */
+function vueDiag(){
+  if (!V.algo){
+    return `<h2>Que présente le patient ?</h2>
+      ${barrePatient()}
+      <div id="zone-dyn">${zoneDiag()}</div>`;
+  }
+  const a = algoById(V.algo), n = a.noeuds[V.noeud];
+  const haut = `<button class="back" onclick="retour()">← Retour</button><div class="muted">${esc(a.titre)} · étape ${V.chemin.length+1}</div>`;
+  return haut + `<div id="zone-dyn">${zoneDiag()}</div>` + (n.res ? `<h3>Données du patient</h3>${barrePatient()}` : "");
+}
+function zoneDiag(){
+  if (!V.algo) return zoneMenu();
+  const a = algoById(V.algo), n = a.noeuds[V.noeud];
+  if (!n) return "";
+  const g = groupePatient(), a2 = algoById(V.algo);
+  const incoh = (g && a2.groupe && a2.groupe !== "Tous" && g !== a2.groupe)
+    ? `<div class="warn">⚠ Cet arbre concerne ${a2.groupe === "Adulte" ? "l'adulte (15 ans et plus)" : "l'enfant (moins de 15 ans)"} ; le patient est ${g === "Adulte" ? "un adulte" : "un enfant"}. Vérifiez l'âge saisi ou changez de motif.</div>` : "";
+  if (n.res) return incoh + vueResultat(n.res);
+  return incoh + `<h2>${esc(n.q)}</h2>
+    ${n.aide ? `<div class="hint">${esc(n.aide)}</div>` : ""}
+    ${n.options.map((o,i) => `<button class="btn" onclick="choisir(${i})"><b>${esc(o.t)}</b></button>`).join("")}`;
+}
+function groupePatient(){
+  const am = ageMois();
+  if (am == null) return null;
+  return am >= 180 ? "Adulte" : "Enfant";
+}
+function zoneMenu(){
+  const g = groupePatient();
+  const liste = (grp) => ALGORITHMES.filter(a => a.groupe === grp)
+    .map(a => `<button class="btn" onclick="lancer('${a.id}')"><b>${esc(a.titre)}</b><span>${esc(a.sous)}</span></button>`).join("");
+  const tous = ALGORITHMES.some(a => a.groupe === "Tous") ? `<h3>Tous âges</h3>${liste("Tous")}` : "";
+  if (!g){
+    return `<div class="hint">Saisissez l'âge du patient : l'application affichera les motifs de consultation adaptés (enfant ou adulte). Adulte = 15 ans et plus.</div>
+      <h3>Enfant (moins de 15 ans)</h3>${liste("Enfant")}<h3>Adulte (15 ans et plus)</h3>${liste("Adulte")}${tous}`;
+  }
+  const autre = g === "Adulte" ? "Enfant" : "Adulte";
+  const am = ageMois();
+  const ageTxt = am < 24 ? Math.round(am) + " mois" : Math.floor(am/12) + " ans";
+  return `<div class="hint">Patient : <b>${g.toLowerCase()}</b> (${esc(ageTxt)}). Motifs de consultation ${g === "Adulte" ? "de l'adulte" : "de l'enfant"} :</div>
+    ${liste(g)}${tous}
+    ${V.voirTous ? `<h3>${autre === "Enfant" ? "Enfant (moins de 15 ans)" : "Adulte (15 ans et plus)"}</h3>${liste(autre)}
+      <button class="back" onclick="V.voirTous=false;partiel()">Masquer les motifs ${autre === "Enfant" ? "de l'enfant" : "de l'adulte"}</button>`
+    : `<button class="back" onclick="V.voirTous=true;partiel()">Afficher aussi les motifs ${autre === "Enfant" ? "de l'enfant" : "de l'adulte"}</button>`}`;
+}
+function lancer(id){ V.algo = id; V.noeud = algoById(id).debut; V.chemin = []; render(); }
+function choisir(i){
+  const a = algoById(V.algo), o = a.noeuds[V.noeud].options[i];
+  V.chemin.push({ algo: V.algo, noeud: V.noeud, memo: o.memo });
+  if (o.vers.startsWith("algo:")){
+    const [id, nd] = o.vers.slice(5).split("#");
+    V.algo = id; V.noeud = nd || algoById(id).debut;
+  } else V.noeud = o.vers;
+  render();
+}
+function retour(){
+  const p = V.chemin.pop();
+  if (!p){ V.algo = null; V.noeud = null; } else { V.algo = p.algo; V.noeud = p.noeud; }
+  render();
+}
+function kgTxt(t){
+  const manque = "(saisir le poids)";
+  return t.replace(/\{kg:(\d+(?:\.\d+)?)\}/g, (_, k) => poids() == null ? manque : ml(+k * poids()))
+          .replace(/\{(?:mg|n):(\d+(?:\.\d+)?)\}/g, (_, k) => poids() == null ? manque : num(+k * poids()));
+}
+function vueResultat(r){
+  const lib = {urgence:"URGENCE", attention:"À TRAITER", ok:"SOINS À DOMICILE"}[r.niveau];
+  const meds = (r.meds||[]).map(drugById).filter(Boolean);
+  const memos = V.chemin.map(c => c.memo).filter(Boolean);
+  const valider = r.valider ? (Array.isArray(r.valider) ? r.valider : [r.valider]) : [];
+  return `<div class="card res-${r.niveau}">
+      <span class="badge b-${r.niveau}">${lib}</span>
+      <h2 style="margin-top:8px">${esc(r.titre)}</h2>
+      <p><b>${esc(r.resume)}</b></p>
+      ${memos.length ? `<div class="hint">${memos.map(m => esc(m)).join("<br>")}</div>` : ""}
+      <h3>Conduite à tenir</h3>
+      <ul>${r.conduite.map(c => `<li>${esc(kgTxt(c))}</li>`).join("")}</ul>
+      ${poids()==null && r.conduite.some(c=>/\{(kg|mg|n):/.test(c)) ? `<div class="info">Saisissez le poids ci-dessous pour calculer les volumes et doses.</div>` : ""}
+      ${valider.map(v => `<div class="info">À valider : ${esc(v)}</div>`).join("")}
+      ${r.source ? `<p class="muted src">Source : ${esc(r.source)}</p>` : ""}
+    </div>
+    ${meds.length ? `<h3>Posologies suggérées</h3>` + meds.map(m => `<button class="btn" onclick="ouvrirCalc('${m.id}')"><b>${esc(m.nom)}</b><span>Calculer la dose pour ce patient</span></button>`).join("") : ""}
+    <div class="card"><div class="muted">Orientation à confirmer par l'examen clinique. En cas de doute ou d'aggravation : référer.</div></div>
+    <button class="btn primary" onclick="V.algo=null;V.noeud=null;V.chemin=[];render()"><b>Nouvelle consultation</b></button>`;
+}
+function ouvrirCalc(id){ V.onglet = "calc"; V.calcDrug = id; render(); }
+
+/* --- Calculateur --- */
+function vueCalc(){
+  return `<h2>Calculateur de posologie</h2>
+    ${barrePatient()}
+    <div class="field" style="margin-bottom:12px"><label>Médicament</label>
+      <select id="calc-sel"><option value="">— Choisir —</option>${MEDICAMENTS.map(m => `<option value="${m.id}"${V.calcDrug===m.id?" selected":""}>${esc(m.nom)}</option>`).join("")}</select></div>
+    <div id="zone-dyn">${zoneCalc()}</div>`;
+}
+function zoneCalc(){
+  const d = drugById(V.calcDrug);
+  if (!d) return `<p class="muted">Renseignez l'âge et le poids, puis choisissez un médicament.</p>`;
+  const al = alertesPatient(d).map(a => `<div class="warn">⚠ ${esc(a)}</div>`).join("");
+  const regs = d.regimes.map(r => ({ r, ok: applicable(r) }));
+  const tri = regs.sort((a,b) => (a.ok==="non") - (b.ok==="non"));
+  return `<h3>${esc(d.nom)}</h3><div class="muted">${esc(d.classe)}</div>${al}
+    ${tri.map(({r, ok}) => `<div class="card ${ok==="non"?"dim":""}">
+        <b>${esc(r.indication)}</b>
+        ${ok==="non" ? `<p class="muted">Ne correspond pas à l'âge/poids du patient.</p>` : ""}
+        ${ok==="?" ? `<div class="info">Âge ou poids manquant : vérifier que ce schéma convient.</div>` : ""}
+        ${ok!=="non" ? calcul(d, r) : ""}
+      </div>`).join("")}
+    <button class="btn" onclick="V.onglet='fiches';V.drug='${d.id}';render()"><b>Voir la fiche complète</b><span>Contre-indications, précautions, effets</span></button>`;
+}
+
+/* --- Fiches --- */
+function vueFiches(){
+  if (V.drug){
+    const d = drugById(V.drug);
+    const li = (a) => `<ul>${a.map(x => `<li>${esc(x)}</li>`).join("")}</ul>`;
+    return `<button class="back" onclick="V.drug=null;render()">← Liste</button>
+      <h2>${esc(d.nom)}</h2><div class="muted">${esc(d.classe)}</div>
+      <div class="card"><h3 style="margin-top:0">Formes</h3>${li(d.formes.map(f => f.nom))}
+        <h3>Indications / schémas</h3>${li(d.regimes.map(r => r.indication))}</div>
+      <div class="card"><h3 style="margin-top:0">Contre-indications</h3>${li(d.ci)}</div>
+      <div class="card"><h3 style="margin-top:0">Précautions</h3>${li(d.precautions)}</div>
+      <div class="card"><h3 style="margin-top:0">Effets indésirables</h3>${li(d.effets)}</div>
+      <button class="btn primary" onclick="ouvrirCalc('${d.id}')"><b>Calculer la posologie</b></button>`;
+  }
+  return `<h2>Fiches médicament</h2>
+    <input class="search" id="rech" placeholder="Rechercher…" oninput="filtrer(this.value)">
+    <div id="liste-fiches">${listeFiches("")}</div>`;
+}
+function listeFiches(q){
+  q = q.trim().toLowerCase();
+  return MEDICAMENTS.filter(m => !q || (m.nom + " " + m.classe).toLowerCase().includes(q))
+    .map(m => `<button class="btn" onclick="V.drug='${m.id}';render()"><b>${esc(m.nom)}</b><span>${esc(m.classe)}</span></button>`).join("") || `<p class="muted">Aucun résultat.</p>`;
+}
+function filtrer(q){ $("#liste-fiches").innerHTML = listeFiches(q); }
+
+/* --- Infos --- */
+function vueInfo(){
+  return `<h2>À propos</h2>
+    <div class="card"><div class="warn" style="margin-top:0"><b>Outil d'aide à la décision, pas un substitut au jugement clinique.</b> Les doses et conduites à tenir doivent être vérifiées dans les protocoles nationaux en vigueur. Le professionnel de santé reste seul responsable de la prescription.</div>
+      <p><b>État du contenu :</b> ${esc(APP_META.statut)}<br><b>Version :</b> ${esc(APP_META.version)}<br><b>Date du contenu :</b> ${esc(APP_META.dateContenu)}</p>
+      <p class="muted">Contenu aligné sur le manuel d'ordinogrammes du Togo (2015). Il doit être relu et validé avant tout usage réel.</p>
+      <h3>Sources</h3><ul>${(APP_META.sources||[]).map(x => `<li>${esc(x)}</li>`).join("")}</ul></div>
+    <div class="card"><h3 style="margin-top:0">Contenu actuel</h3>
+      <ul><li>${MEDICAMENTS.length} médicaments</li><li>${ALGORITHMES.length} arbres de décision : ${ALGORITHMES.map(a=>esc(a.titre)).join(", ")}</li></ul></div>
+    <div class="card"><h3 style="margin-top:0">Mode hors ligne</h3><p class="muted" id="etat-sw">Vérification…</p></div>`;
+}
+
+/* ============ Avertissement initial ============ */
+function avertissement(){
+  let vu = false; try { vu = sessionStorage.getItem("avert") === "1"; } catch(e){}
+  if (vu) return;
+  $("#modal").innerHTML = `<div class="modal"><div class="box">
+    <h2>Avant de commencer</h2>
+    <p>Cette application est une <b>aide à la décision</b> destinée aux professionnels de santé. Elle ne remplace ni l'examen clinique ni les protocoles nationaux.</p>
+    <p class="warn"><b>Version brouillon :</b> le contenu n'a pas encore été validé. Ne pas utiliser pour traiter de vrais patients avant relecture.</p>
+    <button class="btn primary" onclick="fermerAvert()"><b>J'ai compris</b></button></div></div>`;
+}
+function fermerAvert(){ try { sessionStorage.setItem("avert","1"); } catch(e){} $("#modal").innerHTML = ""; }
+
+/* ============ Démarrage + hors ligne ============ */
+render(); avertissement();
+if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost")){
+  navigator.serviceWorker.register("sw.js").then(() => {
+    const e = $("#etat-sw"); if (e) e.textContent = "Prête pour le hors ligne : après ce premier chargement, l'application fonctionne sans internet.";
+  }).catch(() => {});
+}
+document.addEventListener("click", () => { const e = $("#etat-sw"); if (e && e.textContent === "Vérification…") e.textContent = (navigator.serviceWorker && navigator.serviceWorker.controller) ? "Mode hors ligne actif." : "Fichier ouvert localement : fonctionne sans internet tant que le fichier reste sur le téléphone."; });
+</script>
+</body>
+</html>
