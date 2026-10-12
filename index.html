@@ -176,7 +176,7 @@ function meta(r){
 function alertesPatient(drug){
   const am = ageMois(), out = [];
   if (S.enceinte){
-    if (["ibuprofene","albendazole","ciprofloxacine","diclofenac","indometacine","aspirine","doxycycline","glibenclamide","metformine","antihta","allopurinol","acyclovir"].includes(drug.id)) out.push("Patiente enceinte : ce médicament est contre-indiqué ou à éviter. Avis médical.");
+    if (["ibuprofene","albendazole","ciprofloxacine","diclofenac","indometacine","aspirine","doxycycline","glibenclamide","metformine","antihta","allopurinol","acyclovir","griseofulvine","prednisolone","fluconazole"].includes(drug.id)) out.push("Patiente enceinte : ce médicament est contre-indiqué ou à éviter. Avis médical.");
     if (["act-al","asaq","metronidazole"].includes(drug.id)) out.push("Patiente enceinte : vérifier le protocole national selon le trimestre.");
   }
   if (am != null && am < 2 && drug.id !== "paracetamol") out.push("Nourrisson de moins de 2 mois : avis médical / référer.");
@@ -294,11 +294,22 @@ function retour(){
   render();
 }
 function kgTxt(t){
-  const manque = "(saisir le poids)";
+  const manque = "[poids ?]";
   return t.replace(/\{kg:(\d+(?:\.\d+)?)\}/g, (_, k) => poids() == null ? manque : ml(+k * poids()))
           .replace(/\{(?:mg|n):(\d+(?:\.\d+)?)\}/g, (_, k) => poids() == null ? manque : num(+k * poids()));
 }
+/* Conduite : texte simple, ou {g:"Enfant"|"Adulte", t:"..."} filtré selon l'âge saisi */
+function lignesConduite(r){
+  const g = groupePatient();
+  return r.conduite.map(c => {
+    if (typeof c === "string") return c;
+    if (g && g === c.g) return c.t;
+    if (g) return null;
+    return "[" + c.g + "] " + c.t;
+  }).filter(x => x != null);
+}
 function vueResultat(r){
+  const lignes = lignesConduite(r);
   const lib = {urgence:"URGENCE", attention:"À TRAITER", ok:"SOINS À DOMICILE"}[r.niveau];
   const meds = (r.meds||[]).map(drugById).filter(Boolean);
   const memos = V.chemin.map(c => c.memo).filter(Boolean);
@@ -309,8 +320,8 @@ function vueResultat(r){
       <p><b>${esc(r.resume)}</b></p>
       ${memos.length ? `<div class="hint">${memos.map(m => esc(m)).join("<br>")}</div>` : ""}
       <h3>Conduite à tenir</h3>
-      <ul>${r.conduite.map(c => `<li>${esc(kgTxt(c))}</li>`).join("")}</ul>
-      ${poids()==null && r.conduite.some(c=>/\{(kg|mg|n):/.test(c)) ? `<div class="info">Saisissez le poids ci-dessous pour calculer les volumes et doses.</div>` : ""}
+      <ul>${lignes.map(c => `<li>${esc(kgTxt(c))}</li>`).join("")}</ul>
+      ${poids()==null && lignes.some(c=>/\{(kg|mg|n):/.test(c)) ? `<div class="info">Saisissez le poids ci-dessous pour calculer les volumes et doses.</div>` : ""}
       ${valider.map(v => `<div class="info">À valider : ${esc(v)}</div>`).join("")}
       ${r.source ? `<p class="muted src">Source : ${esc(r.source)}</p>` : ""}
     </div>

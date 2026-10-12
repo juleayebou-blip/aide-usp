@@ -1,6 +1,6 @@
 // Service worker : met l'application en cache pour un usage hors ligne.
 // Changer le numéro de version à chaque modification de contenu pour forcer la mise à jour.
-const VERSION = "aide-usp-v0.4";
+const VERSION = "aide-usp-v0.7";
 const FICHIERS = ["./", "index.html", "data.js", "manifest.json", "icon-192.png", "icon-512.png"];
 
 self.addEventListener("install", e => {
