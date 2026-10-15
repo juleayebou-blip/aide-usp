@@ -84,7 +84,7 @@ li{margin:5px 0}
 "use strict";
 /* ============ État ============ */
 const S = { age: "", unite: "ans", poids: "", enceinte: false };
-const V = { voirTous: false, onglet: "diag", algo: null, noeud: null, chemin: [], drug: null, calcDrug: "" };
+const V = { motif: "", voirTous: false, onglet: "diag", algo: null, noeud: null, chemin: [], drug: null, calcDrug: "" };
 
 const $ = (s) => document.querySelector(s);
 const esc = (t) => String(t == null ? "" : t).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -176,8 +176,8 @@ function meta(r){
 function alertesPatient(drug){
   const am = ageMois(), out = [];
   if (S.enceinte){
-    if (["ibuprofene","albendazole","ciprofloxacine","diclofenac","indometacine","aspirine","doxycycline","glibenclamide","metformine","antihta","allopurinol","acyclovir","griseofulvine","prednisolone","fluconazole"].includes(drug.id)) out.push("Patiente enceinte : ce médicament est contre-indiqué ou à éviter. Avis médical.");
-    if (["act-al","asaq","metronidazole"].includes(drug.id)) out.push("Patiente enceinte : vérifier le protocole national selon le trimestre.");
+    if (["ibuprofene","albendazole","ciprofloxacine","diclofenac","indometacine","aspirine","doxycycline","glibenclamide","metformine","antihta","allopurinol","acyclovir","griseofulvine","prednisolone","fluconazole","hydrochlorothiazide"].includes(drug.id)) out.push("Patiente enceinte : ce médicament est contre-indiqué ou à éviter. Avis médical.");
+    if (["act-al","asaq","metronidazole","cotrimoxazole"].includes(drug.id)) out.push("Patiente enceinte : vérifier le protocole national selon le trimestre.");
   }
   if (am != null && am < 2 && drug.id !== "paracetamol") out.push("Nourrisson de moins de 2 mois : avis médical / référer.");
   return out;
@@ -202,17 +202,18 @@ function brancherPatient(rerender){
   ["#p-unite","#p-enc"].forEach(id => { const el = $(id); if(el) el.addEventListener("change", () => { maj(); rerender && rerender(true); }); });
 }
 
+let ETAT_HL = "";
 /* ============ Vues ============ */
 function render(){
   const app = $("#app");
-  $("#draft").textContent = APP_META.statut + " · contenu du " + APP_META.dateContenu + " · v" + APP_META.version;
+  $("#draft").textContent = APP_META.statut + " · contenu du " + APP_META.dateContenu + " · v" + APP_META.version + (ETAT_HL ? " · " + ETAT_HL : "");
   $("#nav").innerHTML = [["diag","🩺","Diagnostic"],["calc","💊","Posologie"],["fiches","📋","Fiches"],["info","ℹ️","Infos"]]
     .map(([k,i,t]) => `<button class="${V.onglet===k?"on":""}" onclick="go('${k}')"><span class="i">${i}</span>${t}</button>`).join("");
   if (V.onglet === "diag") app.innerHTML = vueDiag();
   else if (V.onglet === "calc") app.innerHTML = vueCalc();
   else if (V.onglet === "fiches") app.innerHTML = vueFiches();
   else app.innerHTML = vueInfo();
-  if (V.onglet === "diag") brancherPatient(partiel);
+  if (V.onglet === "diag") { brancherPatient(partiel); if (!V.algo) chercherMotif(); }
   if (V.onglet === "calc") { brancherPatient(partiel); const s = $("#calc-sel"); if (s) s.addEventListener("change", () => { V.calcDrug = s.value; partiel(); }); }
   window.scrollTo(0,0);
 }
@@ -221,7 +222,7 @@ function partiel(){
   const z = $("#zone-dyn");
   if (!z) return;
   if (V.onglet === "calc") z.innerHTML = zoneCalc();
-  if (V.onglet === "diag") z.innerHTML = V.algo ? zoneDiag() : zoneMenu();
+  if (V.onglet === "diag") { z.innerHTML = V.algo ? zoneDiag() : zoneMenu(); if (!V.algo) chercherMotif(); }
 }
 function go(k){
   V.drug = null;
@@ -237,6 +238,9 @@ function vueDiag(){
   if (!V.algo){
     return `<h2>Que présente le patient ?</h2>
       ${barrePatient()}
+      <div class="card"><label for="motif"><b>Motif de consultation principal</b> (écrire librement)</label>
+        <input id="motif" type="search" autocomplete="off" value="${esc(V.motif)}" placeholder="ex. : douleur de gorge, toux, ventre, dent, peau…" oninput="V.motif=this.value;chercherMotif()">
+        <div id="motif-res"></div></div>
       <div id="zone-dyn">${zoneDiag()}</div>`;
   }
   const a = algoById(V.algo), n = a.noeuds[V.noeud];
@@ -254,6 +258,41 @@ function zoneDiag(){
   return incoh + `<h2>${esc(n.q)}</h2>
     ${n.aide ? `<div class="hint">${esc(n.aide)}</div>` : ""}
     ${n.options.map((o,i) => `<button class="btn" onclick="choisir(${i})"><b>${esc(o.t)}</b></button>`).join("")}`;
+}
+/* --- Recherche libre du motif de consultation --- */
+function normMot(t){ return String(t||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]+/g," ").trim(); }
+const MOTS_VIDES = new Set(["de","du","des","la","le","les","un","une","en","au","aux","avec","sans","mal","douleur","douleurs","depuis","jour","jours","pour","chez","patient","patiente","qui","que","est","sur","dans","tres","plus","avoir","a","ai"]);
+function racine(m){ return m.replace(/(s|x)$/,""); }
+function scoreMotif(q, mots){
+  const qt = q.split(" ").filter(t => t.length >= 3 && !MOTS_VIDES.has(t)).map(racine);
+  let sc = 0;
+  for (const kw of mots){
+    const k = normMot(kw); if (!k) continue;
+    if (k.length >= 4 && (" " + q + " ").includes(" " + k + " ")) { sc += 2 + k.split(" ").length; continue; }
+    const kt = k.split(" ").filter(w => !MOTS_VIDES.has(w)).map(racine);
+    for (const t of qt) for (const w of kt)
+      if (t === w || (t.length >= 5 && w.length >= 5 && (t.startsWith(w.slice(0,5)) || w.startsWith(t.slice(0,5))))) { sc += 1; break; }
+  }
+  return sc;
+}
+function chercherMotif(){
+  const z = $("#motif-res"); if (!z) return;
+  const q = normMot(V.motif);
+  if (q.length < 3){ z.innerHTML = ""; return; }
+  const g = groupePatient();
+  let r = ALGORITHMES.map(a => ({ a, sc: scoreMotif(q, MOTS_CLES[a.id] || []) })).filter(x => x.sc > 0);
+  if (g) r = r.filter(x => x.a.groupe === g || x.a.groupe === "Tous");
+  r.sort((x, y) => y.sc - x.sc);
+  r = r.slice(0, 5);
+  if (!r.length){
+    z.innerHTML = `<div class="hint">Aucun arbre ne correspond à « ${esc(V.motif)} ». Essayez un autre mot (fièvre, toux, ventre, gorge, peau, dent…), choisissez dans la liste ci-dessous, ou référez pour avis médical.</div>`; return;
+  }
+  z.innerHTML = `<div class="hint">Suggestions : touchez le motif le plus proche ; l'application posera ensuite les questions pour affiner.</div>` +
+    r.map(x => {
+      const n = x.a.noeuds[x.a.debut];
+      const etiq = g ? "" : (x.a.groupe === "Tous" ? "" : " (" + x.a.groupe.toLowerCase() + ")");
+      return `<button class="btn" onclick="lancer('${x.a.id}')"><b>${esc(x.a.titre)}${etiq}</b><span>1re question : ${esc(n.q || "")}</span></button>`;
+    }).join("");
 }
 function groupePatient(){
   const am = ageMois();
@@ -325,9 +364,15 @@ function vueResultat(r){
       ${valider.map(v => `<div class="info">À valider : ${esc(v)}</div>`).join("")}
       ${r.source ? `<p class="muted src">Source : ${esc(r.source)}</p>` : ""}
     </div>
+    ${(r.liens||[]).length ? `<h3>Voir aussi</h3>` + r.liens.map(l => `<button class="btn" onclick="suivreLien('${l.vers}')"><b>${esc(l.t)}</b><span>Ouvrir cet arbre de décision</span></button>`).join("") : ""}
     ${meds.length ? `<h3>Posologies suggérées</h3>` + meds.map(m => `<button class="btn" onclick="ouvrirCalc('${m.id}')"><b>${esc(m.nom)}</b><span>Calculer la dose pour ce patient</span></button>`).join("") : ""}
     <div class="card"><div class="muted">Orientation à confirmer par l'examen clinique. En cas de doute ou d'aggravation : référer.</div></div>
     <button class="btn primary" onclick="V.algo=null;V.noeud=null;V.chemin=[];render()"><b>Nouvelle consultation</b></button>`;
+}
+function suivreLien(vers){
+  V.chemin.push({ algo: V.algo, noeud: V.noeud });
+  const [id, nd] = vers.slice(5).split("#");
+  V.algo = id; V.noeud = nd || algoById(id).debut; render();
 }
 function ouvrirCalc(id){ V.onglet = "calc"; V.calcDrug = id; render(); }
 
@@ -406,12 +451,28 @@ function fermerAvert(){ try { sessionStorage.setItem("avert","1"); } catch(e){} 
 
 /* ============ Démarrage + hors ligne ============ */
 render(); avertissement();
-if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost")){
-  navigator.serviceWorker.register("sw.js").then(() => {
-    const e = $("#etat-sw"); if (e) e.textContent = "Prête pour le hors ligne : après ce premier chargement, l'application fonctionne sans internet.";
-  }).catch(() => {});
+function majEtatHL(){
+  if (!("serviceWorker" in navigator) || !window.caches) { ETAT_HL = ""; return; }
+  if (!(location.protocol === "https:" || location.hostname === "localhost")) { ETAT_HL = ""; return; }
+  caches.keys().then(ks => {
+    const k = ks.find(x => x.indexOf("aide-usp-") === 0);
+    if (!k) { ETAT_HL = "⚠ hors ligne non prêt"; return null; }
+    return caches.open(k).then(c => Promise.all([c.match("index.html"), c.match("data.js")])).then(([i, d]) => {
+      ETAT_HL = (i && d) ? "✔ hors ligne prêt" : "⚠ hors ligne non prêt";
+    });
+  }).catch(() => {}).then(() => {
+    const e = $("#etat-sw");
+    if (e) e.textContent = ETAT_HL ? (ETAT_HL.indexOf("✔") === 0
+      ? "✔ Prête pour le hors ligne : les fichiers sont enregistrés sur ce téléphone. Si l'application refuse de s'ouvrir sans internet, rouvrez-la une fois avec internet, attendez 10 secondes, puis réessayez. Pour une sécurité maximale, gardez aussi le fichier Aide-USP.html sur le téléphone."
+      : "⚠ Pas encore prête : ouvrez l'application avec une connexion internet, attendez quelques secondes, puis rouvrez cette page.") : "Fichier ouvert localement : fonctionne sans internet tant que le fichier reste sur le téléphone.";
+    $("#draft").textContent = APP_META.statut + " · contenu du " + APP_META.dateContenu + " · v" + APP_META.version + (ETAT_HL ? " · " + ETAT_HL : "");
+  });
 }
-document.addEventListener("click", () => { const e = $("#etat-sw"); if (e && e.textContent === "Vérification…") e.textContent = (navigator.serviceWorker && navigator.serviceWorker.controller) ? "Mode hors ligne actif." : "Fichier ouvert localement : fonctionne sans internet tant que le fichier reste sur le téléphone."; });
+if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost")){
+  navigator.serviceWorker.register("sw.js", { updateViaCache: "none" }).then(() => navigator.serviceWorker.ready).then(() => { majEtatHL(); setTimeout(majEtatHL, 4000); }).catch(() => { ETAT_HL = ""; });
+  try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist(); } catch(e){}
+}
+document.addEventListener("click", () => { const e = $("#etat-sw"); if (e && e.textContent === "Vérification…") majEtatHL(); });
 </script>
 </body>
 </html>

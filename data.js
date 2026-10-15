@@ -10,14 +10,15 @@
    ===================================================================== */
 
 const APP_META = {
-  version: "0.7-prototype",
-  dateContenu: "2026-10-11",
-  statut: "BROUILLON NON VALIDÉ",
-  sources: [
+  "version": "0.9.1-prototype",
+  "dateContenu": "2026-10-15",
+  "statut": "BROUILLON NON VALIDÉ",
+  "sources": [
     "Manuel d'ordinogrammes, MSP Togo, juin 2015 (source principale)",
     "Guides cliniques et thérapeutiques RDC 2016, Médecine interne et Pédiatrie (source pour les ajouts v0.3 : ulcère, morsures, diabète, HTA, drépanocytose, hémorroïdes, rhumatisme ; les IST viennent du manuel togolais)",
     "Fiche « HTA de l'adulte au centre de santé » (11/10/2026) : source de l'algorithme HTA",
-    "Algorithme « Prise en charge des IST » (SANTÉ D'ABORD) : source de l'algorithme IST"
+    "Algorithme « Prise en charge des IST » (SANTÉ D'ABORD) : source de l'algorithme IST",
+    "v0.9 : ajout de tous les ordinogrammes du manuel togolais non encore intégrés (Ord. 3, 5, 6, 7, 8, 13, 15, 19 à 22, 24, 25, 28 à 33, 37, 38, 41 à 44)"
   ]
 };
 
@@ -192,6 +193,26 @@ const MEDICAMENTS = [
         "ageMax": 180,
         "note": "Dose selon le poids, 3 fois par jour, pendant les repas. Durée courte. Éviter en cas de déshydratation.",
         "source": "Décision du validateur"
+      },
+      {
+        "id": "ibu-dysmen",
+        "indication": "Dysménorrhée — femme",
+        "type": "fixe",
+        "texte": "800 mg matin et soir au cours des repas, pendant les 3 jours précédant les règles, pendant 3 cycles",
+        "parJour": 2,
+        "jours": 3,
+        "ageMin": 180,
+        "note": "Pas d'amélioration après 3 cycles : référer.",
+        "source": "Togo Ord. 24 (traitement 14), Ord. 28 (traitement 9)"
+      },
+      {
+        "id": "ibu-gyn",
+        "indication": "Endométrite, fibrome, plaie vulvo-vaginale — adulte",
+        "type": "fixe",
+        "texte": "800 mg matin et soir au cours des repas",
+        "parJour": 2,
+        "ageMin": 180,
+        "source": "Togo Ord. 24, 25 et 32"
       }
     ],
     "ci": [
@@ -369,6 +390,84 @@ const MEDICAMENTS = [
         "ageMax": 180,
         "note": "Avec le métronidazole et le paracétamol sirop ; référer si pas d'amélioration.",
         "source": "Dose retenue par le validateur : 50 mg/kg/jour en 2 prises, 7 jours"
+      },
+      {
+        "id": "amox-gorge-adu",
+        "indication": "Angine bactérienne — adulte",
+        "type": "fixe",
+        "texte": "1 g (2 gélules de 500 mg) matin et soir",
+        "parJour": 2,
+        "jours": 10,
+        "ageMin": 180,
+        "note": "Continuer l'antibiotique même après la disparition des douleurs (rhumatisme articulaire aigu, glomérulonéphrite, endocardite).",
+        "source": "Togo Ord. 40 (mal de gorge)"
+      },
+      {
+        "id": "amox-oeil-enf",
+        "indication": "Œil de l'enfant (conjonctivite, orgelet, blépharite, blessure de la cornée), associée à la pommade",
+        "type": "mgkg",
+        "mgkgJour": 50,
+        "parJour": 2,
+        "jours": 7,
+        "maxPrise": 1000,
+        "ageMin": 2,
+        "ageMax": 180,
+        "note": "Pas d'amélioration : référer.",
+        "source": "Togo Ord. 13"
+      },
+      {
+        "id": "amox-nez-enf",
+        "indication": "Rhinopharyngite, sinusite, traumatisme du nez, plaies de la bouche — enfant",
+        "type": "mgkg",
+        "mgkgJour": 50,
+        "parJour": 2,
+        "jours": 7,
+        "maxPrise": 1000,
+        "ageMin": 2,
+        "ageMax": 180,
+        "note": "Après 7 jours : si bonne évolution, continuer 3 jours ; si fièvre persistante, référer.",
+        "source": "Togo Ord. 41 (traitement 1)"
+      },
+      {
+        "id": "amox-gyn",
+        "indication": "Endométrite — adulte",
+        "type": "fixe",
+        "texte": "500 mg : 2 comprimés matin et soir pendant 10 jours",
+        "parJour": 2,
+        "jours": 10,
+        "ageMin": 180,
+        "source": "Togo Ord. 24, traitement 6"
+      },
+      {
+        "id": "amox-sein",
+        "indication": "Mastite / abcès du sein — adulte",
+        "type": "fixe",
+        "texte": "1 g matin et soir pendant 10 jours",
+        "parJour": 2,
+        "jours": 10,
+        "ageMin": 180,
+        "source": "Togo Ord. 29, traitement 2"
+      },
+      {
+        "id": "amox-pp",
+        "indication": "Suites de couches chez la femme qui allaite — adulte",
+        "type": "fixe",
+        "texte": "1 g matin et soir pendant 7 jours",
+        "parJour": 2,
+        "jours": 7,
+        "ageMin": 180,
+        "source": "Togo Ord. 30"
+      },
+      {
+        "id": "amox-nez-adulte",
+        "indication": "Rhinopharyngite, sinusite, traumatisme du nez, œil, plaies de la bouche — adulte",
+        "type": "fixe",
+        "texte": "500 mg : 2 gélules ou comprimés matin et soir",
+        "parJour": 2,
+        "jours": 7,
+        "ageMin": 180,
+        "note": "Rhinopharyngite / sinusite : après 7 jours, si bonne évolution continuer 3 jours ; fièvre persistante : référer.",
+        "source": "Togo Ord. 41, 42, 43"
       }
     ],
     "ci": [
@@ -558,6 +657,24 @@ const MEDICAMENTS = [
         "jours": 14,
         "ageMax": 2,
         "source": "Algorithme « Prise en charge des IST » (SANTÉ D'ABORD), joint le 11/10/2026"
+      },
+      {
+        "id": "ery-gorge-adu",
+        "indication": "Angine bactérienne — adulte",
+        "type": "fixe",
+        "texte": "500 mg : 1 comprimé 3 fois par jour",
+        "parJour": 3,
+        "ageMin": 180,
+        "source": "Togo Ord. 40 (mal de gorge)"
+      },
+      {
+        "id": "ery-nez-adulte",
+        "indication": "Allergie à l'amoxicilline (rhinopharyngite, sinusite) — adulte",
+        "type": "fixe",
+        "texte": "500 mg : 2 comprimés matin et soir",
+        "parJour": 2,
+        "ageMin": 180,
+        "source": "Togo Ord. 41, traitement 3"
       }
     ],
     "ci": [
@@ -867,6 +984,15 @@ const MEDICAMENTS = [
         "texte": "100 mL d'eau sucrée si le patient peut boire, ou SGH 10 % 250 mL en perfusion",
         "ageMin": 180,
         "source": "Ord. 16, traitement 2"
+      },
+      {
+        "id": "sgh-adulte-500",
+        "indication": "Hypoglycémie d'une convulsion — adulte",
+        "type": "fixe",
+        "texte": "2 morceaux de sucre par la bouche si le patient est conscient ; sinon SGH 10 % 500 mL en perfusion rapide",
+        "ageMin": 180,
+        "note": "Surveiller.",
+        "source": "Togo Ord. 20, traitement 4"
       }
     ],
     "ci": [
@@ -912,6 +1038,42 @@ const MEDICAMENTS = [
         "ageMin": 180,
         "note": "Patient sur le côté, tête en extension, rien dans la bouche, aspirer les sécrétions.",
         "source": "Ord. 16, traitement 2"
+      },
+      {
+        "id": "dz-epil-adulte",
+        "indication": "Crise d'épilepsie — adulte",
+        "type": "fixe",
+        "texte": "10 à 20 mg en IM",
+        "ageMin": 180,
+        "note": "Puis phénobarbital en traitement de fond et référer pour bilan.",
+        "source": "Togo Ord. 20, traitement 3"
+      },
+      {
+        "id": "dz-avort",
+        "indication": "Menace d'avortement — adulte",
+        "type": "fixe",
+        "texte": "5 mg : 1 comprimé matin et soir, ou 1 ampoule de 10 mg en IM matin et soir",
+        "parJour": 2,
+        "jours": 5,
+        "ageMin": 180,
+        "note": "Repos au lit. Si amélioration, continuer 5 jours ; sinon référer.",
+        "source": "Togo Ord. 24 (traitement 3) et Ord. 25"
+      },
+      {
+        "id": "dz-hernie",
+        "indication": "Hernie étranglée, prééclampsie — adulte : avant transfert",
+        "type": "fixe",
+        "texte": "10 mg (1 ampoule) en IM, puis référer",
+        "ageMin": 180,
+        "source": "Togo Ord. 24 (traitement 12), Ord. 32 (traitement 4), Ord. 37 (traitement 9)"
+      },
+      {
+        "id": "dz-alcool",
+        "indication": "Intoxication alcoolique avec agitation ou convulsion — adulte",
+        "type": "fixe",
+        "texte": "10 mg en IM",
+        "ageMin": 180,
+        "source": "Togo Ord. 38, traitement 1"
       }
     ],
     "ci": [
@@ -1035,6 +1197,29 @@ const MEDICAMENTS = [
         "ageMax": 2,
         "note": "IM, dose unique, sans dépasser 125 mg.",
         "source": "Algorithme « Prise en charge des IST » (SANTÉ D'ABORD), joint le 11/10/2026"
+      },
+      {
+        "id": "cef-sept-enf",
+        "indication": "Septicémie de l'enfant (convulsions) — dose avant transfert",
+        "type": "mgkg",
+        "mgkg": 100,
+        "parJour": 1,
+        "jours": 1,
+        "ageMin": 2,
+        "ageMax": 180,
+        "note": "IV directe, puis référer immédiatement, avec la gentamicine.",
+        "source": "Togo Ord. 5, traitement 3"
+      },
+      {
+        "id": "cef-conj-mere",
+        "indication": "Conjonctivite du nouveau-né : traitement de la mère",
+        "type": "fixe",
+        "texte": "250 mg en IM, dose unique",
+        "parJour": 1,
+        "jours": 1,
+        "ageMin": 180,
+        "note": "Traitement de la mère : 250 mg IM en dose unique (le 1 g des schémas IST concerne l'adulte traité pour une IST). Avec érythromycine 1 g, 2 fois par jour pendant 14 jours.",
+        "source": "Togo Ord. 13 et 43"
       }
     ],
     "ci": [
@@ -1238,6 +1423,31 @@ const MEDICAMENTS = [
         "ageMin": 180,
         "note": "Contre-indiquée chez la femme enceinte ou allaitante.",
         "source": "Algorithme « Prise en charge des IST » (SANTÉ D'ABORD), joint le 11/10/2026"
+      },
+      {
+        "id": "cip-uro-adulte",
+        "indication": "Pyélonéphrite, prostatite, orchite bactérienne — adulte",
+        "type": "fixe",
+        "texte": "500 mg : 1 comprimé matin et soir pendant 10 jours",
+        "parJour": 2,
+        "jours": 10,
+        "ageMin": 180,
+        "note": "Orchite : se reporter à l'algorithme IST si écoulement urétral.",
+        "source": "Togo Ord. 31 (traitements 6, 7) et Ord. 32 (traitement 2)"
+      },
+      {
+        "id": "cip-iu-enf",
+        "indication": "Infection urinaire de l'enfant (alternative)",
+        "type": "mgkg",
+        "mgkgJour": 15,
+        "mgkgJourMax": 20,
+        "parJour": 2,
+        "jours": 10,
+        "maxJour": 1000,
+        "ageMin": 6,
+        "ageMax": 180,
+        "note": "Pas d'amélioration : référer.",
+        "source": "Togo Ord. 15"
       }
     ],
     "ci": [
@@ -1388,6 +1598,36 @@ const MEDICAMENTS = [
         "parJour": 2,
         "jours": 10,
         "source": "Algorithme « Prise en charge des IST » (SANTÉ D'ABORD), joint le 11/10/2026"
+      },
+      {
+        "id": "met-endo",
+        "indication": "Endométrite — adulte",
+        "type": "fixe",
+        "texte": "250 mg : 2 comprimés matin et soir pendant 10 jours",
+        "parJour": 2,
+        "jours": 10,
+        "ageMin": 180,
+        "source": "Togo Ord. 24, traitement 6"
+      },
+      {
+        "id": "met-sein",
+        "indication": "Mastite / abcès du sein — adulte",
+        "type": "fixe",
+        "texte": "500 mg : 1 comprimé matin, midi et soir pendant 10 jours",
+        "parJour": 3,
+        "jours": 10,
+        "ageMin": 180,
+        "source": "Togo Ord. 29, traitement 2"
+      },
+      {
+        "id": "met-bouche",
+        "indication": "Stomatite ulcéro-nécrotique — adulte",
+        "type": "fixe",
+        "texte": "250 mg : 2 comprimés matin et soir",
+        "parJour": 2,
+        "ageMin": 180,
+        "note": "Référer.",
+        "source": "Togo Ord. 42, traitement 6"
       }
     ],
     "ci": [
@@ -2326,6 +2566,15 @@ const MEDICAMENTS = [
         "ageMax": 60,
         "note": "Puis référer.",
         "source": "Togo Ord. 11, traitement 2"
+      },
+      {
+        "id": "bp-abces-adu",
+        "indication": "Abcès de l'amygdale : dose avant transfert, adulte",
+        "type": "fixe",
+        "texte": "2,4 millions d'UI en IM, dose unique",
+        "ageMin": 180,
+        "note": "Puis référer immédiatement.",
+        "source": "Togo Ord. 40 (mal de gorge)"
       }
     ],
     "ci": [
@@ -2502,6 +2751,16 @@ const MEDICAMENTS = [
         "ageMin": 180,
         "note": "En cas de fracture : seulement s'il n'y a pas de saignement.",
         "source": "Togo Ord. 34, traitements 1, 2 et 4"
+      },
+      {
+        "id": "aas-gorge-adu",
+        "indication": "Angine — adulte",
+        "type": "fixe",
+        "texte": "500 mg : 2 comprimés matin, midi et soir",
+        "parJour": 3,
+        "ageMin": 180,
+        "note": "Pendant les repas.",
+        "source": "Togo Ord. 40 (mal de gorge)"
       }
     ],
     "ci": [
@@ -2633,6 +2892,16 @@ const MEDICAMENTS = [
         "ageMin": 180,
         "source": "Algorithme « Prise en charge des IST » (SANTÉ D'ABORD), joint le 11/10/2026",
         "note": "Traiter le ou les partenaires ; préservatifs ; dépistage du VIH."
+      },
+      {
+        "id": "azi-gorge-adu",
+        "indication": "Angine bactérienne — adulte",
+        "type": "fixe",
+        "texte": "500 mg : 1 comprimé par jour pendant 3 jours",
+        "parJour": 1,
+        "jours": 3,
+        "ageMin": 180,
+        "source": "Togo Ord. 40 (mal de gorge)"
       }
     ],
     "ci": [
@@ -2931,6 +3200,27 @@ const MEDICAMENTS = [
         "ageMin": 180,
         "note": "Hygiène corporelle et vestimentaire.",
         "source": "Togo Ord. 27, traitement 3"
+      },
+      {
+        "id": "nys-bouche-adulte",
+        "indication": "Candidose buccale — adulte",
+        "type": "fixe",
+        "texte": "500 000 UI : 2 comprimés écrasés, matin, midi, soir et au coucher (badigeonner la bouche puis avaler)",
+        "parJour": 4,
+        "jours": 7,
+        "ageMin": 180,
+        "note": "Avec un bain de bouche au bicarbonate de soude matin, midi et soir. Pas d'amélioration : référer.",
+        "source": "Togo Ord. 42, traitement 3"
+      },
+      {
+        "id": "nys-bouche-enf",
+        "indication": "Candidose buccale — enfant",
+        "type": "fixe",
+        "texte": "500 000 UI : 1 comprimé écrasé, matin, midi, soir et au coucher (badigeonner la bouche puis avaler)",
+        "parJour": 4,
+        "jours": 7,
+        "ageMax": 180,
+        "source": "Togo Ord. 42, traitement 3"
       }
     ],
     "ci": [
@@ -3055,6 +3345,15 @@ const MEDICAMENTS = [
         "ageMin": 60,
         "ageMax": 120,
         "source": "Décision du validateur"
+      },
+      {
+        "id": "prim-moins2-nez",
+        "indication": "Rhinite allergique, rhume — enfant de moins de 2 ans",
+        "type": "fixe",
+        "texte": "Sirop : 2,5 mL par jour",
+        "parJour": 1,
+        "ageMax": 24,
+        "source": "Décision du validateur (Togo Ord. 41, enfant < 2 ans)"
       }
     ],
     "ci": [
@@ -3682,6 +3981,19 @@ const MEDICAMENTS = [
         "ageMax": 180,
         "note": "En une injection, avec bandage compressif ; référer immédiatement.",
         "source": "Togo Ord. 9, traitement 6"
+      },
+      {
+        "id": "amp-sept-enf",
+        "indication": "Septicémie de l'enfant — 2e intention",
+        "type": "mgkg",
+        "mgkgJour": 200,
+        "mgkgJourMax": 300,
+        "parJour": 3,
+        "jours": 1,
+        "ageMin": 2,
+        "ageMax": 180,
+        "note": "IV directe en 2 ou 3 injections, avec la gentamicine, puis référer.",
+        "source": "Togo Ord. 5, traitement 3"
       }
     ],
     "ci": [
@@ -3716,6 +4028,428 @@ const MEDICAMENTS = [
     ],
     "effets": [
       "Coloration des dents, goût altéré"
+    ]
+  },
+  {
+    "id": "cotrimoxazole",
+    "nom": "Cotrimoxazole (sulfaméthoxazole + triméthoprime)",
+    "classe": "Antibiotique",
+    "formes": [
+      {
+        "nom": "Sirop 240 mg/5 mL",
+        "mg": 240,
+        "ml": 5
+      },
+      {
+        "nom": "Comprimé 480 mg",
+        "mg": 480
+      }
+    ],
+    "regimes": [
+      {
+        "id": "cotri-enf",
+        "indication": "Enfant : infection à VIH (diarrhée, convulsions) — avant transfert",
+        "type": "mgkg",
+        "mgkgJour": 48,
+        "parJour": 2,
+        "jours": 5,
+        "maxPrise": 960,
+        "ageMin": 2,
+        "ageMax": 180,
+        "note": "Manuel : 1 mesure de 5 mL (240 mg) pour 5 kg de poids par jour, en 2 prises, 5 jours (soit 48 mg/kg/jour). Comprimé : ½ comprimé de 480 mg pour 5 kg par jour. Référer.",
+        "source": "Togo Ord. 4 (traitement 6) et Ord. 5 (point 8)"
+      },
+      {
+        "id": "cotri-gyn",
+        "indication": "Après curage / AMIU, ou plaie vulvo-vaginale — adulte",
+        "type": "fixe",
+        "texte": "480 mg : 2 comprimés matin et soir pendant 7 jours",
+        "parJour": 2,
+        "jours": 7,
+        "ageMin": 180,
+        "note": "Alternative : amoxicilline 500 mg, 2 comprimés matin et soir, 7 jours. Éviter en cas d'allergie aux sulfamides.",
+        "source": "Togo Ord. 24 (traitement 4), Ord. 25 (traitements 4 et 8)"
+      },
+      {
+        "id": "cotri-pp",
+        "indication": "Suites de couches (hémorragie du post-partum) — femme qui n'allaite pas",
+        "type": "fixe",
+        "texte": "480 mg : 2 comprimés matin et soir pendant 7 jours",
+        "parJour": 2,
+        "jours": 7,
+        "ageMin": 180,
+        "note": "Si la femme allaite : amoxicilline 1 g matin et soir pendant 7 jours.",
+        "source": "Togo Ord. 30"
+      },
+      {
+        "id": "cotri-uro",
+        "indication": "Cystite, pyélonéphrite, prostatite — adulte (alternative à la ciprofloxacine)",
+        "type": "fixe",
+        "texte": "480 mg : 2 comprimés, 2 fois par jour pendant 10 jours",
+        "parJour": 2,
+        "jours": 10,
+        "ageMin": 180,
+        "source": "Togo Ord. 31 (traitements 6, 7, 8)"
+      },
+      {
+        "id": "cotri-oeil",
+        "indication": "Blessure de la cornée — adulte (alternative à l'amoxicilline)",
+        "type": "fixe",
+        "texte": "480 mg : 2 comprimés matin et soir",
+        "parJour": 2,
+        "ageMin": 180,
+        "note": "Référer.",
+        "source": "Togo Ord. 43 (traitement 4)"
+      }
+    ],
+    "ci": [
+      "Allergie aux sulfamides",
+      "Insuffisance rénale ou hépatique sévère",
+      "Nourrisson de moins de 6 semaines",
+      "Déficit en G6PD"
+    ],
+    "precautions": [
+      "Bien boire pendant le traitement",
+      "Arrêter en cas d'éruption cutanée",
+      "Grossesse : avis médical"
+    ],
+    "effets": [
+      "Éruption cutanée, nausées",
+      "Rarement : réactions cutanées graves"
+    ]
+  },
+  {
+    "id": "phenobarbital",
+    "nom": "Phénobarbital",
+    "classe": "Anticonvulsivant",
+    "formes": [
+      {
+        "nom": "Comprimé 100 mg",
+        "mg": 100
+      },
+      {
+        "nom": "Ampoule injectable",
+        "mg": 0
+      }
+    ],
+    "regimes": [
+      {
+        "id": "phb-enf",
+        "indication": "Convulsions de l'enfant : détresse respiratoire ou enfant à référer (à la place du diazépam)",
+        "type": "mgkg",
+        "mgkg": 15,
+        "parJour": null,
+        "jours": null,
+        "maxPrise": null,
+        "ageMax": 180,
+        "note": "En injection intramusculaire, dose unique, puis référer. Surveiller la respiration.",
+        "source": "Togo Ord. 5 et Ord. 6"
+      },
+      {
+        "id": "phb-epil",
+        "indication": "Épilepsie — adulte : traitement de fond après la crise",
+        "type": "fixe",
+        "texte": "100 mg (1 comprimé) le soir",
+        "parJour": 1,
+        "jours": null,
+        "ageMin": 180,
+        "note": "Traitement prolongé (2 à 3 ans) ; référer pour le bilan complet.",
+        "source": "Togo Ord. 20, traitement 3"
+      }
+    ],
+    "ci": [
+      "Insuffisance respiratoire sévère",
+      "Porphyrie"
+    ],
+    "precautions": [
+      "Dépression respiratoire possible, surtout avec le diazépam",
+      "Ne pas arrêter brutalement un traitement de fond"
+    ],
+    "effets": [
+      "Somnolence, troubles de l'attention"
+    ]
+  },
+  {
+    "id": "furosemide",
+    "nom": "Furosémide",
+    "classe": "Diurétique de l'anse",
+    "formes": [
+      {
+        "nom": "Ampoule 20 mg",
+        "mg": 20
+      },
+      {
+        "nom": "Comprimé 40 mg",
+        "mg": 40
+      }
+    ],
+    "regimes": [
+      {
+        "id": "furo-oap",
+        "indication": "Œdème aigu du poumon — adulte",
+        "type": "fixe",
+        "texte": "20 mg : 2 ampoules (40 mg) en IV directe, puis référer",
+        "ageMin": 180,
+        "note": "Position demi-assise.",
+        "source": "Togo Ord. 19, traitement 1"
+      },
+      {
+        "id": "furo-ic",
+        "indication": "Insuffisance cardiaque décompensée avec œdèmes — adulte et adolescent de plus de 12 ans",
+        "type": "fixe",
+        "texte": "20 mg/mL : 1 à 2 ampoules (20 à 40 mg) en IV lente (ou IM, SC), à répéter plusieurs fois par jour ; maximum 100 mg par 24 heures. Associer du chlorure de potassium 600 mg : 1 comprimé, puis référer",
+        "source": "Togo Ord. 37, traitement 2",
+        "ageMin": 144,
+        "note": "Enfant de moins de 12 ans : référer."
+      }
+    ],
+    "ci": [
+      "Anurie",
+      "Déshydratation sévère",
+      "Allergie aux sulfamides"
+    ],
+    "precautions": [
+      "Surveiller la tension",
+      "Risque d'hypokaliémie"
+    ],
+    "effets": [
+      "Hypotension, crampes, déshydratation"
+    ]
+  },
+  {
+    "id": "hydrochlorothiazide",
+    "nom": "Hydrochlorothiazide",
+    "classe": "Diurétique thiazidique",
+    "formes": [
+      {
+        "nom": "Comprimé 25 mg",
+        "mg": 25
+      }
+    ],
+    "regimes": [
+      {
+        "id": "hctz-cirrhose",
+        "indication": "Œdèmes / ascite de la cirrhose — adulte",
+        "type": "fixe",
+        "texte": "25 mg : 1 comprimé par jour, puis référer",
+        "parJour": 1,
+        "ageMin": 180,
+        "source": "Togo Ord. 37, traitement 7"
+      }
+    ],
+    "ci": [
+      "Anurie",
+      "Allergie aux sulfamides",
+      "Grossesse"
+    ],
+    "precautions": [
+      "Surveiller la tension et la diurèse"
+    ],
+    "effets": [
+      "Hypokaliémie, hyponatrémie"
+    ]
+  },
+  {
+    "id": "vitamine-k",
+    "nom": "Vitamine K1 (phytoménadione)",
+    "classe": "Antidote / hémostatique",
+    "formes": [
+      {
+        "nom": "Ampoule injectable",
+        "mg": 0
+      }
+    ],
+    "regimes": [
+      {
+        "id": "vitk-raticide",
+        "indication": "Intoxication aux raticides (anti-vitamine K)",
+        "type": "fixe",
+        "texte": "1 à 3 ampoules par jour en IM",
+        "parJour": 1,
+        "ageMin": 0,
+        "note": "Si hémorragie malgré le traitement : référer.",
+        "source": "Togo Ord. 38, traitement 4"
+      },
+      {
+        "id": "vitk-epistaxis",
+        "indication": "Épistaxis qui persiste — adulte",
+        "type": "fixe",
+        "texte": "1 ampoule en IM, puis référer",
+        "ageMin": 180,
+        "source": "Togo Ord. 41, traitement 10"
+      }
+    ],
+    "ci": [
+      "Allergie à la vitamine K"
+    ],
+    "precautions": [
+      "Injection IM : risque d'hématome si trouble de la coagulation"
+    ],
+    "effets": [
+      "Rarement allergie"
+    ]
+  },
+  {
+    "id": "praziquantel",
+    "nom": "Praziquantel",
+    "classe": "Antiparasitaire (bilharziose)",
+    "formes": [
+      {
+        "nom": "Comprimé 600 mg",
+        "mg": 600
+      }
+    ],
+    "regimes": [
+      {
+        "id": "pzq",
+        "indication": "Bilharziose vésicale (zone d'endémie ou séjour récent) — enfant et adulte",
+        "type": "mgkg",
+        "mgkg": 40,
+        "parJour": 1,
+        "jours": 1,
+        "maxPrise": null,
+        "note": "Prise unique, au cours d'un repas.",
+        "source": "Togo Ord. 15 (traitement 6) et Ord. 31 (traitement 11)"
+      }
+    ],
+    "ci": [
+      "Allergie au praziquantel"
+    ],
+    "precautions": [
+      "Prendre avec un repas"
+    ],
+    "effets": [
+      "Vertiges, douleurs abdominales, nausées"
+    ]
+  },
+  {
+    "id": "sulfate-magnesium",
+    "nom": "Sulfate de magnésium (éclampsie)",
+    "classe": "Anticonvulsivant obstétrical",
+    "formes": [
+      {
+        "nom": "Solution à 20 %",
+        "mg": 0
+      }
+    ],
+    "regimes": [
+      {
+        "id": "mgso4-attaque",
+        "indication": "Crise d'éclampsie : dose d'attaque",
+        "type": "fixe",
+        "texte": "4 g de sulfate de magnésium à 20 % en IV lente (en 5 minutes), puis 5 g en IM profonde dans chaque fesse (10 g au total), après avoir ajouté 1 mL de lidocaïne à 2 % dans la seringue",
+        "ageMin": 180,
+        "note": "Prévenir la patiente d'une sensation de chaleur lors de l'injection. Respecter l'asepsie.",
+        "source": "Togo Ord. 20, traitement 5 (1re intention)"
+      },
+      {
+        "id": "mgso4-entretien",
+        "indication": "Crise d'éclampsie : dose d'entretien",
+        "type": "fixe",
+        "texte": "5 g de sulfate de magnésium + 1 mL de lidocaïne à 2 % en IM profonde, toutes les 4 heures, en alternant les fesses",
+        "parJour": 6,
+        "ageMin": 180,
+        "note": "Poursuivre 24 heures après la dernière convulsion ou après l'accouchement (le dernier des deux). Avant chaque dose : vérifier la respiration, les réflexes rotuliens et la diurèse.",
+        "source": "Togo Ord. 20, traitement 5"
+      }
+    ],
+    "ci": [
+      "Insuffisance rénale",
+      "Fréquence respiratoire < 16/min",
+      "Réflexes rotuliens abolis"
+    ],
+    "precautions": [
+      "Gluconate de calcium disponible comme antidote en cas de surdosage",
+      "Surveillance rapprochée"
+    ],
+    "effets": [
+      "Sensation de chaleur, dépression respiratoire en cas de surdosage"
+    ]
+  },
+  {
+    "id": "ocytocine",
+    "nom": "Ocytocine",
+    "classe": "Utérotonique",
+    "formes": [
+      {
+        "nom": "Ampoule injectable",
+        "mg": 0
+      }
+    ],
+    "regimes": [
+      {
+        "id": "ocy-ivd",
+        "indication": "Rétention placentaire ou de cotylédons : après délivrance artificielle / révision utérine",
+        "type": "fixe",
+        "texte": "1 ampoule en IV directe",
+        "ageMin": 180,
+        "note": "Si l'hémorragie persiste : référer immédiatement.",
+        "source": "Togo Ord. 30 (traitements 2 et 3)"
+      },
+      {
+        "id": "ocy-perf",
+        "indication": "Atonie utérine",
+        "type": "fixe",
+        "texte": "10 UI en perfusion dans 500 mL de sérum salé ou de SGI, avec massage utérin",
+        "ageMin": 180,
+        "note": "Faire d'abord la révision utérine. Si l'hémorragie persiste : garniture propre, sonde de Foley si possible, et référer immédiatement.",
+        "source": "Togo Ord. 30 (traitement 4)"
+      }
+    ],
+    "ci": [
+      "Ne jamais injecter avant la naissance du bébé"
+    ],
+    "precautions": [
+      "Surveiller la tension"
+    ],
+    "effets": [
+      "Hypotension si injection trop rapide"
+    ]
+  },
+  {
+    "id": "pommade-ophtalmique",
+    "nom": "Pommade / collyre antibiotique pour l'œil",
+    "classe": "Antibiotique local",
+    "formes": [
+      {
+        "nom": "Pommade ophtalmique (tétracycline)",
+        "mg": 0
+      },
+      {
+        "nom": "Collyre rifamycine",
+        "mg": 0
+      }
+    ],
+    "regimes": [
+      {
+        "id": "oph-enf",
+        "indication": "Œil de l'enfant : conjonctivite, orgelet, blépharite, traumatisme, corps étranger",
+        "type": "fixe",
+        "texte": "Pommade ophtalmique antibiotique dans les deux yeux, 3 fois par jour (matin, midi et soir)",
+        "parJour": 3,
+        "ageMax": 180,
+        "note": "Se laver les mains. Faire regarder l'enfant vers le haut, déposer une petite quantité de pommade entre la paupière inférieure et le globe en tirant la paupière vers le bas. Continuer jusqu'à disparition de la rougeur. Ne pas utiliser d'autres pommades ou collyres.",
+        "source": "Togo Ord. 13"
+      },
+      {
+        "id": "oph-adulte",
+        "indication": "Œil de l'adulte : conjonctivite, orgelet, blépharite, traumatisme, corps étranger",
+        "type": "fixe",
+        "texte": "Pommade à la tétracycline : 1 application matin, midi et soir ; ou collyre à la rifamycine : 1 goutte matin, midi et soir",
+        "parJour": 3,
+        "ageMin": 180,
+        "source": "Togo Ord. 43"
+      }
+    ],
+    "ci": [
+      "Allergie à l'un des composants"
+    ],
+    "precautions": [
+      "Ne pas toucher l'œil avec l'embout",
+      "Un tube par patient"
+    ],
+    "effets": [
+      "Irritation passagère"
     ]
   }
 ];
@@ -4596,6 +5330,180 @@ const ALGORITHMES = [
     }
   },
   {
+    "id": "gorge_adu",
+    "groupe": "Adulte",
+    "titre": "Mal de gorge de l'adulte",
+    "sous": "Togo Ord. 40 : douleur de gorge, difficulté à avaler (dysphagie)",
+    "debut": "g0",
+    "noeuds": {
+      "g0": {
+        "q": "Que trouve-t-on à l'examen ?",
+        "aide": "Mal de gorge : sensation douloureuse de la gorge avec difficulté à avaler. Regarder la gorge avec une lampe et un abaisse-langue ; chercher fièvre (> 37,5 °C), enduits, fausses membranes, ganglions.",
+        "options": [
+          {
+            "t": "Gorge rouge, avec ou sans dépôts blanchâtres faciles à enlever, fièvre > 37,5 °C",
+            "vers": "r_angine"
+          },
+          {
+            "t": "Fausses membranes",
+            "vers": "r_membranes"
+          },
+          {
+            "t": "Impossible d'avaler, ouverture de la bouche difficile (abcès de l'amygdale)",
+            "vers": "r_abces"
+          },
+          {
+            "t": "Sensation de corps étranger",
+            "vers": "r_corps"
+          },
+          {
+            "t": "Plaie dans la gorge avec saignement, ou notion de traumatisme",
+            "vers": "r_trauma"
+          },
+          {
+            "t": "Modification de la voix et/ou amaigrissement",
+            "vers": "r_cancer"
+          },
+          {
+            "t": "Nez qui coule ou bouché, toux, gorge irritée (rhinopharyngite)",
+            "vers": "r_rhino"
+          },
+          {
+            "t": "Autres signes",
+            "vers": "r_ref"
+          }
+        ]
+      },
+      "r_angine": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Angine bactérienne",
+          "resume": "Antibiotique + antalgique + gargarismes ; réévaluer à 3 jours.",
+          "conduite": [
+            "Antibiotique, un seul au choix : pénicilline V 50 000 UI/kg/jour = {n:50000} UI par jour pendant 10 jours ; ou amoxicilline 500 mg, 2 gélules matin et soir ; ou érythromycine 500 mg, 1 comprimé 3 fois par jour ; ou azithromycine 500 mg, 1 comprimé par jour pendant 3 jours",
+            "Aspirine 500 mg : 2 comprimés matin, midi et soir (pendant les repas)",
+            "Gargarisme à l'eau tiède salée matin, midi et soir",
+            "Durée totale 10 jours (pénicilline V, amoxicilline, érythromycine). Après 3 jours : évolution bonne : poursuivre le traitement ; évolution défavorable : maintenir le traitement et référer",
+            "Insister : continuer l'antibiotique après la disparition des douleurs (rhumatisme articulaire aigu, glomérulonéphrite, endocardite)"
+          ],
+          "meds": [
+            "amoxicilline",
+            "erythromycine",
+            "azithromycine",
+            "aspirine"
+          ],
+          "source": "Togo Ord. 40 (mal de gorge)"
+        }
+      },
+      "r_membranes": {
+        "res": {
+          "niveau": "urgence",
+          "titre": "Fausses membranes dans la gorge",
+          "resume": "Diphtérie à éliminer d'abord ; mononucléose en diagnostic différentiel : 1re dose et référer.",
+          "conduite": [
+            "Diphtérie à suspecter et éliminer en premier : benzylpénicilline 50 000 UI/kg/jour en IM = {n:50000} UI par jour, et aspirine 500 mg 2 comprimés, puis référer",
+            "Isoler le patient ; notifier si diphtérie suspectée",
+            "Diagnostic différentiel : mononucléose infectieuse (aspirine, puis référer)",
+            "Référer"
+          ],
+          "meds": [
+            "aspirine"
+          ],
+          "source": "Togo Ord. 40 (mal de gorge)"
+        }
+      },
+      "r_abces": {
+        "res": {
+          "niveau": "urgence",
+          "titre": "Abcès de l'amygdale",
+          "resume": "Première dose puis référer immédiatement.",
+          "conduite": [
+            "Benzathine pénicilline 2,4 MUI en IM, dose unique",
+            "Référer immédiatement"
+          ],
+          "meds": [
+            "benzathine-penicilline"
+          ],
+          "source": "Togo Ord. 40 (mal de gorge)"
+        }
+      },
+      "r_corps": {
+        "res": {
+          "niveau": "urgence",
+          "titre": "Corps étranger de la gorge",
+          "resume": "Extraire si visible et accessible ; sinon référer.",
+          "conduite": [
+            "Si le corps étranger est visible et facilement accessible : le saisir avec une pince et l'extraire",
+            "Puis donner : ibuprofène pendant 3 jours et amoxicilline",
+            "Échec de l'extraction : référer"
+          ],
+          "meds": [
+            "ibuprofene",
+            "amoxicilline"
+          ],
+          "source": "Togo Ord. 40 (mal de gorge)"
+        }
+      },
+      "r_trauma": {
+        "res": {
+          "niveau": "urgence",
+          "titre": "Plaie de la gorge ou traumatisme",
+          "resume": "Référer.",
+          "conduite": [
+            "Plaie dans la gorge avec saignement, ou notion de traumatisme : référer"
+          ],
+          "meds": [],
+          "source": "Togo Ord. 40 (mal de gorge)"
+        }
+      },
+      "r_cancer": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Cancer de la gorge possible",
+          "resume": "Antalgique puis référer.",
+          "conduite": [
+            "Modification de la voix et/ou amaigrissement chez l'adulte : paracétamol 500 mg, 2 comprimés matin, midi et soir",
+            "Référer pour bilan"
+          ],
+          "meds": [
+            "paracetamol"
+          ],
+          "source": "Togo Ord. 40 (mal de gorge)"
+        }
+      },
+      "r_rhino": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Rhinopharyngite",
+          "resume": "Antalgique, antibiotique selon le manuel.",
+          "conduite": [
+            "Paracétamol ou aspirine",
+            "Amoxicilline 500 mg, 2 gélules matin et soir, ou érythromycine, pendant 10 jours",
+            "Pas d'amélioration : référer"
+          ],
+          "meds": [
+            "paracetamol",
+            "amoxicilline",
+            "erythromycine"
+          ],
+          "source": "Togo Ord. 40 (mal de gorge)"
+        }
+      },
+      "r_ref": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Autres signes : référer",
+          "resume": "Référer.",
+          "conduite": [
+            "Référer pour avis médical"
+          ],
+          "meds": [],
+          "source": "Togo Ord. 40 (mal de gorge)"
+        }
+      }
+    }
+  },
+  {
     "id": "oreille_enf",
     "groupe": "Enfant",
     "titre": "Maladies de l'oreille de l'enfant",
@@ -4999,13 +5907,19 @@ const ALGORITHMES = [
         "res": {
           "niveau": "attention",
           "titre": "Hépatite possible",
-          "resume": "Voir l'ordinogramme ictère (non intégré).",
+          "resume": "Voir l'algorithme « Ictère de l'adulte ».",
           "conduite": [
             "Référer pour bilan",
             "Éviter les médicaments hépatotoxiques (paracétamol à dose réduite)"
           ],
           "meds": [],
-          "source": "Ord. 16 → Ord. 21 (non intégré)"
+          "source": "Ord. 16 → Ord. 21",
+          "liens": [
+            {
+              "t": "Ictère de l'adulte",
+              "vers": "algo:ictere_adu"
+            }
+          ]
         }
       },
       "r_tb": {
@@ -5024,7 +5938,7 @@ const ALGORITHMES = [
         "res": {
           "niveau": "attention",
           "titre": "Affection ORL",
-          "resume": "Ordinogrammes mal de gorge / oreille / écoulement nasal de l'adulte (non intégrés).",
+          "resume": "Voir les algorithmes mal de gorge, oreille et écoulement nasal.",
           "conduite": [
             "Examiner la gorge, les tympans et les sinus",
             "Paracétamol",
@@ -5034,7 +5948,21 @@ const ALGORITHMES = [
           "meds": [
             "paracetamol"
           ],
-          "source": "Ord. 16, traitement 10 → Ord. 35, 40, 41 (non intégrés)"
+          "source": "Ord. 16, traitement 10 → Ord. 35, 40, 41",
+          "liens": [
+            {
+              "t": "Mal de gorge de l'adulte",
+              "vers": "algo:gorge_adu"
+            },
+            {
+              "t": "Maladies de l'oreille de l'adulte",
+              "vers": "algo:oreille_adu"
+            },
+            {
+              "t": "Écoulement nasal",
+              "vers": "algo:nez"
+            }
+          ]
         }
       },
       "r_ref": {
@@ -5258,13 +6186,23 @@ const ALGORITHMES = [
         "res": {
           "niveau": "urgence",
           "titre": "Insuffisance cardiaque possible",
-          "resume": "Référer.",
+          "resume": "Référer ; voir aussi les algorithmes dyspnée et œdèmes.",
           "conduite": [
             "Position demi-assise",
             "Référer"
           ],
           "meds": [],
-          "source": "Ord. 17 → Ord. 37 (œdèmes, non intégré) ; Ord. 19"
+          "source": "Ord. 17 → Ord. 19 et 37",
+          "liens": [
+            {
+              "t": "Dyspnée de l'adulte",
+              "vers": "algo:dyspnee_adu"
+            },
+            {
+              "t": "Œdèmes",
+              "vers": "algo:oedemes"
+            }
+          ]
         }
       },
       "r_oap": {
@@ -5408,7 +6346,7 @@ const ALGORITHMES = [
         "res": {
           "niveau": "attention",
           "titre": "Intoxication alimentaire ou chimique",
-          "resume": "Voir l'ordinogramme intoxication (non intégré).",
+          "resume": "Voir l'algorithme intoxication.",
           "conduite": [
             "Réhydrater",
             "Référer en cas de signes de gravité ou de produit toxique"
@@ -5416,7 +6354,13 @@ const ALGORITHMES = [
           "meds": [
             "sro"
           ],
-          "source": "Ord. 18 → Ord. 38 (non intégré)"
+          "source": "Ord. 18 → Ord. 38",
+          "liens": [
+            {
+              "t": "Intoxication",
+              "vers": "algo:intoxication"
+            }
+          ]
         }
       },
       "r_fhv": {
@@ -5454,7 +6398,7 @@ const ALGORITHMES = [
         "res": {
           "niveau": "attention",
           "titre": "VIH/SIDA suspecté",
-          "resume": "Voir l'ordinogramme amaigrissement (non intégré).",
+          "resume": "Voir l'algorithme amaigrissement.",
           "conduite": [
             "Réhydrater",
             "Proposer le dépistage et référer selon le PNLS"
@@ -5462,7 +6406,13 @@ const ALGORITHMES = [
           "meds": [
             "sro"
           ],
-          "source": "Ord. 18 → Ord. 22 (non intégré)"
+          "source": "Ord. 18 → Ord. 22",
+          "liens": [
+            {
+              "t": "Amaigrissement",
+              "vers": "algo:amaigrissement"
+            }
+          ]
         }
       },
       "r_ref": {
@@ -8193,7 +9143,7 @@ const ALGORITHMES = [
             },
             {
               "g": "Enfant",
-              "t": "Paracétamol sirop selon le poids ({mg:15} mg par prise, toutes les 6 heures)"
+              "t": "Paracétamol sirop selon le poids ({mg:15} mg par prise, toutes les 8 heures)"
             },
             "Conseils d'hygiène bucco-dentaire, puis référer au dentiste"
           ],
@@ -8220,7 +9170,7 @@ const ALGORITHMES = [
             },
             {
               "g": "Enfant",
-              "t": "Paracétamol sirop : 15 mg/kg par prise, soit {mg:15} mg toutes les 6 heures"
+              "t": "Paracétamol sirop : 15 mg/kg par prise, soit {mg:15} mg toutes les 8 heures"
             },
             {
               "g": "Enfant",
@@ -8268,7 +9218,7 @@ const ALGORITHMES = [
             },
             {
               "g": "Enfant",
-              "t": "Paracétamol sirop : 15 mg/kg par prise, soit {mg:15} mg toutes les 6 heures"
+              "t": "Paracétamol sirop : 15 mg/kg par prise, soit {mg:15} mg toutes les 8 heures"
             },
             {
               "g": "Adulte",
@@ -8998,5 +9948,4509 @@ const ALGORITHMES = [
         }
       }
     }
+  },
+  {
+    "id": "dyspnee_enf",
+    "groupe": "Enfant",
+    "titre": "Difficultés respiratoires (dyspnée) de l'enfant",
+    "sous": "Togo Ord. 3",
+    "debut": "d0",
+    "noeuds": {
+      "d0": {
+        "q": "Signes généraux de danger : léthargie, inconscience, vomit tout, incapable de boire ou de téter, convulsions ?",
+        "options": [
+          {
+            "t": "Oui, au moins un",
+            "vers": "r_danger"
+          },
+          {
+            "t": "Non",
+            "vers": "d1"
+          }
+        ],
+        "aide": "Compter la respiration sur une minute complète, chercher un tirage sous-costal et un stridor (enfant déshabillé)."
+      },
+      "d1": {
+        "q": "Quel tableau ?",
+        "options": [
+          {
+            "t": "Vomissements, diarrhée, fièvre, yeux enfoncés, pli cutané qui s'efface lentement (déshydratation)",
+            "vers": "algo:diarrhee_enf"
+          },
+          {
+            "t": "Toux avec respiration rapide, tirage, fièvre (pneumonie), ou toux simple",
+            "vers": "algo:toux_enf"
+          },
+          {
+            "t": "Difficulté à expirer, sifflement (asthme)",
+            "vers": "algo:asthme"
+          },
+          {
+            "t": "Début brutal pendant un repas ou un gavage (corps étranger, fausse route)",
+            "vers": "r_corps"
+          },
+          {
+            "t": "Toux avec voix rauque ou éteinte, inspiration difficile et bruyante (laryngite)",
+            "vers": "algo:toux_enf#r_laryngite"
+          },
+          {
+            "t": "Pâleur palmaire sévère (anémie grave)",
+            "vers": "algo:anemie#r_grave_e"
+          },
+          {
+            "t": "Toux de plus de 2 semaines, contage tuberculeux, fièvre prolongée",
+            "vers": "algo:toux_enf#r_tb"
+          },
+          {
+            "t": "Autres signes",
+            "vers": "r_ref"
+          }
+        ]
+      },
+      "r_danger": {
+        "res": {
+          "niveau": "urgence",
+          "titre": "Détresse respiratoire avec signe de danger",
+          "resume": "Premiers gestes puis transfert.",
+          "conduite": [
+            "Libérer les voies aériennes supérieures",
+            "Position semi-assise",
+            "Oxygène si disponible",
+            "Poser une voie veineuse pour perfusion si possible",
+            "Convulsions : diazépam 0,5 à 1 mg/kg ({mg:0.5} à {mg:1} mg) ; en cas de détresse respiratoire : phénobarbital 15 mg/kg IM ({mg:15} mg)",
+            "Référer immédiatement"
+          ],
+          "meds": [
+            "diazepam",
+            "phenobarbital"
+          ],
+          "source": "Togo Ord. 3 et Ord. 5"
+        }
+      },
+      "r_corps": {
+        "res": {
+          "niveau": "urgence",
+          "titre": "Corps étranger dans les voies respiratoires / fausse route",
+          "resume": "Manœuvre de désobstruction puis surveillance ou transfert.",
+          "conduite": [
+            "Faire la manœuvre de Heimlich (adaptée à l'âge de l'enfant)",
+            "Ne pas faire vomir, ne pas faire de lavage d'estomac",
+            "Détresse respiratoire : référer",
+            "Signes de pneumonie : traiter (voir toux de l'enfant)",
+            "Surveiller l'enfant"
+          ],
+          "meds": [],
+          "source": "Togo Ord. 3 (point 5) et Ord. 5 (traitement 7)"
+        }
+      },
+      "r_ref": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Référer pour avis spécialisé",
+          "resume": "Le tableau ne correspond à aucun cas traité au centre de santé.",
+          "conduite": [
+            "Référer vers l'hôpital pour examen et bilan",
+            "Avant le transfert : traiter la douleur ou la fièvre, hydrater, rassurer la famille"
+          ],
+          "meds": [
+            "paracetamol"
+          ],
+          "source": "Togo Ord. 3"
+        }
+      }
+    }
+  },
+  {
+    "id": "convuls_enf",
+    "groupe": "Enfant",
+    "titre": "Convulsions de l'enfant",
+    "sous": "Togo Ord. 5",
+    "debut": "c0",
+    "noeuds": {
+      "c0": {
+        "q": "L'enfant convulse-t-il en ce moment ?",
+        "options": [
+          {
+            "t": "Oui, crise en cours",
+            "vers": "r_crise"
+          },
+          {
+            "t": "Non, la crise est terminée",
+            "vers": "c1"
+          }
+        ]
+      },
+      "r_crise": {
+        "res": {
+          "niveau": "urgence",
+          "titre": "Crise convulsive en cours",
+          "resume": "Arrêter la crise, protéger les voies aériennes, puis chercher la cause.",
+          "conduite": [
+            "Mettre l'enfant en position latérale de sécurité, libérer les voies aériennes",
+            "Diazépam : 0,5 à 1 mg/kg en intrarectal, IM ou IV lente, soit {mg:0.5} à {mg:1} mg",
+            "Détresse respiratoire ou enfant à référer : pas de diazépam, phénobarbital 15 mg/kg IM, soit {mg:15} mg",
+            "Si fièvre : dévêtir, envelopper dans un linge humide, paracétamol 15 mg/kg, soit {mg:15} mg",
+            "Faire un TDR du paludisme et une glycémie capillaire",
+            "Chercher ensuite la cause (bouton ci-dessous)"
+          ],
+          "meds": [
+            "diazepam",
+            "phenobarbital",
+            "paracetamol"
+          ],
+          "source": "Togo Ord. 5 (conduite à tenir, A à C)",
+          "liens": [
+            {
+              "t": "Chercher la cause des convulsions",
+              "vers": "algo:convuls_enf#c1"
+            }
+          ]
+        }
+      },
+      "c1": {
+        "q": "Quel tableau ?",
+        "options": [
+          {
+            "t": "Nouveau-né de moins de 28 jours : ombilic infecté, dyspnée, jaunisse, geignement, trouble de la conscience",
+            "vers": "r_septic"
+          },
+          {
+            "t": "Raideur de la nuque, trouble de la conscience, fontanelle bombée",
+            "vers": "algo:fievre_enf#r_mening"
+          },
+          {
+            "t": "Frissons, vomissements, urines foncées, trouble de la conscience, détresse respiratoire, coma, TDR ou goutte épaisse positif",
+            "vers": "algo:fievre_enf#r_grave"
+          },
+          {
+            "t": "Trismus ou crise provoquée par une stimulation, vaccination antitétanique absente ou douteuse (mère ou enfant)",
+            "vers": "r_tetanos"
+          },
+          {
+            "t": "Fièvre (température > 37,5 °C) sans signe ci-dessus",
+            "vers": "algo:fievre_enf"
+          },
+          {
+            "t": "Enfant de plus de 3 ans, crises répétées, chute brutale avec perte d'urine ou morsure de langue, antécédent de souffrance à la naissance",
+            "vers": "r_epil"
+          },
+          {
+            "t": "Dernier repas il y a plus de 6 heures, trouble de la conscience",
+            "vers": "r_hypo"
+          },
+          {
+            "t": "Crispation des doigts (main d'accoucheur) chez le grand enfant ; agitation, cris, tremblements chez le nouveau-né",
+            "vers": "r_tetanie"
+          },
+          {
+            "t": "Inhalation d'un corps étranger, fausse route",
+            "vers": "algo:dyspnee_enf#r_corps"
+          },
+          {
+            "t": "Infection à VIH connue ou suspectée",
+            "vers": "r_vih"
+          },
+          {
+            "t": "Autres signes",
+            "vers": "r_ref"
+          }
+        ]
+      },
+      "r_septic": {
+        "res": {
+          "niveau": "urgence",
+          "titre": "Septicémie néonatale possible",
+          "resume": "Bilan rapide, antibiotiques, puis transfert immédiat.",
+          "conduite": [
+            "Si possible : NFS, CRP, goutte épaisse avant le traitement, sans retarder l'antibiotique",
+            "Ceftriaxone 50 mg/kg/jour IV, soit {mg:50} mg par jour",
+            "Gentamicine 4 mg/kg/jour en une injection pendant 3 jours, soit {mg:4} mg",
+            "Paracétamol injectable 15 mg/kg si fièvre, soit {mg:15} mg",
+            "Soigner la porte d'entrée (ombilic)",
+            "Puis référer immédiatement"
+          ],
+          "meds": [
+            "ceftriaxone",
+            "gentamicine",
+            "paracetamol"
+          ],
+          "source": "Togo Ord. 5 (traitement 3) ; schéma néonatal retenu par le validateur"
+        }
+      },
+      "r_tetanos": {
+        "res": {
+          "niveau": "urgence",
+          "titre": "Tétanos possible",
+          "resume": "Tétanos possible : référer en urgence après les premiers gestes.",
+          "conduite": [
+            "Référer en urgence",
+            "Avant le transfert : diazépam 0,5 à 1 mg/kg ({mg:0.5} à {mg:1} mg), pénicilline G 100 000 UI/kg/jour ({mg:100000} UI par jour)",
+            "Soins de la porte d'entrée (ombilic chez le nouveau-né)",
+            "VAT selon le calendrier vaccinal",
+            "Le sérum antitétanique (SAT) et la perfusion continue de diazépam se font à l'hôpital"
+          ],
+          "meds": [
+            "diazepam"
+          ],
+          "source": "Togo Ord. 5 (traitement 6)"
+        }
+      },
+      "r_epil": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Épilepsie possible",
+          "resume": "Arrêter la crise puis référer.",
+          "conduite": [
+            "Diazépam 0,5 à 1 mg/kg en IR, IM ou IV lente ({mg:0.5} à {mg:1} mg) ; détresse respiratoire : phénobarbital 15 mg/kg IM ({mg:15} mg)",
+            "Référer pour bilan et traitement de fond"
+          ],
+          "meds": [
+            "diazepam",
+            "phenobarbital"
+          ],
+          "source": "Togo Ord. 5 (traitement 4)"
+        }
+      },
+      "r_hypo": {
+        "res": {
+          "niveau": "urgence",
+          "titre": "Hypoglycémie",
+          "resume": "Sucre immédiatement.",
+          "conduite": [
+            "SGH 10 % : 10 mL/kg en bolus, soit {kg:10} mL",
+            "Alimenter l'enfant dès que la voie orale est possible",
+            "Contrôler la glycémie capillaire ; chercher la cause (paludisme, infection)"
+          ],
+          "meds": [
+            "sgh10"
+          ],
+          "source": "Togo Ord. 5 (traitement 5)"
+        }
+      },
+      "r_tetanie": {
+        "res": {
+          "niveau": "urgence",
+          "titre": "Hypocalcémie (tétanie) possible",
+          "resume": "Référer.",
+          "conduite": [
+            "Référer en urgence",
+            "Crise en cours : diazépam 0,5 à 1 mg/kg ({mg:0.5} à {mg:1} mg)"
+          ],
+          "meds": [
+            "diazepam"
+          ],
+          "source": "Togo Ord. 5 (point 7)"
+        }
+      },
+      "r_vih": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Infection à VIH de l'enfant possible",
+          "resume": "Cotrimoxazole puis transfert.",
+          "conduite": [
+            "Cotrimoxazole : 5 mL de sirop pour 5 kg par jour, en 2 prises, ou ½ comprimé de 480 mg pour 5 kg par jour",
+            "Référer"
+          ],
+          "meds": [
+            "cotrimoxazole"
+          ],
+          "source": "Togo Ord. 5 (point 8)"
+        }
+      },
+      "r_ref": {
+        "res": {
+          "niveau": "urgence",
+          "titre": "Référer en urgence",
+          "resume": "Cas non traité au centre de santé.",
+          "conduite": [
+            "Référer immédiatement vers l'hôpital",
+            "Mettre l'enfant en position confortable, le garder au chaud, surveiller la respiration"
+          ],
+          "meds": [],
+          "source": "Togo Ord. 5"
+        }
+      }
+    }
+  },
+  {
+    "id": "ictere_enf",
+    "groupe": "Enfant",
+    "titre": "Ictère (jaunisse) du nouveau-né et de l'enfant",
+    "sous": "Togo Ord. 6",
+    "debut": "i0",
+    "noeuds": {
+      "i0": {
+        "q": "Âge ?",
+        "options": [
+          {
+            "t": "Nouveau-né (moins de 28 jours)",
+            "vers": "i1"
+          },
+          {
+            "t": "Enfant plus grand",
+            "vers": "i2"
+          }
+        ],
+        "aide": "Examiner l'enfant déshabillé : ombilic, respiration, pâleur palmaire, couleur des selles et des urines. Vérifier le groupe sanguin et le rhésus de la mère."
+      },
+      "i1": {
+        "q": "Quel tableau chez le nouveau-né ?",
+        "options": [
+          {
+            "t": "Température > 37,5 °C ou < 36 °C, ne tète pas, fièvre de la mère à l'accouchement, rupture prématurée des membranes, liquide amniotique anormal",
+            "vers": "r_nn_inf"
+          },
+          {
+            "t": "Ictère intense dès le 1er ou 2e jour, mère multipare de rhésus négatif",
+            "vers": "r_nn_hemol"
+          },
+          {
+            "t": "Ictère léger isolé apparu au 3e jour, l'enfant tète bien",
+            "vers": "r_nn_phys"
+          },
+          {
+            "t": "Autres signes",
+            "vers": "r_ref"
+          }
+        ]
+      },
+      "i2": {
+        "q": "Quel tableau chez l'enfant ?",
+        "options": [
+          {
+            "t": "Température > 37,5 °C, vomissements importants, urines « coca-cola », détresse respiratoire, trouble de la conscience, TDR positif",
+            "vers": "algo:fievre_enf#r_grave"
+          },
+          {
+            "t": "Drépanocytaire connu (en crise ou non)",
+            "vers": "algo:drepano"
+          },
+          {
+            "t": "Fatigue, syndrome grippal, gros foie, démangeaisons, selles décolorées (hépatite)",
+            "vers": "r_hepat"
+          },
+          {
+            "t": "Antécédent de déficit en G6PD, ou autres signes",
+            "vers": "r_ref"
+          }
+        ]
+      },
+      "r_nn_inf": {
+        "res": {
+          "niveau": "urgence",
+          "titre": "Infection néonatale possible",
+          "resume": "Antibiotiques puis transfert.",
+          "conduite": [
+            "Envelopper le nouveau-né pour qu'il ne prenne pas froid",
+            "Si possible : NFS, CRP, goutte épaisse avant le traitement",
+            "Ceftriaxone 50 mg/kg/jour IV, soit {mg:50} mg par jour",
+            "Gentamicine 4 mg/kg/jour pendant 3 jours, soit {mg:4} mg",
+            "Si fièvre : paracétamol injectable 15 mg/kg ({mg:15} mg)",
+            "Soigner la porte d'entrée (ombilic)",
+            "Convulsions : voir l'arbre « convulsions de l'enfant »",
+            "Puis référer"
+          ],
+          "meds": [
+            "ceftriaxone",
+            "gentamicine",
+            "paracetamol"
+          ],
+          "source": "Togo Ord. 6 (traitement 1) ; schéma néonatal retenu par le validateur"
+        }
+      },
+      "r_nn_hemol": {
+        "res": {
+          "niveau": "urgence",
+          "titre": "Ictère hémolytique du nouveau-né possible",
+          "resume": "Référer sans délai.",
+          "conduite": [
+            "Envelopper le nouveau-né, le garder au chaud",
+            "Photothérapie si disponible",
+            "Référer immédiatement (incompatibilité sanguine)"
+          ],
+          "meds": [],
+          "source": "Togo Ord. 6 (point 2)"
+        }
+      },
+      "r_nn_phys": {
+        "res": {
+          "niveau": "ok",
+          "titre": "Ictère physiologique probable",
+          "resume": "Rassurer et revoir.",
+          "conduite": [
+            "Rassurer les parents : l'ictère va disparaître",
+            "Allaiter souvent",
+            "Revoir le nouveau-né au 8e et au 15e jour ; si l'ictère persiste : référer"
+          ],
+          "meds": [],
+          "source": "Togo Ord. 6 (traitement 3)"
+        }
+      },
+      "r_hepat": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Hépatite ou affection hépatobiliaire possible",
+          "resume": "Référer.",
+          "conduite": [
+            "Référer pour bilan",
+            "Hydratation, repos, éviter les médicaments non prescrits"
+          ],
+          "meds": [],
+          "source": "Togo Ord. 6 (point 6)"
+        }
+      },
+      "r_ref": {
+        "res": {
+          "niveau": "urgence",
+          "titre": "Référer en urgence",
+          "resume": "Cas non traité au centre de santé.",
+          "conduite": [
+            "Référer immédiatement vers l'hôpital",
+            "Mettre l'enfant en position confortable, le garder au chaud, surveiller la respiration"
+          ],
+          "meds": [],
+          "source": "Togo Ord. 6"
+        }
+      }
+    }
+  },
+  {
+    "id": "poids_enf",
+    "groupe": "Enfant",
+    "titre": "Poids anormal de l'enfant (maigreur ou obésité)",
+    "sous": "Togo Ord. 7 et 8",
+    "debut": "p0",
+    "noeuds": {
+      "p0": {
+        "q": "Que présente l'enfant ?",
+        "options": [
+          {
+            "t": "Poids trop faible, maigreur",
+            "vers": "p1"
+          },
+          {
+            "t": "Poids trop élevé (obésité)",
+            "vers": "p_ob"
+          }
+        ]
+      },
+      "p1": {
+        "q": "Mesures : poids/taille (Z-score), périmètre brachial (PB, dès 6 mois), œdèmes des deux pieds ?",
+        "options": [
+          {
+            "t": "Dénutrition sévère : P/T < −3 DS, ou PB < 115 mm, ou œdèmes bilatéraux, amaigrissement visible sévère",
+            "vers": "r_sev"
+          },
+          {
+            "t": "Dénutrition modérée : P/T entre −3 DS et −2 DS",
+            "vers": "r_mod"
+          },
+          {
+            "t": "Poids bas avec d'autres signes : chercher la cause",
+            "vers": "p2"
+          }
+        ],
+        "aide": "Rechercher aussi la pâleur palmo-plantaire et les autres signes associés."
+      },
+      "p2": {
+        "q": "Autres signes associés ?",
+        "options": [
+          {
+            "t": "Infections répétées, parotidite, ganglions partout, gros foie ou rate, dermatose, VIH chez la mère ou la fratrie, candidose, diarrhée ou toux persistantes",
+            "vers": "r_vih"
+          },
+          {
+            "t": "Contage tuberculeux, ganglions indolores du cou",
+            "vers": "r_tb"
+          },
+          {
+            "t": "Soif, faim et urines abondantes (diabète)",
+            "vers": "r_diab"
+          },
+          {
+            "t": "Lait ou bouillie donnés avant la perte de poids (erreurs diététiques)",
+            "vers": "r_diet"
+          },
+          {
+            "t": "Diarrhée chronique, ventre ballonné (malabsorption)",
+            "vers": "r_ref"
+          },
+          {
+            "t": "Choc affectif, troubles psycho-socio-affectifs",
+            "vers": "r_psy"
+          },
+          {
+            "t": "Autres signes",
+            "vers": "r_ref"
+          }
+        ]
+      },
+      "p_ob": {
+        "q": "Z-score poids/taille ou IMC ?",
+        "options": [
+          {
+            "t": "Entre +1 DS et +2 DS : risque de surpoids",
+            "vers": "r_ob1"
+          },
+          {
+            "t": "Entre +2 DS et +3 DS, ou plus de +3 DS : surpoids ou obésité",
+            "vers": "r_ob2"
+          }
+        ],
+        "aide": "Évaluer l'alimentation (aliments, horaires, boissons) et faire un TDR de la glycémie."
+      },
+      "r_sev": {
+        "res": {
+          "niveau": "urgence",
+          "titre": "Dénutrition sévère",
+          "resume": "Prévenir l'hypoglycémie et référer.",
+          "conduite": [
+            "Eau sucrée à 10 % : 4 morceaux de sucre dans 200 mL d'eau, à raison de 5 mL/kg par heure ({kg:5} mL par heure)",
+            "Référer vers le CRENAS ou le CRENI",
+            "Rechercher et traiter une infection associée"
+          ],
+          "meds": [],
+          "source": "Togo Ord. 7"
+        }
+      },
+      "r_mod": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Dénutrition modérée",
+          "resume": "Conseils et référence au CRENAM.",
+          "conduite": [
+            "Prévenir l'hypoglycémie : eau sucrée à 10 %",
+            "Référer vers le CRENAM",
+            "Conseils nutritionnels aux parents"
+          ],
+          "meds": [],
+          "source": "Togo Ord. 7"
+        }
+      },
+      "r_vih": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Infection à VIH de l'enfant possible",
+          "resume": "Référer.",
+          "conduite": [
+            "Référer pour dépistage et prise en charge selon le programme national"
+          ],
+          "meds": [],
+          "source": "Togo Ord. 7"
+        }
+      },
+      "r_tb": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Tuberculose possible",
+          "resume": "Référer.",
+          "conduite": [
+            "Référer pour bilan et prise en charge selon le programme national"
+          ],
+          "meds": [],
+          "source": "Togo Ord. 7"
+        }
+      },
+      "r_diab": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Diabète de type 1 possible",
+          "resume": "Référer.",
+          "conduite": [
+            "Faire un TDR de la glycémie",
+            "Référer"
+          ],
+          "meds": [],
+          "source": "Togo Ord. 7"
+        }
+      },
+      "r_diet": {
+        "res": {
+          "niveau": "ok",
+          "titre": "Erreurs diététiques",
+          "resume": "Conseils nutritionnels.",
+          "conduite": [
+            "Conseils nutritionnels sur l'alimentation de l'enfant (allaitement, bouillie, repas équilibrés)",
+            "Pas d'amélioration : référer"
+          ],
+          "meds": [],
+          "source": "Togo Ord. 7 (traitement 6, annexe 8)"
+        }
+      },
+      "r_psy": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Troubles psycho-socio-affectifs",
+          "resume": "Rassurer et référer.",
+          "conduite": [
+            "Rassurer et conseiller les parents",
+            "Référer"
+          ],
+          "meds": [],
+          "source": "Togo Ord. 7"
+        }
+      },
+      "r_ob1": {
+        "res": {
+          "niveau": "ok",
+          "titre": "Risque de surpoids",
+          "resume": "Conseils nutritionnels.",
+          "conduite": [
+            "Régime équilibré pauvre en sucres",
+            "Repas principaux à heures fixes",
+            "Activité sportive régulière",
+            "Pas d'amélioration : référer"
+          ],
+          "meds": [],
+          "source": "Togo Ord. 8"
+        }
+      },
+      "r_ob2": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Surpoids ou obésité",
+          "resume": "Référer au nutritionniste.",
+          "conduite": [
+            "Conseils : régime équilibré pauvre en sucres, repas à heures fixes, activité sportive",
+            "Référer en pédiatrie, auprès du nutritionniste"
+          ],
+          "meds": [],
+          "source": "Togo Ord. 8"
+        }
+      },
+      "r_ref": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Référer pour avis spécialisé",
+          "resume": "Le tableau ne correspond à aucun cas traité au centre de santé.",
+          "conduite": [
+            "Référer vers l'hôpital pour examen et bilan",
+            "Avant le transfert : traiter la douleur ou la fièvre, hydrater, rassurer la famille"
+          ],
+          "meds": [
+            "paracetamol"
+          ],
+          "source": "Togo Ord. 7"
+        }
+      }
+    }
+  },
+  {
+    "id": "oeil_enf",
+    "groupe": "Enfant",
+    "titre": "Affections de l'œil de l'enfant",
+    "sous": "Togo Ord. 13",
+    "debut": "o0",
+    "noeuds": {
+      "o0": {
+        "q": "Quel tableau ?",
+        "options": [
+          {
+            "t": "Douleur vive avec baisse brutale de la vue",
+            "vers": "r_urg"
+          },
+          {
+            "t": "Corps étranger dans l'œil",
+            "vers": "r_co"
+          },
+          {
+            "t": "Traumatisme ou produit projeté dans l'œil",
+            "vers": "o1"
+          },
+          {
+            "t": "Sécrétions purulentes, ou rougeur avec photophobie ou picotement (conjonctivite)",
+            "vers": "o2"
+          },
+          {
+            "t": "Furoncle douloureux à la base d'un cil (orgelet)",
+            "vers": "r_org"
+          },
+          {
+            "t": "Gonflement des paupières avec démangeaison (blépharite)",
+            "vers": "r_bleph"
+          },
+          {
+            "t": "Baisse progressive de la vue, œil qui sort (exophtalmie), tumeur, autres signes",
+            "vers": "r_ref"
+          }
+        ]
+      },
+      "o1": {
+        "q": "Que s'est-il passé ?",
+        "options": [
+          {
+            "t": "Liquide caustique (produit chimique)",
+            "vers": "r_caust"
+          },
+          {
+            "t": "Blessure de la cornée ou plaie profonde avec baisse de la vue",
+            "vers": "r_cornee"
+          },
+          {
+            "t": "Traumatisme sans lésion ni trouble de la vue",
+            "vers": "r_trauma"
+          }
+        ]
+      },
+      "o2": {
+        "q": "Âge ?",
+        "options": [
+          {
+            "t": "Nouveau-né (moins de 28 jours)",
+            "vers": "algo:ist_adu#r_conj"
+          },
+          {
+            "t": "Enfant",
+            "vers": "r_conj"
+          }
+        ]
+      },
+      "r_urg": {
+        "res": {
+          "niveau": "urgence",
+          "titre": "Glaucome aigu ou autre urgence oculaire",
+          "resume": "Antalgique puis transfert.",
+          "conduite": [
+            "Paracétamol 15 mg/kg, soit {mg:15} mg",
+            "Référer immédiatement"
+          ],
+          "meds": [
+            "paracetamol"
+          ],
+          "source": "Togo Ord. 13 (point 10)"
+        }
+      },
+      "r_co": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Corps étranger solide de l'œil",
+          "resume": "Extraire s'il est visible et accessible.",
+          "conduite": [
+            "Si visible et accessible : l'extraire par lavage à l'eau propre",
+            "Après expulsion : paracétamol ; pommade ophtalmique antibiotique 3 fois par jour pendant 3 jours",
+            "Si amélioration : continuer 4 jours de plus ; sinon pansement occlusif protecteur et référer",
+            "Échec de l'expulsion : paracétamol, pansement protecteur et référer"
+          ],
+          "meds": [
+            "paracetamol",
+            "pommade-ophtalmique"
+          ],
+          "source": "Togo Ord. 13 (traitement 2)"
+        }
+      },
+      "r_caust": {
+        "res": {
+          "niveau": "urgence",
+          "titre": "Projection de liquide caustique",
+          "resume": "Laver abondamment.",
+          "conduite": [
+            "Laver à grande eau propre pendant 10 minutes",
+            "Forte rougeur ou blessure : paracétamol, pommade antibiotique, pansement protecteur et référer",
+            "Ni rougeur ni blessure : paracétamol, pommade 3 fois par jour et pansement protecteur pendant 3 jours ; si amélioration continuer 4 jours, sinon référer"
+          ],
+          "meds": [
+            "paracetamol",
+            "pommade-ophtalmique"
+          ],
+          "source": "Togo Ord. 13 (traitement 3)"
+        }
+      },
+      "r_cornee": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Blessure de la cornée",
+          "resume": "Pansement, antalgique, antibiotique, puis référer.",
+          "conduite": [
+            "Pansement protecteur",
+            "Paracétamol 15 mg/kg ({mg:15} mg)",
+            "Amoxicilline 50 mg/kg/jour en 2 prises ({mg:50} mg par jour)",
+            "Référer"
+          ],
+          "meds": [
+            "paracetamol",
+            "amoxicilline"
+          ],
+          "source": "Togo Ord. 13 (traitement 4)"
+        }
+      },
+      "r_trauma": {
+        "res": {
+          "niveau": "ok",
+          "titre": "Traumatisme sans lésion",
+          "resume": "Pommade et antalgique.",
+          "conduite": [
+            "Pommade ophtalmique antibiotique dans les deux yeux 3 fois par jour, et paracétamol, pendant 3 jours",
+            "Si amélioration : continuer 4 jours de plus ; sinon référer avec le même traitement"
+          ],
+          "meds": [
+            "pommade-ophtalmique",
+            "paracetamol"
+          ],
+          "source": "Togo Ord. 13 (traitement 5)"
+        }
+      },
+      "r_conj": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Conjonctivite de l'enfant",
+          "resume": "Pommade antibiotique.",
+          "conduite": [
+            "Essuyer doucement le pus avec un tissu propre et humide",
+            "Pommade ophtalmique antibiotique dans les deux yeux 3 fois par jour, jusqu'à disparition de la rougeur",
+            "Ne rien mettre d'autre dans les yeux",
+            "Amoxicilline 50 mg/kg/jour en 2 prises pendant 7 jours ({mg:50} mg par jour)",
+            "Pas d'amélioration : référer"
+          ],
+          "meds": [
+            "pommade-ophtalmique",
+            "amoxicilline"
+          ],
+          "source": "Togo Ord. 13 (traitement 1)"
+        }
+      },
+      "r_org": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Orgelet",
+          "resume": "Pommade, antalgique, amoxicilline.",
+          "conduite": [
+            "Évacuer le pus avec une compresse",
+            "Pommade ophtalmique antibiotique : 1 application matin, midi et soir",
+            "Paracétamol pendant 5 jours",
+            "Amoxicilline pendant 7 jours : 50 mg/kg/jour en 2 prises ({mg:50} mg par jour)",
+            "Pas d'amélioration : maintenir le traitement et référer"
+          ],
+          "meds": [
+            "pommade-ophtalmique",
+            "paracetamol",
+            "amoxicilline"
+          ],
+          "source": "Togo Ord. 13 (traitement 6)"
+        }
+      },
+      "r_bleph": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Blépharite",
+          "resume": "Pommade, antalgique, amoxicilline.",
+          "conduite": [
+            "Pommade ophtalmique antibiotique : 1 application matin, midi et soir",
+            "Paracétamol pendant 5 jours",
+            "Amoxicilline pendant 7 jours : 50 mg/kg/jour en 2 prises ({mg:50} mg par jour)",
+            "Pas d'amélioration : référer avec le même traitement"
+          ],
+          "meds": [
+            "pommade-ophtalmique",
+            "paracetamol",
+            "amoxicilline"
+          ],
+          "source": "Togo Ord. 13 (traitement 7)"
+        }
+      },
+      "r_ref": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Référer pour avis spécialisé",
+          "resume": "Le tableau ne correspond à aucun cas traité au centre de santé.",
+          "conduite": [
+            "Référer vers l'hôpital pour examen et bilan",
+            "Avant le transfert : traiter la douleur ou la fièvre, hydrater, rassurer la famille"
+          ],
+          "meds": [
+            "paracetamol"
+          ],
+          "source": "Togo Ord. 13"
+        }
+      }
+    }
+  },
+  {
+    "id": "urinaire_enf",
+    "groupe": "Enfant",
+    "titre": "Troubles urinaires et génitaux de l'enfant",
+    "sous": "Togo Ord. 15",
+    "debut": "u0",
+    "noeuds": {
+      "u0": {
+        "q": "Quel problème ?",
+        "options": [
+          {
+            "t": "Douleur ou brûlure en urinant, besoin fréquent, urines troubles, fièvre (infection urinaire)",
+            "vers": "algo:fievre_enf#r_iu"
+          },
+          {
+            "t": "Impossible d'uriner, ventre bombé (rétention)",
+            "vers": "r_ret"
+          },
+          {
+            "t": "Urines rouges en fin de miction, séjour en zone de bilharziose",
+            "vers": "r_bilh"
+          },
+          {
+            "t": "Prépuce impossible à décalotter, gonflement (phimosis)",
+            "vers": "r_phim"
+          },
+          {
+            "t": "Pas d'urines (anurie), fuites d'urine, pipi au lit (énurésie)",
+            "vers": "r_ref"
+          },
+          {
+            "t": "Urines colorées, gonflement des paupières, tension élevée (glomérulonéphrite)",
+            "vers": "r_ref"
+          },
+          {
+            "t": "Soif, faim, urines abondantes (diabète)",
+            "vers": "r_ref"
+          },
+          {
+            "t": "Malformation des organes génitaux ou des voies urinaires, vulvite, pertes",
+            "vers": "r_ref"
+          }
+        ]
+      },
+      "r_ret": {
+        "res": {
+          "niveau": "urgence",
+          "titre": "Rétention aiguë d'urine",
+          "resume": "Sondage si possible puis transfert.",
+          "conduite": [
+            "Si possible : sondage vésical dans des conditions rigoureuses d'asepsie",
+            "Calmer la douleur : paracétamol",
+            "Référer"
+          ],
+          "meds": [
+            "paracetamol"
+          ],
+          "source": "Togo Ord. 15 (point 2)"
+        }
+      },
+      "r_bilh": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Bilharziose vésicale possible",
+          "resume": "Praziquantel en prise unique.",
+          "conduite": [
+            "Praziquantel 40 mg/kg en prise unique, soit {mg:40} mg",
+            "Prévention : éviter les baignades en eau douce stagnante"
+          ],
+          "meds": [
+            "praziquantel"
+          ],
+          "source": "Togo Ord. 15 (traitement 6)"
+        }
+      },
+      "r_phim": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Phimosis",
+          "resume": "Circoncision.",
+          "conduite": [
+            "Si possible : circoncision dans des conditions rigoureuses d'asepsie",
+            "Sinon référer",
+            "Douleur : paracétamol"
+          ],
+          "meds": [
+            "paracetamol"
+          ],
+          "source": "Togo Ord. 15 (traitement 7)"
+        }
+      },
+      "r_ref": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Référer pour avis spécialisé",
+          "resume": "Le tableau ne correspond à aucun cas traité au centre de santé.",
+          "conduite": [
+            "Référer vers l'hôpital pour examen et bilan",
+            "Avant le transfert : traiter la douleur ou la fièvre, hydrater, rassurer la famille"
+          ],
+          "meds": [
+            "paracetamol"
+          ],
+          "source": "Togo Ord. 15"
+        }
+      }
+    }
+  },
+  {
+    "id": "dyspnee_adu",
+    "groupe": "Adulte",
+    "titre": "Difficultés respiratoires (dyspnée) de l'adulte",
+    "sous": "Togo Ord. 19",
+    "debut": "d0",
+    "noeuds": {
+      "d0": {
+        "q": "Quel tableau ?",
+        "options": [
+          {
+            "t": "Dyspnée en position couchée, crachats mousseux rosés, râles crépitants (œdème aigu du poumon)",
+            "vers": "r_oap"
+          },
+          {
+            "t": "Notion de corps étranger, étouffement",
+            "vers": "r_corps"
+          },
+          {
+            "t": "Dyspnée d'effort, toux, hypertension, œdèmes des jambes, veines du cou gonflées (insuffisance cardiaque)",
+            "vers": "r_ic"
+          },
+          {
+            "t": "Dyspnée avec fièvre ≥ 38 °C, point de côté, râles crépitants (pneumonie)",
+            "vers": "r_pneumo"
+          },
+          {
+            "t": "Sifflements, râles sibilants (crise d'asthme)",
+            "vers": "algo:asthme"
+          },
+          {
+            "t": "Matité ou absence de murmure vésiculaire, point de côté (épanchement pleural)",
+            "vers": "r_ref"
+          },
+          {
+            "t": "Pâleur des muqueuses (anémie)",
+            "vers": "r_ref"
+          },
+          {
+            "t": "Autres signes",
+            "vers": "r_ref"
+          }
+        ]
+      },
+      "r_oap": {
+        "res": {
+          "niveau": "urgence",
+          "titre": "Œdème aigu du poumon",
+          "resume": "Position, diurétique, transfert.",
+          "conduite": [
+            "Mettre le patient en position demi-assise",
+            "Furosémide 20 mg : 2 ampoules en IV directe",
+            "Oxygène si disponible",
+            "Référer"
+          ],
+          "meds": [
+            "furosemide"
+          ],
+          "source": "Togo Ord. 19 (traitement 1)"
+        }
+      },
+      "r_corps": {
+        "res": {
+          "niveau": "urgence",
+          "titre": "Corps étranger des voies respiratoires",
+          "resume": "Manœuvre de Heimlich.",
+          "conduite": [
+            "Manœuvre de Heimlich : patient debout, pression brusque sur l'épigastre au moment de l'expiration",
+            "Si le corps étranger ne sort pas : référer vers un centre ORL pour extraction"
+          ],
+          "meds": [],
+          "source": "Togo Ord. 19 (traitement 2)"
+        }
+      },
+      "r_ic": {
+        "res": {
+          "niveau": "urgence",
+          "titre": "Insuffisance cardiaque possible",
+          "resume": "Référer.",
+          "conduite": [
+            "Référer (insuffisance cardiaque décompensée ou non)",
+            "Position demi-assise en attendant le transfert"
+          ],
+          "meds": [],
+          "source": "Togo Ord. 19 (points 3 et 4)"
+        }
+      },
+      "r_pneumo": {
+        "res": {
+          "niveau": "urgence",
+          "titre": "Pneumonie avec signe de gravité",
+          "resume": "Ceftriaxone puis transfert.",
+          "conduite": [
+            "Ceftriaxone 2 g en IM ou IV directe",
+            "Paracétamol si fièvre",
+            "Référer"
+          ],
+          "meds": [
+            "ceftriaxone",
+            "paracetamol"
+          ],
+          "source": "Togo Ord. 19 (traitement 5)"
+        }
+      },
+      "r_ref": {
+        "res": {
+          "niveau": "urgence",
+          "titre": "Référer en urgence",
+          "resume": "Cas non traité au centre de santé.",
+          "conduite": [
+            "Référer immédiatement vers l'hôpital",
+            "Poser une voie veineuse si possible, surveiller le pouls, la tension et la respiration"
+          ],
+          "meds": [],
+          "source": "Togo Ord. 19"
+        }
+      }
+    }
+  },
+  {
+    "id": "convuls_adu",
+    "groupe": "Adulte",
+    "titre": "Convulsions de l'adulte",
+    "sous": "Togo Ord. 20",
+    "debut": "a0",
+    "noeuds": {
+      "a0": {
+        "q": "Le patient convulse-t-il en ce moment ?",
+        "options": [
+          {
+            "t": "Oui, crise en cours",
+            "vers": "r_crise"
+          },
+          {
+            "t": "Non, la crise est terminée",
+            "vers": "a1"
+          }
+        ]
+      },
+      "r_crise": {
+        "res": {
+          "niveau": "urgence",
+          "titre": "Crise convulsive en cours",
+          "resume": "Protéger le patient, arrêter la crise, chercher la cause.",
+          "conduite": [
+            "Placer le patient sur le côté, tête en extension, ne rien mettre dans la bouche, aspirer les sécrétions",
+            "Diazépam 10 mg en IM (10 à 20 mg si épilepsie connue)",
+            "Glycémie capillaire et TDR du paludisme",
+            "Chercher la cause (bouton ci-dessous)"
+          ],
+          "meds": [
+            "diazepam"
+          ],
+          "source": "Togo Ord. 16 (traitement 2) et Ord. 20",
+          "liens": [
+            {
+              "t": "Chercher la cause des convulsions",
+              "vers": "algo:convuls_adu#a1"
+            }
+          ]
+        }
+      },
+      "a1": {
+        "q": "Quel tableau ?",
+        "options": [
+          {
+            "t": "Raideur de la nuque, fièvre ≥ 38 °C, céphalées, vomissements",
+            "vers": "algo:fievre_adu#r_mening"
+          },
+          {
+            "t": "Trouble de la conscience, TDR ou goutte épaisse positif (paludisme grave)",
+            "vers": "algo:fievre_adu#r_grave"
+          },
+          {
+            "t": "Perte d'urine, morsure de langue, chute brutale (épilepsie)",
+            "vers": "r_epil"
+          },
+          {
+            "t": "Femme enceinte en fin de grossesse, en travail ou en suites de couches, avec tension élevée ou œdèmes (éclampsie)",
+            "vers": "r_eclampsie"
+          },
+          {
+            "t": "Hypoglycémie suspectée (sueurs, jeûne, diabétique traité)",
+            "vers": "r_hypo"
+          },
+          {
+            "t": "Prise de produit toxique, douleurs abdominales",
+            "vers": "algo:intoxication"
+          },
+          {
+            "t": "Crispation des doigts (main d'accoucheur), contractures douloureuses des mains",
+            "vers": "r_hypocalc"
+          },
+          {
+            "t": "Autres signes",
+            "vers": "r_ref"
+          }
+        ]
+      },
+      "r_epil": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Épilepsie possible",
+          "resume": "Arrêter la crise puis référer.",
+          "conduite": [
+            "Diazépam 10 à 20 mg en IM",
+            "Traitement de fond : phénobarbital 100 mg, 1 comprimé le soir pendant 2 à 3 ans, après avis du médecin",
+            "Référer pour bilan clinique et paraclinique complet"
+          ],
+          "meds": [
+            "diazepam",
+            "phenobarbital"
+          ],
+          "source": "Togo Ord. 20 (traitement 3)"
+        }
+      },
+      "r_eclampsie": {
+        "res": {
+          "niveau": "urgence",
+          "titre": "Éclampsie",
+          "resume": "Sulfate de magnésium puis transfert.",
+          "conduite": [
+            "Allonger la femme dans un endroit calme, en décubitus latéral gauche ; maintenir les voies respiratoires dégagées ; mettre un rouleau de tissu propre entre les dents pour éviter la morsure de la langue (sans forcer)",
+            "1re intention : sulfate de magnésium 4 g à 20 % en IV en 5 minutes, puis 5 g en IM profonde dans chaque fesse (10 g) avec 1 mL de lidocaïne à 2 %",
+            "Entretien : 5 g IM profonde + 1 mL de lidocaïne toutes les 4 heures, en alternant les fesses, jusqu'à 24 heures après la dernière convulsion ou l'accouchement",
+            "Avant chaque dose : respiration ≥ 16 par minute, réflexes rotuliens présents, diurèse conservée",
+            "2e intention : diazépam 10 mg en IV directe pendant 2 minutes, puis perfusion de sérum glucosé isotonique contenant 3 ampoules de diazépam, et 1 ampoule de Catapressan (clonidine) 0,15 mg/mL, 1 mL en IM",
+            "Rechercher les signes de travail : si le travail est avancé, accoucher puis référer ; sinon référer",
+            "Dans tous les cas, référer"
+          ],
+          "meds": [
+            "sulfate-magnesium",
+            "diazepam"
+          ],
+          "source": "Togo Ord. 20 (traitement 5)"
+        }
+      },
+      "r_hypo": {
+        "res": {
+          "niveau": "urgence",
+          "titre": "Hypoglycémie",
+          "resume": "Sucre immédiatement.",
+          "conduite": [
+            "Patient conscient : deux morceaux de sucre par la bouche",
+            "Sinon : SGH 10 % 500 mL en perfusion rapide",
+            "Surveiller la glycémie"
+          ],
+          "meds": [
+            "sgh10"
+          ],
+          "source": "Togo Ord. 20 (traitement 4)"
+        }
+      },
+      "r_hypocalc": {
+        "res": {
+          "niveau": "urgence",
+          "titre": "Hypocalcémie (tétanie)",
+          "resume": "Calcium puis transfert.",
+          "conduite": [
+            "Gluconate de calcium : 1 ampoule dans 20 mL de SGI en perfusion lente",
+            "Référer"
+          ],
+          "meds": [
+            "gluconate-calcium"
+          ],
+          "source": "Togo Ord. 20 (traitement 7)"
+        }
+      },
+      "r_ref": {
+        "res": {
+          "niveau": "urgence",
+          "titre": "Référer en urgence",
+          "resume": "Cas non traité au centre de santé.",
+          "conduite": [
+            "Référer immédiatement vers l'hôpital",
+            "Poser une voie veineuse si possible, surveiller le pouls, la tension et la respiration"
+          ],
+          "meds": [],
+          "source": "Togo Ord. 20 (encéphalite, tumeur ou abcès cérébral possibles)"
+        }
+      }
+    }
+  },
+  {
+    "id": "ictere_adu",
+    "groupe": "Adulte",
+    "titre": "Ictère (jaunisse) de l'adulte",
+    "sous": "Togo Ord. 21",
+    "debut": "i0",
+    "noeuds": {
+      "i0": {
+        "q": "Quel tableau ?",
+        "options": [
+          {
+            "t": "Fièvre ≥ 38 °C, yeux injectés de sang, courbatures, peu ou pas d'urines, vomissements de sang noir, délire (fièvre jaune)",
+            "vers": "r_jaune"
+          },
+          {
+            "t": "Céphalées, frissons, courbatures, ± trouble de la conscience, TDR ou goutte épaisse positif (paludisme grave)",
+            "vers": "algo:fievre_adu#r_grave"
+          },
+          {
+            "t": "Fatigue, légère douleur sous les côtes à droite, syndrome grippal, vomissements (hépatite virale)",
+            "vers": "r_hepat"
+          },
+          {
+            "t": "Prise de quinine suivie d'urines « coca-cola », fièvre (fièvre bilieuse hémoglobinurique)",
+            "vers": "r_fbh"
+          },
+          {
+            "t": "Douleurs articulaires ou musculaires, antécédents de drépanocytose",
+            "vers": "algo:drepano"
+          },
+          {
+            "t": "Douleur très vive sous les côtes à droite (cholécystite, abcès du foie)",
+            "vers": "r_ref"
+          },
+          {
+            "t": "Ictère indolore, œdèmes des jambes, ascite (cirrhose)",
+            "vers": "r_ref"
+          },
+          {
+            "t": "Gros foie dur, altération de l'état général (cancer du foie)",
+            "vers": "r_ref"
+          },
+          {
+            "t": "Selles décolorées, démangeaisons intenses, altération de l'état général (cancer du pancréas)",
+            "vers": "r_ref"
+          },
+          {
+            "t": "Prise de sulfamides ou de produit toxique (hépatite toxique, hémolyse)",
+            "vers": "r_ref"
+          },
+          {
+            "t": "Autres signes (pancréatite…)",
+            "vers": "r_ref"
+          }
+        ]
+      },
+      "r_jaune": {
+        "res": {
+          "niveau": "urgence",
+          "titre": "Fièvre jaune possible",
+          "resume": "Alerter, isoler, traitement symptomatique, transfert.",
+          "conduite": [
+            "Alerter immédiatement l'échelon supérieur",
+            "Isoler le malade sous moustiquaire",
+            "Traitement symptomatique : paracétamol (éviter l'aspirine, risque hémorragique), réhydratation",
+            "Gluconate de calcium 1 à 2 g par jour en IV pour prévenir le risque hémorragique",
+            "Mesures d'hygiène ; référer"
+          ],
+          "meds": [
+            "paracetamol",
+            "gluconate-calcium"
+          ],
+          "source": "Togo Ord. 21 (traitement 1)"
+        }
+      },
+      "r_hepat": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Hépatite virale probable",
+          "resume": "Mesures simples, surveillance quotidienne.",
+          "conduite": [
+            "Conseils d'hygiène : ne pas partager rasoirs, brosses à dents ni objets souillés de sang ; se laver les mains après les selles",
+            "Repos au lit, bien manger (légumes, fruits)",
+            "Proscrire l'alcool, les aliments gras et tout médicament non prescrit",
+            "Vomissements plus de 3 fois par jour : métoclopramide 1 ampoule en IM ou IV, 2 à 3 fois par jour",
+            "Vitamine C 1000 mg par jour",
+            "Vomissements plus de 3 fois par jour : perfusion de SGI 500 mL, 2 flacons par jour, et 1 flacon de sérum salé par jour",
+            "Revoir le malade tous les jours ; si amélioré après 7 jours, continuer 2 semaines ; sinon référer"
+          ],
+          "meds": [
+            "metoclopramide"
+          ],
+          "source": "Togo Ord. 21 (traitement 3)"
+        }
+      },
+      "r_fbh": {
+        "res": {
+          "niveau": "urgence",
+          "titre": "Fièvre bilieuse hémoglobinurique",
+          "resume": "Arrêter la quinine et transférer.",
+          "conduite": [
+            "Arrêter immédiatement la quinine et tout autre médicament",
+            "Référer en urgence (hémolyse et insuffisance rénale aiguë)",
+            "Expliquer au malade et à sa famille qu'il ne devra plus jamais prendre de quinine ; noter l'intolérance sur son carnet"
+          ],
+          "meds": [],
+          "source": "Togo Ord. 21 (traitement 5)"
+        }
+      },
+      "r_ref": {
+        "res": {
+          "niveau": "urgence",
+          "titre": "Référer en urgence",
+          "resume": "Cas non traité au centre de santé.",
+          "conduite": [
+            "Référer immédiatement vers l'hôpital",
+            "Poser une voie veineuse si possible, surveiller le pouls, la tension et la respiration"
+          ],
+          "meds": [],
+          "source": "Togo Ord. 21"
+        }
+      }
+    }
+  },
+  {
+    "id": "amaigrissement",
+    "groupe": "Adulte",
+    "titre": "Amaigrissement",
+    "sous": "Togo Ord. 22",
+    "debut": "m0",
+    "noeuds": {
+      "m0": {
+        "q": "Quel tableau ?",
+        "options": [
+          {
+            "t": "Boit beaucoup, urine beaucoup (plus de 3 fois la nuit), mange beaucoup (diabète)",
+            "vers": "r_diab"
+          },
+          {
+            "t": "Toux chronique, diarrhée chronique, démangeaisons généralisées, zona récidivant, sérologie VIH positive",
+            "vers": "r_vih"
+          },
+          {
+            "t": "Toux de plus de 2 semaines, crachats, sueurs nocturnes (tuberculose)",
+            "vers": "r_tb"
+          },
+          {
+            "t": "Palpitations, nervosité, exophtalmie (hyperthyroïdie)",
+            "vers": "r_ref"
+          },
+          {
+            "t": "Alimentation insuffisante, malnutrition, tristesse (dépression)",
+            "vers": "r_ref"
+          },
+          {
+            "t": "Vomissements après les repas (sténose du pylore)",
+            "vers": "r_ref"
+          },
+          {
+            "t": "Masse, altération de l'état général (cancer)",
+            "vers": "r_ref"
+          },
+          {
+            "t": "Autres signes",
+            "vers": "r_ref"
+          }
+        ],
+        "aide": "Perte de poids involontaire d'au moins 5 % du poids initial."
+      },
+      "r_diab": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Diabète possible",
+          "resume": "Glycémie et transfert.",
+          "conduite": [
+            "Faire une glycémie capillaire",
+            "Référer pour confirmation et prise en charge"
+          ],
+          "meds": [],
+          "source": "Togo Ord. 22 (point 1)",
+          "liens": [
+            {
+              "t": "Prise en charge du diabète",
+              "vers": "algo:diabete"
+            }
+          ]
+        }
+      },
+      "r_vih": {
+        "res": {
+          "niveau": "attention",
+          "titre": "VIH/sida possible",
+          "resume": "Dépistage et programme national.",
+          "conduite": [
+            "Proposer le dépistage VIH",
+            "Prise en charge selon les directives du programme national de lutte contre le sida (PNLS)"
+          ],
+          "meds": [],
+          "source": "Togo Ord. 22 (point 2)"
+        }
+      },
+      "r_tb": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Tuberculose possible",
+          "resume": "Programme national.",
+          "conduite": [
+            "Prise en charge selon les directives du programme national de lutte contre la tuberculose (PNLT)",
+            "Orienter vers le centre de dépistage et de traitement de la tuberculose"
+          ],
+          "meds": [],
+          "source": "Togo Ord. 22 (point 7)"
+        }
+      },
+      "r_ref": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Référer pour avis spécialisé",
+          "resume": "Le tableau ne correspond à aucun cas traité au centre de santé.",
+          "conduite": [
+            "Référer vers l'hôpital pour examen et bilan",
+            "Avant le transfert : traiter la douleur ou la fièvre, hydrater, rassurer le patient"
+          ],
+          "meds": [
+            "paracetamol"
+          ],
+          "source": "Togo Ord. 22"
+        }
+      }
+    }
+  },
+  {
+    "id": "bas_ventre_f",
+    "groupe": "Adulte",
+    "titre": "Douleurs du bas-ventre chez la femme",
+    "sous": "Togo Ord. 24",
+    "debut": "b0",
+    "noeuds": {
+      "b0": {
+        "q": "Retard de règles ou saignement vaginal ?",
+        "options": [
+          {
+            "t": "Oui",
+            "vers": "b1"
+          },
+          {
+            "t": "Non",
+            "vers": "b5"
+          }
+        ],
+        "aide": "Dans tous les cas : demander l'âge et la date des dernières règles, prendre le pouls et la tension."
+      },
+      "b1": {
+        "q": "Quel tableau ?",
+        "options": [
+          {
+            "t": "Ventre mou, « cri de l'ombilic », toucher vaginal très douloureux, état de choc (GEU rompue)",
+            "vers": "r_geur"
+          },
+          {
+            "t": "Col fermé, utérus petit, masse douloureuse mobile à côté de l'utérus (GEU non rompue)",
+            "vers": "r_geu"
+          },
+          {
+            "t": "Col plus ou moins fermé, utérus augmenté de volume (menace d'avortement)",
+            "vers": "r_menace"
+          },
+          {
+            "t": "Col entrouvert, œuf dans le col (avortement en cours, incomplet, ou tentative d'IVG)",
+            "vers": "r_avort"
+          },
+          {
+            "t": "Autre tableau",
+            "vers": "b5"
+          }
+        ]
+      },
+      "b5": {
+        "q": "Quel tableau ?",
+        "options": [
+          {
+            "t": "Douleur de la fosse iliaque droite avec fièvre, défense (appendicite)",
+            "vers": "r_ref_urg"
+          },
+          {
+            "t": "Fièvre ≥ 38 °C, pertes malodorantes, utérus gros et mou (endométrite)",
+            "vers": "r_endo"
+          },
+          {
+            "t": "Défense du bas-ventre, fièvre (pelvipéritonite)",
+            "vers": "r_ref_urg"
+          },
+          {
+            "t": "Fièvre, fibrome connu, gros utérus irrégulier et douloureux (fibrome en nécrobiose)",
+            "vers": "r_fibrome"
+          },
+          {
+            "t": "Douleur vive et brutale, nausées, vomissements, masse douloureuse (torsion d'organe pelvien)",
+            "vers": "r_ref_urg"
+          },
+          {
+            "t": "Pas d'urines, globe vésical (rétention aiguë)",
+            "vers": "r_ret"
+          },
+          {
+            "t": "Douleur au niveau d'un orifice herniaire avec tuméfaction réductible",
+            "vers": "r_hernie_ne"
+          },
+          {
+            "t": "Douleur au niveau d'un orifice herniaire avec tuméfaction non réductible",
+            "vers": "r_hernie_e"
+          },
+          {
+            "t": "Brûlures en urinant, besoin fréquent (cystite)",
+            "vers": "algo:urinaire_adu#r_cystite"
+          },
+          {
+            "t": "Règles douloureuses (dysménorrhée)",
+            "vers": "r_dysmen"
+          },
+          {
+            "t": "Autres signes",
+            "vers": "r_ref"
+          }
+        ]
+      },
+      "r_geur": {
+        "res": {
+          "niveau": "urgence",
+          "titre": "Grossesse extra-utérine rompue",
+          "resume": "Transfert immédiat.",
+          "conduite": [
+            "Poser un abord veineux (Ringer lactate ou sérum salé ; macromolécules si disponibles)",
+            "Référer immédiatement"
+          ],
+          "meds": [],
+          "source": "Togo Ord. 24 (traitement 1)"
+        }
+      },
+      "r_geu": {
+        "res": {
+          "niveau": "urgence",
+          "titre": "Grossesse extra-utérine non rompue",
+          "resume": "Transfert.",
+          "conduite": [
+            "Référer, avec abord veineux si possible"
+          ],
+          "meds": [],
+          "source": "Togo Ord. 24 (traitement 2)"
+        }
+      },
+      "r_menace": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Menace d'avortement",
+          "resume": "Repos et diazépam.",
+          "conduite": [
+            "Repos au lit, garniture propre",
+            "Diazépam : 1 comprimé de 5 mg matin et soir, ou 1 ampoule de 10 mg en IM matin et soir",
+            "Si amélioration : continuer 5 jours ; si les troubles persistent ou s'aggravent : référer"
+          ],
+          "meds": [
+            "diazepam"
+          ],
+          "source": "Togo Ord. 24 (traitement 3)"
+        }
+      },
+      "r_avort": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Avortement incomplet ou en cours",
+          "resume": "Vider l'utérus si possible, sinon transférer.",
+          "conduite": [
+            "Curage digital si le col est assez ouvert, ou AMIU, ou curetage si faisable au centre",
+            "Sinon : référer avec garniture propre, et abord veineux si tension basse (systolique < 100 mmHg)",
+            "Rechercher des vésicules de môle dans le produit expulsé : si présentes, référer",
+            "Référer aussi si l'hémorragie persiste après le geste",
+            "Après le geste : amoxicilline 500 mg, 2 comprimés matin et soir pendant 7 jours, ou cotrimoxazole 480 mg, 2 comprimés matin et soir pendant 7 jours",
+            "Paracétamol 1 g, 2 à 3 fois par jour si besoin",
+            "Revoir après 24 heures"
+          ],
+          "meds": [
+            "amoxicilline",
+            "cotrimoxazole",
+            "paracetamol"
+          ],
+          "source": "Togo Ord. 24 (traitement 4)"
+        }
+      },
+      "r_endo": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Endométrite",
+          "resume": "Antibiotiques et contrôle à 3 jours.",
+          "conduite": [
+            "Amoxicilline 500 mg : 2 comprimés matin et soir pendant 10 jours",
+            "Métronidazole 250 mg : 2 comprimés matin et soir pendant 10 jours",
+            "Ibuprofène 400 mg : 2 comprimés matin et soir au repas",
+            "Revoir après 3 jours : si amélioré, poursuivre jusqu'au terme ; sinon référer"
+          ],
+          "meds": [
+            "amoxicilline",
+            "metronidazole",
+            "ibuprofene"
+          ],
+          "source": "Togo Ord. 24 (traitement 6)"
+        }
+      },
+      "r_fibrome": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Fibrome en nécrobiose",
+          "resume": "Anti-inflammatoire, antispasmodique, glace, transfert.",
+          "conduite": [
+            "Ibuprofène 800 mg matin et soir au cours des repas",
+            "Hyoscine ou autre antispasmodique, injectable ou oral, pour calmer la douleur",
+            "Vessie de glace, puis référer"
+          ],
+          "meds": [
+            "ibuprofene"
+          ],
+          "source": "Togo Ord. 24 (traitement 8)"
+        }
+      },
+      "r_dysmen": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Dysménorrhée",
+          "resume": "Antispasmodique et anti-inflammatoire.",
+          "conduite": [
+            "Pendant les règles : butylscopolamine 20 mg, 3 fois par jour pendant 3 jours",
+            "Ibuprofène 800 mg matin et soir au cours des repas, pendant les 3 jours précédant les règles, pendant 3 mois",
+            "Pas d'amélioration : référer"
+          ],
+          "meds": [
+            "ibuprofene"
+          ],
+          "source": "Togo Ord. 24 (traitement 14)"
+        }
+      },
+      "r_ret": {
+        "res": {
+          "niveau": "urgence",
+          "titre": "Rétention aiguë d'urine",
+          "resume": "Sondage si possible puis transfert.",
+          "conduite": [
+            "Si possible : sondage vésical dans des conditions rigoureuses d'asepsie",
+            "Référer"
+          ],
+          "meds": [],
+          "source": "Togo Ord. 24 (traitement 10)"
+        }
+      },
+      "r_hernie_ne": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Hernie non étranglée",
+          "resume": "Expliquer et conseiller la chirurgie.",
+          "conduite": [
+            "Donner des explications au patient et conseiller l'intervention chirurgicale",
+            "Référer"
+          ],
+          "meds": [],
+          "source": "Togo Ord. 24 (traitement 11)"
+        }
+      },
+      "r_hernie_e": {
+        "res": {
+          "niveau": "urgence",
+          "titre": "Hernie étranglée",
+          "resume": "Diazépam puis transfert en urgence.",
+          "conduite": [
+            "Diazépam : 1 ampoule (10 mg) en IM",
+            "Référer immédiatement"
+          ],
+          "meds": [
+            "diazepam"
+          ],
+          "source": "Togo Ord. 24 (traitement 12)"
+        }
+      },
+      "r_ref_urg": {
+        "res": {
+          "niveau": "urgence",
+          "titre": "Urgence abdominale chirurgicale ou gynécologique",
+          "resume": "Transfert en urgence.",
+          "conduite": [
+            "Référer immédiatement vers l'hôpital",
+            "Poser une voie veineuse, ne rien donner par la bouche"
+          ],
+          "meds": [],
+          "source": "Togo Ord. 24 (appendicite, pelvipéritonite, torsion)"
+        }
+      },
+      "r_ref": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Référer pour avis spécialisé",
+          "resume": "Le tableau ne correspond à aucun cas traité au centre de santé.",
+          "conduite": [
+            "Référer vers l'hôpital pour examen et bilan",
+            "Avant le transfert : traiter la douleur ou la fièvre, hydrater, rassurer le patient"
+          ],
+          "meds": [
+            "paracetamol"
+          ],
+          "source": "Togo Ord. 24"
+        }
+      }
+    }
+  },
+  {
+    "id": "saignement_vag",
+    "groupe": "Adulte",
+    "titre": "Saignement vaginal (écoulement vaginal rouge)",
+    "sous": "Togo Ord. 25",
+    "debut": "s0",
+    "noeuds": {
+      "s0": {
+        "q": "Douleurs du bas-ventre avec retard de règles ?",
+        "options": [
+          {
+            "t": "Oui",
+            "vers": "algo:bas_ventre_f#b1"
+          },
+          {
+            "t": "Non",
+            "vers": "s1"
+          }
+        ],
+        "aide": "Saignement en dehors des règles et en dehors de l'accouchement. Demander l'âge, la date des dernières règles, la durée et l'abondance ; prendre le pouls et la tension."
+      },
+      "s1": {
+        "q": "Quel tableau ?",
+        "options": [
+          {
+            "t": "Grossesse d'environ 6 mois, utérus dur en permanence et douloureux, ± sang noir (décollement placentaire)",
+            "vers": "r_dppni"
+          },
+          {
+            "t": "Grossesse avancée, utérus souple et indolore, sang rouge (placenta praevia)",
+            "vers": "r_pp"
+          },
+          {
+            "t": "Saignement provoqué par un rapport sexuel ou la toilette intime (cancer du col)",
+            "vers": "r_cancer"
+          },
+          {
+            "t": "Traumatisme, produit caustique dans le vagin, rapport sexuel violent, viol",
+            "vers": "r_plaie"
+          },
+          {
+            "t": "Femme ménopausée, pertes fétides (cancer de l'endomètre)",
+            "vers": "r_cancer"
+          },
+          {
+            "t": "Autres signes",
+            "vers": "r_ref"
+          }
+        ]
+      },
+      "r_dppni": {
+        "res": {
+          "niveau": "urgence",
+          "titre": "Décollement prématuré du placenta",
+          "resume": "Transfert immédiat.",
+          "conduite": [
+            "Référer avec une garniture propre et un abord veineux si possible"
+          ],
+          "meds": [],
+          "source": "Togo Ord. 25 (traitement 5)"
+        }
+      },
+      "r_pp": {
+        "res": {
+          "niveau": "urgence",
+          "titre": "Placenta praevia hémorragique",
+          "resume": "Transfert, éviter les touchers répétés.",
+          "conduite": [
+            "Référer si le col est fermé ou les membranes inaccessibles",
+            "Membranes accessibles : les rompre largement",
+            "Éviter les touchers vaginaux répétés",
+            "Si les saignements persistent : référer avec une garniture propre et un abord veineux"
+          ],
+          "meds": [],
+          "source": "Togo Ord. 25 (traitement 6)"
+        }
+      },
+      "r_cancer": {
+        "res": {
+          "niveau": "urgence",
+          "titre": "Cancer du col ou de l'endomètre possible",
+          "resume": "Transfert.",
+          "conduite": [
+            "Référer (tamponnement vaginal si hémorragie importante)"
+          ],
+          "meds": [],
+          "source": "Togo Ord. 25 (traitements 7 et 9)"
+        }
+      },
+      "r_plaie": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Plaie vulvo-vaginale ou perforation",
+          "resume": "Suture, antibiotique, antalgique.",
+          "conduite": [
+            "Suture au fil résorbable si possible et soins locaux quotidiens ; sinon référer",
+            "Amoxicilline 500 mg : 2 comprimés matin et soir pendant 7 jours, ou cotrimoxazole 480 mg : 2 comprimés matin et soir pendant 7 jours",
+            "Ibuprofène 800 mg matin et soir au cours des repas pendant 5 jours",
+            "Viol : référer (sérologie VIH, antigène HBs, prévention après exposition, contraception d'urgence, soutien psychosocial)",
+            "Perforation du Douglas ou produit caustique : référer"
+          ],
+          "meds": [
+            "amoxicilline",
+            "cotrimoxazole",
+            "ibuprofene"
+          ],
+          "source": "Togo Ord. 25 (traitement 8)"
+        }
+      },
+      "r_ref": {
+        "res": {
+          "niveau": "urgence",
+          "titre": "Référer en urgence",
+          "resume": "Cas non traité au centre de santé.",
+          "conduite": [
+            "Référer immédiatement vers l'hôpital",
+            "Poser une voie veineuse si possible, surveiller le pouls, la tension et la respiration"
+          ],
+          "meds": [],
+          "source": "Togo Ord. 25"
+        }
+      }
+    }
+  },
+  {
+    "id": "regles",
+    "groupe": "Adulte",
+    "titre": "Troubles des règles",
+    "sous": "Togo Ord. 28",
+    "debut": "r0",
+    "noeuds": {
+      "r0": {
+        "q": "Quel tableau ?",
+        "options": [
+          {
+            "t": "Jamais eu de règles, moins de 17 ans",
+            "vers": "r_amen"
+          },
+          {
+            "t": "Jamais eu de règles, plus de 17 ans",
+            "vers": "r_ref"
+          },
+          {
+            "t": "Douleurs périodiques, masse au bas-ventre, hymen imperforé",
+            "vers": "r_ref"
+          },
+          {
+            "t": "Absence de règles depuis plus de 6 semaines avec signes de grossesse",
+            "vers": "r_gross"
+          },
+          {
+            "t": "Femme qui allaite, sans signe de grossesse",
+            "vers": "r_pf"
+          },
+          {
+            "t": "Femme sous contraceptifs",
+            "vers": "r_pf"
+          },
+          {
+            "t": "Femme de plus de 45 ans",
+            "vers": "r_meno"
+          },
+          {
+            "t": "Règles douloureuses (plus de 3 fois en 6 mois)",
+            "vers": "r_dysmen"
+          },
+          {
+            "t": "Règles de plus de 6 jours, très abondantes avec caillots (fibrome)",
+            "vers": "r_ref"
+          },
+          {
+            "t": "Saignement avec arrêt des règles et masse à côté de l'utérus (GEU)",
+            "vers": "algo:bas_ventre_f#r_geu"
+          },
+          {
+            "t": "Saignement sous contraceptifs hormonaux ou DIU, ou après la ménopause",
+            "vers": "r_ref"
+          },
+          {
+            "t": "Autres signes",
+            "vers": "r_ref"
+          }
+        ]
+      },
+      "r_amen": {
+        "res": {
+          "niveau": "ok",
+          "titre": "Aménorrhée primaire avant 17 ans",
+          "resume": "Rassurer.",
+          "conduite": [
+            "Rassurer la patiente",
+            "Revoir si les règles n'apparaissent pas après 17 ans"
+          ],
+          "meds": [],
+          "source": "Togo Ord. 28 (traitement 1)"
+        }
+      },
+      "r_gross": {
+        "res": {
+          "niveau": "ok",
+          "titre": "Grossesse",
+          "resume": "Consultation prénatale.",
+          "conduite": [
+            "Diriger vers la consultation prénatale (CPN)"
+          ],
+          "meds": [],
+          "source": "Togo Ord. 28 (traitements 4 et 6)"
+        }
+      },
+      "r_pf": {
+        "res": {
+          "niveau": "ok",
+          "titre": "Allaitement ou contraception sans grossesse",
+          "resume": "Planification familiale.",
+          "conduite": [
+            "Diriger vers le service de planification familiale"
+          ],
+          "meds": [],
+          "source": "Togo Ord. 28 (traitements 5 et 7)"
+        }
+      },
+      "r_meno": {
+        "res": {
+          "niveau": "ok",
+          "titre": "Préménopause ou ménopause",
+          "resume": "Rassurer.",
+          "conduite": [
+            "Conseiller et rassurer"
+          ],
+          "meds": [],
+          "source": "Togo Ord. 28 (traitement 8)"
+        }
+      },
+      "r_dysmen": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Dysménorrhée",
+          "resume": "Antispasmodique et anti-inflammatoire.",
+          "conduite": [
+            "Butylscopolamine 20 mg, 3 fois par jour pendant la durée des règles",
+            "Ibuprofène 800 mg matin et soir au cours des repas pendant 3 cycles",
+            "Rendez-vous après 3 cycles : si amélioration, continuer ; sinon référer"
+          ],
+          "meds": [
+            "ibuprofene"
+          ],
+          "source": "Togo Ord. 28 (traitement 9)"
+        }
+      },
+      "r_ref": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Référer pour avis spécialisé",
+          "resume": "Le tableau ne correspond à aucun cas traité au centre de santé.",
+          "conduite": [
+            "Référer vers l'hôpital pour examen et bilan",
+            "Avant le transfert : traiter la douleur ou la fièvre, hydrater, rassurer le patient"
+          ],
+          "meds": [
+            "paracetamol"
+          ],
+          "source": "Togo Ord. 28"
+        }
+      }
+    }
+  },
+  {
+    "id": "sein",
+    "groupe": "Adulte",
+    "titre": "Masse dans le sein",
+    "sous": "Togo Ord. 29",
+    "debut": "s0",
+    "noeuds": {
+      "s0": {
+        "q": "Quel tableau ?",
+        "options": [
+          {
+            "t": "Peau d'orange, gros ganglions sous l'aisselle, augmentation de volume, fièvre (mastite carcinomateuse)",
+            "vers": "r_ref"
+          },
+          {
+            "t": "Femme qui allaite, sein chaud, rouge, douloureux, ganglion (mastite non suppurée)",
+            "vers": "r_mastite"
+          },
+          {
+            "t": "Zone fluctuante, ganglion sous l'aisselle (mastite suppurée, abcès)",
+            "vers": "r_abces"
+          },
+          {
+            "t": "Boule isolée, indolore, ou autre signe (tumeur)",
+            "vers": "r_ref"
+          }
+        ]
+      },
+      "r_mastite": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Mastite non suppurée",
+          "resume": "Antibiotiques et vidange du sein.",
+          "conduite": [
+            "Amoxicilline 1 g par voie orale matin et soir pendant 10 jours",
+            "Métronidazole 500 mg : 1 comprimé matin, midi et soir pendant 10 jours",
+            "Paracétamol (ou aspirine 500 mg, 2 comprimés matin et soir pendant 3 jours)",
+            "Vider le sein si la femme allaite",
+            "Si amélioration après 3 jours : continuer ; sinon référer"
+          ],
+          "meds": [
+            "amoxicilline",
+            "metronidazole",
+            "paracetamol"
+          ],
+          "source": "Togo Ord. 29 (traitement 2A)"
+        }
+      },
+      "r_abces": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Mastite suppurée (abcès du sein)",
+          "resume": "Drainage et antibiotiques.",
+          "conduite": [
+            "Incision et drainage",
+            "Même traitement que pour la mastite non suppurée : amoxicilline 1 g matin et soir et métronidazole 500 mg 3 fois par jour pendant 10 jours, antalgique",
+            "Vider le sein si la femme allaite",
+            "Pas d'amélioration après 3 jours : référer"
+          ],
+          "meds": [
+            "amoxicilline",
+            "metronidazole",
+            "paracetamol"
+          ],
+          "source": "Togo Ord. 29 (traitement 2B)"
+        }
+      },
+      "r_ref": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Référer pour avis spécialisé",
+          "resume": "Le tableau ne correspond à aucun cas traité au centre de santé.",
+          "conduite": [
+            "Référer vers l'hôpital pour examen et bilan",
+            "Avant le transfert : traiter la douleur ou la fièvre, hydrater, rassurer le patient"
+          ],
+          "meds": [
+            "paracetamol"
+          ],
+          "source": "Togo Ord. 29"
+        }
+      }
+    }
+  },
+  {
+    "id": "post_partum",
+    "groupe": "Adulte",
+    "titre": "Hémorragie après l'accouchement",
+    "sous": "Togo Ord. 30",
+    "debut": "h0",
+    "noeuds": {
+      "h0": {
+        "q": "Que constate-t-on ?",
+        "options": [
+          {
+            "t": "Placenta non expulsé, utérus gros et mou (rétention placentaire)",
+            "vers": "r_ret_tot"
+          },
+          {
+            "t": "Placenta expulsé mais incomplet : membranes ou cotylédons manquants",
+            "vers": "r_ret_cot"
+          },
+          {
+            "t": "Placenta expulsé, pas de globe de sécurité, utérus mou (atonie utérine)",
+            "vers": "r_atonie"
+          },
+          {
+            "t": "Utérus bien contracté mais saignement continu : déchirure du périnée, du col ou du vagin, plaie du clitoris, rupture utérine",
+            "vers": "r_trauma"
+          },
+          {
+            "t": "Saignement fluide, sans caillots, qui ne coagule pas (CIVD)",
+            "vers": "r_civd"
+          },
+          {
+            "t": "Autres signes",
+            "vers": "r_ref"
+          }
+        ],
+        "aide": "Dans tous les cas : prendre la tension et le pouls ; vider la vessie (sonde de Foley à demeure si possible) ; masser l'utérus ; si tension systolique < 100 mmHg : perfusion de Ringer lactate, de sérum salé ou de macromolécules. Après l'arrêt : garniture propre, surveiller 2 heures l'état général, la tension, le pouls, la garniture et le globe de sécurité."
+      },
+      "r_ret_tot": {
+        "res": {
+          "niveau": "urgence",
+          "titre": "Rétention placentaire",
+          "resume": "Délivrance artificielle puis ocytocine.",
+          "conduite": [
+            "Faire la délivrance artificielle et la révision utérine",
+            "Ocytocine : 1 ampoule en IV directe",
+            "Si l'hémorragie persiste : référer immédiatement",
+            "Suites de couches : cotrimoxazole 480 mg, 2 comprimés matin et soir pendant 7 jours (si elle allaite : amoxicilline 1 g matin et soir pendant 7 jours)",
+            "Fer + acide folique : 2 comprimés, 2 fois par jour pendant 2 mois"
+          ],
+          "meds": [
+            "ocytocine",
+            "cotrimoxazole",
+            "amoxicilline"
+          ],
+          "source": "Togo Ord. 30 (traitement 2)"
+        }
+      },
+      "r_ret_cot": {
+        "res": {
+          "niveau": "urgence",
+          "titre": "Rétention de membranes ou de cotylédons",
+          "resume": "Révision utérine puis ocytocine.",
+          "conduite": [
+            "Faire une révision utérine, puis ocytocine 1 ampoule en IV directe",
+            "Si l'hémorragie persiste : référer immédiatement",
+            "Suites de couches : cotrimoxazole 480 mg, 2 comprimés matin et soir pendant 7 jours (si elle allaite : amoxicilline 1 g matin et soir pendant 7 jours)",
+            "Fer + acide folique : 2 comprimés, 2 fois par jour pendant 2 mois"
+          ],
+          "meds": [
+            "ocytocine",
+            "cotrimoxazole",
+            "amoxicilline"
+          ],
+          "source": "Togo Ord. 30 (traitement 3)"
+        }
+      },
+      "r_atonie": {
+        "res": {
+          "niveau": "urgence",
+          "titre": "Atonie utérine",
+          "resume": "Révision utérine, ocytocine, massage.",
+          "conduite": [
+            "Faire une révision utérine",
+            "Ocytocine 10 UI en perfusion dans 500 mL de sérum salé ou de SGI",
+            "Massage utérin",
+            "Si l'hémorragie persiste : garniture propre, sonde de Foley si possible, et référer immédiatement",
+            "Suites de couches : cotrimoxazole 480 mg, 2 comprimés matin et soir pendant 7 jours (si elle allaite : amoxicilline 1 g matin et soir pendant 7 jours)",
+            "Fer + acide folique : 2 comprimés, 2 fois par jour pendant 2 mois"
+          ],
+          "meds": [
+            "ocytocine",
+            "cotrimoxazole",
+            "amoxicilline"
+          ],
+          "source": "Togo Ord. 30 (traitement 4)"
+        }
+      },
+      "r_trauma": {
+        "res": {
+          "niveau": "urgence",
+          "titre": "Traumatisme des parties molles",
+          "resume": "Suturer ou transférer.",
+          "conduite": [
+            "Rupture utérine, déchirure grave du col ou du périnée (2e et 3e degrés) : garniture propre et référer immédiatement",
+            "Autres cas : suture au fil résorbable et soins locaux 2 fois par jour",
+            "Suites de couches : cotrimoxazole 480 mg, 2 comprimés matin et soir pendant 7 jours (si elle allaite : amoxicilline 1 g matin et soir pendant 7 jours)",
+            "Fer + acide folique : 2 comprimés, 2 fois par jour pendant 2 mois"
+          ],
+          "meds": [
+            "cotrimoxazole",
+            "amoxicilline"
+          ],
+          "source": "Togo Ord. 30 (traitement 1)"
+        }
+      },
+      "r_civd": {
+        "res": {
+          "niveau": "urgence",
+          "titre": "Coagulation intravasculaire disséminée",
+          "resume": "Tamponnement et transfert immédiat.",
+          "conduite": [
+            "Tamponnement vaginal et référer immédiatement"
+          ],
+          "meds": [],
+          "source": "Togo Ord. 30 (traitement 5)"
+        }
+      },
+      "r_ref": {
+        "res": {
+          "niveau": "urgence",
+          "titre": "Référer en urgence",
+          "resume": "Cas non traité au centre de santé.",
+          "conduite": [
+            "Référer immédiatement vers l'hôpital",
+            "Poser une voie veineuse si possible, surveiller le pouls, la tension et la respiration"
+          ],
+          "meds": [],
+          "source": "Togo Ord. 30"
+        }
+      }
+    }
+  },
+  {
+    "id": "urinaire_adu",
+    "groupe": "Adulte",
+    "titre": "Troubles urinaires de l'adulte",
+    "sous": "Togo Ord. 31",
+    "debut": "u0",
+    "noeuds": {
+      "u0": {
+        "q": "Quel tableau ?",
+        "options": [
+          {
+            "t": "Globe vésical, impossible d'uriner (rétention aiguë)",
+            "vers": "r_ret"
+          },
+          {
+            "t": "Pas d'urines sans globe vésical (anurie)",
+            "vers": "r_ref"
+          },
+          {
+            "t": "Fuite continue après un accouchement difficile ou une opération du bassin (fistule), émission involontaire d'urine (incontinence)",
+            "vers": "r_ref"
+          },
+          {
+            "t": "Écoulement urétral, douleur en urinant (urétrite)",
+            "vers": "algo:ist_adu"
+          },
+          {
+            "t": "Fièvre ≥ 38 °C, urines troubles, douleur de la loge rénale (pyélonéphrite)",
+            "vers": "r_pyelo"
+          },
+          {
+            "t": "Homme de plus de 40 ans, se lève plus de 2 fois la nuit, pousse pour uriner (prostatite)",
+            "vers": "r_prost"
+          },
+          {
+            "t": "Brûlures en urinant, besoin fréquent (cystite)",
+            "vers": "r_cystite"
+          },
+          {
+            "t": "Traumatisme, sang dans les urines",
+            "vers": "r_ref"
+          },
+          {
+            "t": "Gonflement des paupières, fièvre (glomérulonéphrite)",
+            "vers": "r_ref"
+          },
+          {
+            "t": "Zone de bilharziose, urines sanglantes en fin de miction",
+            "vers": "r_bilh"
+          },
+          {
+            "t": "Gonflement du prépuce, difficulté à uriner (phimosis)",
+            "vers": "r_phim"
+          },
+          {
+            "t": "Soif, faim, urines abondantes, sucre dans les urines (diabète)",
+            "vers": "r_ref"
+          },
+          {
+            "t": "Autres signes",
+            "vers": "r_ref"
+          }
+        ]
+      },
+      "r_ret": {
+        "res": {
+          "niveau": "urgence",
+          "titre": "Rétention aiguë d'urine",
+          "resume": "Sondage si possible puis transfert.",
+          "conduite": [
+            "Si possible : sondage vésical dans des conditions rigoureuses d'asepsie",
+            "Référer"
+          ],
+          "meds": [],
+          "source": "Togo Ord. 31 (traitement 1)"
+        }
+      },
+      "r_pyelo": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Pyélonéphrite",
+          "resume": "Antibiotique 10 jours.",
+          "conduite": [
+            "Ciprofloxacine 500 mg : 1 comprimé matin et soir pendant 10 jours, ou cotrimoxazole 480 mg : 2 comprimés, 2 fois par jour pendant 10 jours",
+            "Paracétamol 1 g, 2 à 3 fois par jour",
+            "Femme enceinte : référer",
+            "Pas d'amélioration après 7 jours : référer"
+          ],
+          "meds": [
+            "ciprofloxacine",
+            "cotrimoxazole",
+            "paracetamol"
+          ],
+          "source": "Togo Ord. 31 (traitement 6)"
+        }
+      },
+      "r_prost": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Prostatite",
+          "resume": "Antibiotique et anti-inflammatoire.",
+          "conduite": [
+            "Ciprofloxacine 500 mg : 1 comprimé matin et soir pendant 10 jours, ou cotrimoxazole 480 mg : 2 comprimés, 2 fois par jour pendant 10 jours",
+            "Ibuprofène 800 mg matin et soir au cours des repas pendant 7 jours",
+            "Pas d'amélioration : référer"
+          ],
+          "meds": [
+            "ciprofloxacine",
+            "cotrimoxazole",
+            "ibuprofene"
+          ],
+          "source": "Togo Ord. 31 (traitement 7)"
+        }
+      },
+      "r_cystite": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Cystite",
+          "resume": "Antibiotique 10 jours.",
+          "conduite": [
+            "Ciprofloxacine 500 mg : 1 comprimé matin et soir pendant 10 jours, ou cotrimoxazole 480 mg : 2 comprimés, 2 fois par jour pendant 10 jours",
+            "Ibuprofène 800 mg matin et soir au cours des repas pendant 7 jours (paracétamol si grossesse)",
+            "Femme enceinte : référer",
+            "Pas d'amélioration : référer"
+          ],
+          "meds": [
+            "ciprofloxacine",
+            "cotrimoxazole",
+            "ibuprofene"
+          ],
+          "source": "Togo Ord. 31 (traitement 8)"
+        }
+      },
+      "r_bilh": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Bilharziose vésicale possible",
+          "resume": "Praziquantel en prise unique.",
+          "conduite": [
+            "Praziquantel 40 mg/kg en prise unique, soit {mg:40} mg",
+            "Zone d'endémie ou séjour récent en zone d'endémie"
+          ],
+          "meds": [
+            "praziquantel"
+          ],
+          "source": "Togo Ord. 31 (traitement 11)"
+        }
+      },
+      "r_phim": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Phimosis",
+          "resume": "Circoncision.",
+          "conduite": [
+            "Si possible : circoncision dans des conditions rigoureuses d'asepsie",
+            "Sinon référer"
+          ],
+          "meds": [],
+          "source": "Togo Ord. 31 (traitement 12)"
+        }
+      },
+      "r_ref": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Référer pour avis spécialisé",
+          "resume": "Le tableau ne correspond à aucun cas traité au centre de santé.",
+          "conduite": [
+            "Référer vers l'hôpital pour examen et bilan",
+            "Avant le transfert : traiter la douleur ou la fièvre, hydrater, rassurer le patient"
+          ],
+          "meds": [
+            "paracetamol"
+          ],
+          "source": "Togo Ord. 31"
+        }
+      }
+    }
+  },
+  {
+    "id": "oeil_adu",
+    "groupe": "Adulte",
+    "titre": "Affections de l'œil de l'adulte",
+    "sous": "Togo Ord. 43",
+    "debut": "o0",
+    "noeuds": {
+      "o0": {
+        "q": "Quel tableau ?",
+        "options": [
+          {
+            "t": "Douleur vive avec baisse brutale de la vue (glaucome aigu)",
+            "vers": "r_glau"
+          },
+          {
+            "t": "Corps étranger dans l'œil",
+            "vers": "r_co"
+          },
+          {
+            "t": "Traumatisme ou produit projeté dans l'œil",
+            "vers": "o1"
+          },
+          {
+            "t": "Sécrétions purulentes, rougeur avec photophobie ou picotement (conjonctivite)",
+            "vers": "r_conj"
+          },
+          {
+            "t": "Furoncle douloureux à la base d'un cil (orgelet)",
+            "vers": "r_org"
+          },
+          {
+            "t": "Gonflement des paupières avec démangeaison (blépharite)",
+            "vers": "r_bleph"
+          },
+          {
+            "t": "Baisse progressive de la vue, exophtalmie, palpitations, tumeur, autres signes",
+            "vers": "r_ref"
+          }
+        ]
+      },
+      "o1": {
+        "q": "Que s'est-il passé ?",
+        "options": [
+          {
+            "t": "Liquide caustique (produit chimique)",
+            "vers": "r_caust"
+          },
+          {
+            "t": "Blessure de la cornée ou plaie profonde avec baisse de la vue",
+            "vers": "r_cornee"
+          },
+          {
+            "t": "Traumatisme sans lésion ni trouble de la vue",
+            "vers": "r_trauma"
+          }
+        ]
+      },
+      "r_glau": {
+        "res": {
+          "niveau": "urgence",
+          "titre": "Glaucome aigu",
+          "resume": "Antalgique puis transfert.",
+          "conduite": [
+            "Aspirine 500 mg : 2 comprimés matin, midi et soir (ou paracétamol)",
+            "Référer immédiatement"
+          ],
+          "meds": [
+            "aspirine",
+            "paracetamol"
+          ],
+          "source": "Togo Ord. 43 (traitement 1)"
+        }
+      },
+      "r_co": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Corps étranger solide",
+          "resume": "Extraire s'il est visible et accessible.",
+          "conduite": [
+            "Si visible et accessible : l'extraire par lavage à l'eau propre",
+            "Après expulsion : antalgique ; pommade à la tétracycline matin et soir pendant 3 jours",
+            "Si amélioration : continuer 4 jours de plus ; sinon pansement occlusif protecteur et référer",
+            "Échec de l'expulsion : antalgique, pansement protecteur et référer"
+          ],
+          "meds": [
+            "pommade-ophtalmique",
+            "paracetamol"
+          ],
+          "source": "Togo Ord. 43 (traitement 2)"
+        }
+      },
+      "r_caust": {
+        "res": {
+          "niveau": "urgence",
+          "titre": "Projection de liquide caustique",
+          "resume": "Laver abondamment.",
+          "conduite": [
+            "Laver à grande eau propre pendant 10 minutes",
+            "Forte rougeur ou blessure : antalgique, pommade à la tétracycline, pansement protecteur et référer",
+            "Ni rougeur ni blessure : antalgique, pommade matin et soir et pansement protecteur pendant 3 jours ; si amélioration continuer 4 jours, sinon référer"
+          ],
+          "meds": [
+            "pommade-ophtalmique",
+            "paracetamol"
+          ],
+          "source": "Togo Ord. 43 (traitement 3)"
+        }
+      },
+      "r_cornee": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Blessure de la cornée",
+          "resume": "Pansement, antalgique, antibiotique, puis référer.",
+          "conduite": [
+            "Pansement protecteur",
+            "Antalgique (paracétamol ou aspirine 500 mg, 2 comprimés matin, midi et soir)",
+            "Amoxicilline 500 mg : 2 gélules matin et soir, ou cotrimoxazole 480 mg : 2 comprimés matin et soir",
+            "Référer"
+          ],
+          "meds": [
+            "amoxicilline",
+            "cotrimoxazole",
+            "paracetamol"
+          ],
+          "source": "Togo Ord. 43 (traitement 4)"
+        }
+      },
+      "r_trauma": {
+        "res": {
+          "niveau": "ok",
+          "titre": "Traumatisme sans lésion",
+          "resume": "Collyre et antalgique.",
+          "conduite": [
+            "Rifamycine collyre : 1 goutte matin, midi et soir, et antalgique, pendant 3 jours",
+            "Si amélioration : continuer 4 jours de plus ; sinon référer avec le même traitement"
+          ],
+          "meds": [
+            "pommade-ophtalmique",
+            "paracetamol"
+          ],
+          "source": "Togo Ord. 43 (traitement 5)"
+        }
+      },
+      "r_conj": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Conjonctivite",
+          "resume": "Pommade ou collyre.",
+          "conduite": [
+            "Pommade à la tétracycline : 1 application matin, midi et soir, ou rifamycine collyre : 1 goutte matin, midi et soir",
+            "Antalgique pendant 3 jours",
+            "Si amélioration : continuer 4 jours de plus ; sinon référer",
+            "Conjonctivite du nouveau-né : voir l'algorithme IST"
+          ],
+          "meds": [
+            "pommade-ophtalmique",
+            "paracetamol"
+          ],
+          "source": "Togo Ord. 43 (traitement 7)"
+        }
+      },
+      "r_org": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Orgelet",
+          "resume": "Pommade et antalgique.",
+          "conduite": [
+            "Évacuer le pus avec une compresse",
+            "Pommade à la tétracycline : 1 application matin, midi et soir pendant 5 jours",
+            "Antalgique",
+            "Si amélioration : continuer 5 jours de plus ; sinon maintenir le traitement et référer"
+          ],
+          "meds": [
+            "pommade-ophtalmique",
+            "paracetamol"
+          ],
+          "source": "Togo Ord. 43 (traitement 8)"
+        }
+      },
+      "r_bleph": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Blépharite",
+          "resume": "Pommade et antalgique.",
+          "conduite": [
+            "Pommade à la tétracycline : 1 application matin, midi et soir",
+            "Antalgique pendant 5 jours",
+            "Si amélioration : continuer 5 jours de plus ; sinon référer avec le même traitement"
+          ],
+          "meds": [
+            "pommade-ophtalmique",
+            "paracetamol"
+          ],
+          "source": "Togo Ord. 43 (traitement 9)"
+        }
+      },
+      "r_ref": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Référer pour avis spécialisé",
+          "resume": "Le tableau ne correspond à aucun cas traité au centre de santé.",
+          "conduite": [
+            "Référer vers l'hôpital pour examen et bilan",
+            "Avant le transfert : traiter la douleur ou la fièvre, hydrater, rassurer le patient"
+          ],
+          "meds": [
+            "paracetamol"
+          ],
+          "source": "Togo Ord. 43"
+        }
+      }
+    }
+  },
+  {
+    "id": "bourse",
+    "groupe": "Tous",
+    "titre": "Grosse bourse (gonflement du scrotum)",
+    "sous": "Togo Ord. 32",
+    "debut": "b0",
+    "noeuds": {
+      "b0": {
+        "q": "Quel tableau ?",
+        "options": [
+          {
+            "t": "Début brutal, douleur vive, œdème du scrotum, testicule sensible (torsion testiculaire)",
+            "vers": "r_torsion"
+          },
+          {
+            "t": "Début progressif, douleur lancinante, fièvre ≥ 38 °C, avec écoulement urétral ou risque d'IST",
+            "vers": "algo:ist_adu#r_scrotum"
+          },
+          {
+            "t": "Début progressif, douleur lancinante, fièvre ≥ 38 °C, sans écoulement (orchite bactérienne)",
+            "vers": "r_orchite"
+          },
+          {
+            "t": "Gonflement devant ou derrière l'oreille (orchite ourlienne)",
+            "vers": "r_ourl"
+          },
+          {
+            "t": "Tuméfaction sensible, qui ne se réduit pas (hernie étranglée)",
+            "vers": "r_hernie_e"
+          },
+          {
+            "t": "Tuméfaction qui se réduit (hernie non étranglée)",
+            "vers": "r_ref"
+          },
+          {
+            "t": "Tumeur indolore, liquidienne, translucide (hydrocèle)",
+            "vers": "r_ref"
+          },
+          {
+            "t": "Éléphantiasis du scrotum, autres signes",
+            "vers": "r_ref"
+          }
+        ]
+      },
+      "r_torsion": {
+        "res": {
+          "niveau": "urgence",
+          "titre": "Torsion testiculaire",
+          "resume": "Transfert chirurgical immédiat.",
+          "conduite": [
+            "Référer immédiatement : une intervention rapide (dans les heures qui suivent) conditionne la survie du testicule"
+          ],
+          "meds": [],
+          "source": "Togo Ord. 32 (point 1)"
+        }
+      },
+      "r_orchite": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Orchite bactérienne",
+          "resume": "Antibiotique 10 jours.",
+          "conduite": [
+            {
+              "g": "Adulte",
+              "t": "Ciprofloxacine 500 mg : 1 comprimé matin et soir pendant 10 jours"
+            },
+            {
+              "g": "Adulte",
+              "t": "Ibuprofène 800 mg matin et soir au cours du repas"
+            },
+            {
+              "g": "Enfant",
+              "t": "Enfant : référer"
+            },
+            "Repos et port d'un suspensoir",
+            "Conseiller le préservatif et traiter le ou les partenaires ; proposer le dépistage VIH",
+            "Après 7 jours : si amélioration, continuer ; sinon référer"
+          ],
+          "meds": [
+            "ciprofloxacine",
+            "ibuprofene"
+          ],
+          "source": "Togo Ord. 32 (traitement 2)"
+        }
+      },
+      "r_ourl": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Orchite ourlienne",
+          "resume": "Repos et antalgique.",
+          "conduite": [
+            "Repos strict, port d'un suspensoir",
+            "Paracétamol 15 mg/kg (enfant) ou 1 g (adulte), 3 fois par jour pendant 3 à 5 jours (le manuel propose l'aspirine 50 mg/kg/jour)",
+            "Pas d'amélioration : référer"
+          ],
+          "meds": [
+            "paracetamol"
+          ],
+          "source": "Togo Ord. 32 (traitement 3)"
+        }
+      },
+      "r_hernie_e": {
+        "res": {
+          "niveau": "urgence",
+          "titre": "Hernie inguino-scrotale étranglée",
+          "resume": "Diazépam puis transfert.",
+          "conduite": [
+            {
+              "g": "Adulte",
+              "t": "Diazépam : 1 ampoule (10 mg) en IM"
+            },
+            {
+              "g": "Enfant",
+              "t": "Enfant : référer immédiatement"
+            },
+            "Référer immédiatement"
+          ],
+          "meds": [
+            "diazepam"
+          ],
+          "source": "Togo Ord. 32 (traitement 4)"
+        }
+      },
+      "r_ref": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Référer pour avis spécialisé",
+          "resume": "Le tableau ne correspond à aucun cas traité au centre de santé.",
+          "conduite": [
+            "Référer vers l'hôpital pour examen et bilan",
+            "Avant le transfert : traiter la douleur ou la fièvre, hydrater, rassurer le patient"
+          ],
+          "meds": [
+            "paracetamol"
+          ],
+          "source": "Togo Ord. 32"
+        }
+      }
+    }
+  },
+  {
+    "id": "constipation",
+    "groupe": "Tous",
+    "titre": "Constipation",
+    "sous": "Togo Ord. 33",
+    "debut": "c0",
+    "noeuds": {
+      "c0": {
+        "q": "Signes associés : douleurs importantes, vomissements, ventre ballonné, sang dans les selles, amaigrissement ?",
+        "options": [
+          {
+            "t": "Oui",
+            "vers": "r_ref"
+          },
+          {
+            "t": "Non, constipation isolée",
+            "vers": "r_const"
+          }
+        ]
+      },
+      "r_const": {
+        "res": {
+          "niveau": "ok",
+          "titre": "Constipation",
+          "resume": "Lavement si besoin et conseils.",
+          "conduite": [
+            {
+              "g": "Enfant",
+              "t": "Lavement évacuateur avec 200 mL d'eau tiède et 100 mL d'huile de paraffine"
+            },
+            {
+              "g": "Adulte",
+              "t": "Lavement évacuateur avec 1 à 1,5 litre d'eau tiède et 100 mL d'huile de paraffine"
+            },
+            "Si les selles ne sont pas évacuées : référer",
+            "Manger plus de légumes et de fruits (papaye), pâte de farine non tamisée",
+            "Boire 2 verres d'eau le matin à jeun et au moins 1,5 litre d'eau par jour",
+            "Aller à la selle chaque jour à la même heure, de préférence après le repas principal",
+            "Marcher, faire de l'activité physique",
+            {
+              "g": "Adulte",
+              "t": "Au besoin : 1 à 2 cuillères à soupe d'huile de paraffine le soir au coucher"
+            }
+          ],
+          "meds": [],
+          "source": "Togo Ord. 33"
+        }
+      },
+      "r_ref": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Référer pour avis spécialisé",
+          "resume": "Le tableau ne correspond à aucun cas traité au centre de santé.",
+          "conduite": [
+            "Référer vers l'hôpital pour examen et bilan",
+            "Avant le transfert : traiter la douleur ou la fièvre, hydrater, rassurer le patient"
+          ],
+          "meds": [
+            "paracetamol"
+          ],
+          "source": "Togo Ord. 33 (fécalome, tumeur, mégacôlon à rechercher)"
+        }
+      }
+    }
+  },
+  {
+    "id": "oedemes",
+    "groupe": "Tous",
+    "titre": "Œdèmes (gonflements mous)",
+    "sous": "Togo Ord. 37",
+    "debut": "e0",
+    "noeuds": {
+      "e0": {
+        "q": "Âge ?",
+        "options": [
+          {
+            "t": "Enfant (moins de 15 ans)",
+            "vers": "e1"
+          },
+          {
+            "t": "Adulte (15 ans et plus)",
+            "vers": "e2"
+          }
+        ],
+        "aide": "Gonflement mou, diffus, indolore, qui garde le godet."
+      },
+      "e1": {
+        "q": "Quel tableau chez l'enfant ?",
+        "options": [
+          {
+            "t": "Cheveux défrisés et cassants, peau dépigmentée, œdèmes des pieds (kwashiorkor)",
+            "vers": "r_ref"
+          },
+          {
+            "t": "Essoufflement à l'effort, veines du cou gonflées, visage bouffi (insuffisance cardiaque)",
+            "vers": "r_ic"
+          },
+          {
+            "t": "Gonflement du visage, sang dans les urines",
+            "vers": "r_ref"
+          },
+          {
+            "t": "Pâleur marquée",
+            "vers": "algo:anemie"
+          },
+          {
+            "t": "Autres signes",
+            "vers": "r_ref"
+          }
+        ]
+      },
+      "e2": {
+        "q": "Quel tableau chez l'adulte ?",
+        "options": [
+          {
+            "t": "Essoufflement à l'effort, veines du cou gonflées, visage bouffi (insuffisance cardiaque décompensée)",
+            "vers": "r_ic"
+          },
+          {
+            "t": "Essoufflement à l'effort, veines du cou gonflées, sans visage bouffi (insuffisance cardiaque droite)",
+            "vers": "r_ref"
+          },
+          {
+            "t": "Gonflement du visage et des jambes, urines rares (insuffisance rénale)",
+            "vers": "r_ref"
+          },
+          {
+            "t": "Ascite avec beaucoup de protéines dans les urines (syndrome néphrotique)",
+            "vers": "r_ref"
+          },
+          {
+            "t": "Ascite et ictère (cirrhose)",
+            "vers": "r_cirr"
+          },
+          {
+            "t": "Femme enceinte, tension ≥ 140/90, protéines dans les urines (prééclampsie)",
+            "vers": "r_preecl"
+          },
+          {
+            "t": "Pâleur des muqueuses (anémie)",
+            "vers": "algo:anemie#na1"
+          },
+          {
+            "t": "Autres signes",
+            "vers": "r_ref"
+          }
+        ]
+      },
+      "r_ic": {
+        "res": {
+          "niveau": "urgence",
+          "titre": "Insuffisance cardiaque globale décompensée",
+          "resume": "Diurétique puis transfert.",
+          "conduite": [
+            {
+              "g": "Adulte",
+              "t": "Furosémide 20 mg/mL : 1 à 2 ampoules (20 à 40 mg) en IV lente, à répéter plusieurs fois par jour, maximum 100 mg par 24 heures, associée à du chlorure de potassium 600 mg : 1 comprimé"
+            },
+            {
+              "g": "Enfant",
+              "t": "Enfant de moins de 12 ans : référer sans diurétique ; adolescent de plus de 12 ans : même schéma que l'adulte"
+            },
+            "Puis référer"
+          ],
+          "meds": [
+            "furosemide"
+          ],
+          "source": "Togo Ord. 37 (traitement 2)"
+        }
+      },
+      "r_cirr": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Cirrhose",
+          "resume": "Diurétique et transfert.",
+          "conduite": [
+            "Hydrochlorothiazide 25 mg : 1 comprimé par jour, puis référer"
+          ],
+          "meds": [
+            "hydrochlorothiazide"
+          ],
+          "source": "Togo Ord. 37 (traitement 7)"
+        }
+      },
+      "r_preecl": {
+        "res": {
+          "niveau": "urgence",
+          "titre": "Prééclampsie",
+          "resume": "Diazépam puis transfert.",
+          "conduite": [
+            "Diazépam 10 mg (1 ampoule) en IM, puis référer immédiatement",
+            "Surveiller la tension et rechercher des signes d'éclampsie (maux de tête, troubles visuels, convulsions)"
+          ],
+          "meds": [
+            "diazepam"
+          ],
+          "source": "Togo Ord. 37 (traitement 9)",
+          "liens": [
+            {
+              "t": "Hypertension de la grossesse",
+              "vers": "algo:hta_adu"
+            }
+          ]
+        }
+      },
+      "r_ref": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Référer pour avis spécialisé",
+          "resume": "Le tableau ne correspond à aucun cas traité au centre de santé.",
+          "conduite": [
+            "Référer vers l'hôpital pour examen et bilan",
+            "Avant le transfert : traiter la douleur ou la fièvre, hydrater, rassurer le patient"
+          ],
+          "meds": [
+            "paracetamol"
+          ],
+          "source": "Togo Ord. 37"
+        }
+      }
+    }
+  },
+  {
+    "id": "intoxication",
+    "groupe": "Tous",
+    "titre": "Intoxication",
+    "sous": "Togo Ord. 38",
+    "debut": "i0",
+    "noeuds": {
+      "i0": {
+        "q": "Quel produit ?",
+        "options": [
+          {
+            "t": "Haleine alcoolique (alcool)",
+            "vers": "r_alcool"
+          },
+          {
+            "t": "Prise abusive de médicaments, surdosage",
+            "vers": "r_medic"
+          },
+          {
+            "t": "Produit domestique caustique (acide, soude, eau de Javel, permanganate, détartrant)",
+            "vers": "r_caust"
+          },
+          {
+            "t": "Raticide",
+            "vers": "r_rat"
+          },
+          {
+            "t": "Pesticide ou insecticide",
+            "vers": "r_pest"
+          },
+          {
+            "t": "Pétrole",
+            "vers": "r_petrole"
+          },
+          {
+            "t": "Piles sèches",
+            "vers": "r_piles"
+          },
+          {
+            "t": "Aliments avariés, champignons, manioc toxique, anacardes (douleurs abdominales, vomissements, diarrhée)",
+            "vers": "r_alim"
+          },
+          {
+            "t": "Drogues, substances psychoactives",
+            "vers": "r_ref"
+          },
+          {
+            "t": "Autre produit",
+            "vers": "r_autre"
+          }
+        ],
+        "aide": "Toujours interroger la famille et chercher la boîte du produit. Si le malade est comateux : position latérale de sécurité, libérer les voies respiratoires, le réchauffer."
+      },
+      "r_alcool": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Intoxication alcoolique",
+          "resume": "Vitamine B1 et glucose.",
+          "conduite": [
+            "Vitamine B1 : 3 ampoules de 100 mg en IM",
+            "Puis perfusion de SGH 10 % 500 mL en 2 à 3 heures (ou SGI 500 mL, 2 flacons)",
+            {
+              "g": "Adulte",
+              "t": "Agitation ou convulsion : diazépam 10 mg en IM"
+            },
+            {
+              "g": "Enfant",
+              "t": "Enfant : diazépam selon le poids (voir la fiche), adapter les perfusions au poids"
+            },
+            "Pas d'amélioration après 3 heures : référer en réanimation sous perfusion"
+          ],
+          "meds": [
+            "diazepam",
+            "sgh10"
+          ],
+          "source": "Togo Ord. 38 (traitement 1)"
+        }
+      },
+      "r_medic": {
+        "res": {
+          "niveau": "urgence",
+          "titre": "Intoxication médicamenteuse",
+          "resume": "Identifier le produit et transférer.",
+          "conduite": [
+            "Chercher toujours à identifier le médicament et la dose",
+            "Traitement symptomatique",
+            "Référer"
+          ],
+          "meds": [],
+          "source": "Togo Ord. 38 (traitement 2)"
+        }
+      },
+      "r_caust": {
+        "res": {
+          "niveau": "urgence",
+          "titre": "Ingestion de produit caustique",
+          "resume": "Ne pas faire vomir.",
+          "conduite": [
+            "Ne pas faire vomir",
+            "Traitement symptomatique (douleur, hydratation)",
+            "Référer"
+          ],
+          "meds": [
+            "paracetamol"
+          ],
+          "source": "Togo Ord. 38 (traitement 3)"
+        }
+      },
+      "r_rat": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Intoxication au raticide (anti-vitamine K)",
+          "resume": "Vitamine K.",
+          "conduite": [
+            "Vitamine K1 : 1 à 3 ampoules par jour en IM",
+            "Si hémorragie malgré le traitement : référer"
+          ],
+          "meds": [
+            "vitamine-k"
+          ],
+          "source": "Togo Ord. 38 (traitement 4)"
+        }
+      },
+      "r_pest": {
+        "res": {
+          "niveau": "urgence",
+          "titre": "Intoxication aux pesticides ou insecticides",
+          "resume": "Atropine et transfert.",
+          "conduite": [
+            "Suivre la conduite à tenir écrite sur la boîte, si elle est retrouvée",
+            {
+              "g": "Adulte",
+              "t": "Atropine injectable : 1 mg en IM ou IV toutes les 30 minutes"
+            },
+            {
+              "g": "Enfant",
+              "t": "Enfant : référer sans atropine"
+            },
+            "Référer"
+          ],
+          "meds": [],
+          "source": "Togo Ord. 38 (traitement 5)"
+        }
+      },
+      "r_petrole": {
+        "res": {
+          "niveau": "urgence",
+          "titre": "Ingestion de pétrole",
+          "resume": "Ne rien donner par la bouche.",
+          "conduite": [
+            "Ne pas faire vomir et ne rien donner par la bouche (ni œuf cru ni huile rouge)",
+            "Benzylpénicilline 50 000 UI/kg/jour en IM, soit {mg:50000} UI par jour",
+            "Détresse respiratoire : hydrocortisone 100 mg en IM et référer"
+          ],
+          "meds": [],
+          "source": "Togo Ord. 38 (traitement 6)"
+        }
+      },
+      "r_piles": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Ingestion de piles sèches",
+          "resume": "Référer.",
+          "conduite": [
+            "Référer"
+          ],
+          "meds": [],
+          "source": "Togo Ord. 38 (traitement 7)"
+        }
+      },
+      "r_alim": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Intoxication alimentaire",
+          "resume": "Traitement symptomatique.",
+          "conduite": [
+            "Traitement symptomatique : réhydratation (SRO), voir la diarrhée",
+            "Référer selon la gravité"
+          ],
+          "meds": [
+            "sro"
+          ],
+          "source": "Togo Ord. 38 (traitement 8)",
+          "liens": [
+            {
+              "t": "Diarrhée de l'adulte",
+              "vers": "algo:diarrhee_adu"
+            },
+            {
+              "t": "Diarrhée de l'enfant",
+              "vers": "algo:diarrhee_enf"
+            }
+          ]
+        }
+      },
+      "r_autre": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Autre produit",
+          "resume": "Suivre les indications du fabricant.",
+          "conduite": [
+            "Traitement symptomatique, ou selon les indications du fabricant si la boîte est retrouvée",
+            "Référer selon la gravité"
+          ],
+          "meds": [],
+          "source": "Togo Ord. 38 (traitement 10)"
+        }
+      },
+      "r_ref": {
+        "res": {
+          "niveau": "urgence",
+          "titre": "Référer en urgence",
+          "resume": "Cas non traité au centre de santé.",
+          "conduite": [
+            "Référer immédiatement vers l'hôpital",
+            "Surveiller le pouls, la tension et la respiration pendant le transfert"
+          ],
+          "meds": [],
+          "source": "Togo Ord. 38 (substances psychoactives)"
+        }
+      }
+    }
+  },
+  {
+    "id": "nez",
+    "groupe": "Tous",
+    "titre": "Écoulement nasal et saignement de nez",
+    "sous": "Togo Ord. 41",
+    "debut": "n0",
+    "noeuds": {
+      "n0": {
+        "q": "Quel écoulement ?",
+        "options": [
+          {
+            "t": "Écoulement clair (séreux) avec fièvre > 37,5 °C",
+            "vers": "r_rhino"
+          },
+          {
+            "t": "Éternuements, nez bouché, démangeaisons",
+            "vers": "r_allergie"
+          },
+          {
+            "t": "Écoulement simple, sans fièvre (rhume)",
+            "vers": "r_rhinite"
+          },
+          {
+            "t": "Écoulement purulent jaune ou vert avec maux de tête, ou fétide",
+            "vers": "n1"
+          },
+          {
+            "t": "Déformation de la face (cancer du maxillaire supérieur)",
+            "vers": "r_ref"
+          },
+          {
+            "t": "Corps étranger dans la fosse nasale",
+            "vers": "r_corps"
+          },
+          {
+            "t": "Écoulement sanglant après un traumatisme de la face ou de la tête",
+            "vers": "r_trauma"
+          },
+          {
+            "t": "Saignement avec tension élevée (diastolique > 90, systolique > 140)",
+            "vers": "algo:hta_adu"
+          },
+          {
+            "t": "Saignement de nez isolé ou répété (épistaxis)",
+            "vers": "r_epi"
+          },
+          {
+            "t": "Autres signes",
+            "vers": "r_ref"
+          }
+        ]
+      },
+      "n1": {
+        "q": "Trou dans une molaire supérieure (origine dentaire) ?",
+        "options": [
+          {
+            "t": "Oui",
+            "vers": "r_sinus_dent"
+          },
+          {
+            "t": "Non",
+            "vers": "r_sinus"
+          }
+        ]
+      },
+      "r_rhino": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Rhinopharyngite",
+          "resume": "Antibiotique et antipyrétique.",
+          "conduite": [
+            {
+              "g": "Adulte",
+              "t": "Amoxicilline 500 mg : 2 gélules ou comprimés matin et soir"
+            },
+            {
+              "g": "Enfant",
+              "t": "Amoxicilline : 50 mg/kg/jour en 2 prises, soit {mg:50} mg par jour"
+            },
+            "Paracétamol (15 mg/kg toutes les 8 heures chez l'enfant, 1 g 3 fois par jour chez l'adulte)",
+            "Après 7 jours : si bonne évolution, continuer 3 jours ; si fièvre persistante, référer"
+          ],
+          "meds": [
+            "amoxicilline",
+            "paracetamol"
+          ],
+          "source": "Togo Ord. 41 (traitement 1)"
+        }
+      },
+      "r_allergie": {
+        "res": {
+          "niveau": "ok",
+          "titre": "Rhinite allergique",
+          "resume": "Antihistaminique et conseils.",
+          "conduite": [
+            "Éviter la poussière, l'eau froide et ce qui déclenche les symptômes",
+            "Antihistaminique : voir la fiche (adulte et enfant de plus de 2 ans)",
+            {
+              "g": "Enfant",
+              "t": "Enfant de moins de 2 ans : Primalan sirop, 2,5 mL par jour"
+            },
+            "Rechutes trop rapprochées (plus de 3 fois par an) : référer"
+          ],
+          "meds": [
+            "antihistaminique",
+            "primalan"
+          ],
+          "source": "Togo Ord. 41 (traitement 2)"
+        }
+      },
+      "r_rhinite": {
+        "res": {
+          "niveau": "ok",
+          "titre": "Rhinite banale (rhume)",
+          "resume": "Traitement symptomatique.",
+          "conduite": [
+            "Paracétamol pendant 4 jours",
+            "Antihistaminique (voir la fiche)",
+            {
+              "g": "Enfant",
+              "t": "Enfant de moins de 2 ans : Primalan sirop, 2,5 mL par jour"
+            },
+            {
+              "g": "Adulte",
+              "t": "Vitamine C 1000 mg par jour, et huile goménolée à 5 % : 2 gouttes matin, midi et soir dans chaque narine"
+            },
+            "Si l'écoulement devient purulent ou si la fièvre apparaît : traiter comme une rhinopharyngite",
+            "Allergie à l'amoxicilline : érythromycine (adulte 500 mg, 2 comprimés matin et soir ; enfant 50 mg/kg/jour en 2 prises)"
+          ],
+          "meds": [
+            "paracetamol",
+            "antihistaminique",
+            "erythromycine",
+            "primalan"
+          ],
+          "source": "Togo Ord. 41 (traitement 3)"
+        }
+      },
+      "r_sinus": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Sinusite",
+          "resume": "Antibiotique 7 à 10 jours.",
+          "conduite": [
+            {
+              "g": "Adulte",
+              "t": "Amoxicilline 500 mg : 2 gélules ou comprimés matin et soir pendant 7 jours"
+            },
+            {
+              "g": "Enfant",
+              "t": "Amoxicilline : 50 mg/kg/jour en 2 prises pendant 7 jours, soit {mg:50} mg par jour"
+            },
+            "Paracétamol",
+            "Si amélioration : continuer 3 jours ; si les signes persistent : référer"
+          ],
+          "meds": [
+            "amoxicilline",
+            "paracetamol"
+          ],
+          "source": "Togo Ord. 41 (traitement 5A)"
+        }
+      },
+      "r_sinus_dent": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Sinusite d'origine dentaire",
+          "resume": "Antibiotique et transfert.",
+          "conduite": [
+            {
+              "g": "Adulte",
+              "t": "Amoxicilline 500 mg : 2 gélules ou comprimés matin et soir"
+            },
+            {
+              "g": "Enfant",
+              "t": "Amoxicilline : 50 mg/kg/jour en 2 prises, soit {mg:50} mg par jour"
+            },
+            "Puis référer (dentiste)"
+          ],
+          "meds": [
+            "amoxicilline"
+          ],
+          "source": "Togo Ord. 41 (traitement 5B)"
+        }
+      },
+      "r_corps": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Corps étranger du nez",
+          "resume": "Extraction ou transfert.",
+          "conduite": [
+            "Extraire avec une pince si le corps étranger est visible et facilement accessible",
+            "Sinon référer"
+          ],
+          "meds": [],
+          "source": "Togo Ord. 41 (traitement 6)"
+        }
+      },
+      "r_trauma": {
+        "res": {
+          "niveau": "urgence",
+          "titre": "Traumatisme cranio-facial",
+          "resume": "Tamponnement et transfert.",
+          "conduite": [
+            "Faire un tamponnement nasal avec une mèche de compresse",
+            "Paracétamol",
+            "Amoxicilline systématique pour éviter la surinfection (adulte 500 mg, 2 comprimés matin et soir ; enfant 50 mg/kg/jour en 2 prises)",
+            "Avant de référer : s'assurer que le patient n'est pas en état de choc (pouls, tension, conjonctives, conscience)"
+          ],
+          "meds": [
+            "paracetamol",
+            "amoxicilline"
+          ],
+          "source": "Togo Ord. 41 (traitement 7)"
+        }
+      },
+      "r_epi": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Épistaxis",
+          "resume": "Compression et tamponnement.",
+          "conduite": [
+            "Faire pencher la tête en avant",
+            "Pincer le nez et respirer par la bouche pendant environ 10 minutes",
+            "Tamponnement hémostatique, vessie de glace si possible",
+            "Mesurer la tension : si élevée, voir l'algorithme HTA",
+            {
+              "g": "Adulte",
+              "t": "Si le saignement persiste : vitamine K1 en IM et référer"
+            }
+          ],
+          "meds": [
+            "vitamine-k"
+          ],
+          "source": "Togo Ord. 41 (traitement 10)",
+          "liens": [
+            {
+              "t": "Hypertension artérielle",
+              "vers": "algo:hta_adu"
+            }
+          ]
+        }
+      },
+      "r_ref": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Référer pour avis spécialisé",
+          "resume": "Le tableau ne correspond à aucun cas traité au centre de santé.",
+          "conduite": [
+            "Référer vers l'hôpital pour examen et bilan",
+            "Avant le transfert : traiter la douleur ou la fièvre, hydrater, rassurer le patient"
+          ],
+          "meds": [
+            "paracetamol"
+          ],
+          "source": "Togo Ord. 41"
+        }
+      }
+    }
+  },
+  {
+    "id": "bouche",
+    "groupe": "Tous",
+    "titre": "Plaies dans la bouche",
+    "sous": "Togo Ord. 42",
+    "debut": "m0",
+    "noeuds": {
+      "m0": {
+        "q": "Quel tableau ?",
+        "options": [
+          {
+            "t": "Lésion des gencives, saignement des gencives (gingivite)",
+            "vers": "r_gingi"
+          },
+          {
+            "t": "Enduits blanchâtres dans la bouche (après antibiotiques prolongés, nourrisson)",
+            "vers": "r_candi"
+          },
+          {
+            "t": "Enduits blanchâtres avec fièvre prolongée ou amaigrissement (VIH possible)",
+            "vers": "r_vih"
+          },
+          {
+            "t": "Ulcérations douloureuses arrondies sur la face interne de la joue ou le bord de la langue (aphtes)",
+            "vers": "r_aphte"
+          },
+          {
+            "t": "Petites vésicules en grappes sur fond rouge (herpès labial ou buccal)",
+            "vers": "r_herpes"
+          },
+          {
+            "t": "Ulcération nécrotique, haleine très fétide (stomatite ulcéro-nécrotique)",
+            "vers": "r_unec"
+          },
+          {
+            "t": "Plaie de la lèvre, du plancher ou du palais qui ne guérit pas ; ulcération bourgeonnante, saignante, avec ganglion (cancer)",
+            "vers": "r_cancer"
+          },
+          {
+            "t": "Ingestion de produit chimique, œdème de la muqueuse (brûlure caustique)",
+            "vers": "algo:intoxication#r_caust"
+          },
+          {
+            "t": "Autres signes",
+            "vers": "r_ref"
+          }
+        ]
+      },
+      "r_gingi": {
+        "res": {
+          "niveau": "ok",
+          "titre": "Gingivite",
+          "resume": "Bains de bouche et hygiène.",
+          "conduite": [
+            "Bain de bouche à la chlorhexidine ou à la polyvidone iodée",
+            "Bain de bouche à l'eau tiède salée pendant 10 jours",
+            "Conseils d'hygiène bucco-dentaire"
+          ],
+          "meds": [
+            "chlorhexidine"
+          ],
+          "source": "Togo Ord. 42 (traitement 1)"
+        }
+      },
+      "r_vih": {
+        "res": {
+          "niveau": "attention",
+          "titre": "VIH/sida possible",
+          "resume": "Dépistage.",
+          "conduite": [
+            "Proposer le dépistage VIH et suivre les directives du programme national (PNLS)"
+          ],
+          "meds": [],
+          "source": "Togo Ord. 42 (point 2)"
+        }
+      },
+      "r_candi": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Candidose buccale",
+          "resume": "Nystatine et bain de bouche.",
+          "conduite": [
+            {
+              "g": "Adulte",
+              "t": "Nystatine 500 000 UI : 2 comprimés écrasés, matin, midi, soir et au coucher (badigeonner la bouche puis avaler)"
+            },
+            {
+              "g": "Enfant",
+              "t": "Nystatine 500 000 UI : 1 comprimé écrasé, matin, midi, soir et au coucher (badigeonner la bouche puis avaler)"
+            },
+            "Bain de bouche au bicarbonate de soude matin, midi et soir pendant 7 jours",
+            "Pas d'amélioration : référer"
+          ],
+          "meds": [
+            "nystatine"
+          ],
+          "source": "Togo Ord. 42 (traitement 3)"
+        }
+      },
+      "r_aphte": {
+        "res": {
+          "niveau": "ok",
+          "titre": "Aphtes",
+          "resume": "Antalgique, vitamine C, bain de bouche.",
+          "conduite": [
+            "Paracétamol (le manuel propose l'aspirine 500 mg, 1 comprimé 3 fois par jour)",
+            "Vitamine C 500 mg : 2 comprimés matin et midi pendant 15 jours",
+            "Bain de bouche à la chlorhexidine 4 fois par jour pendant 10 jours",
+            "Pas d'amélioration ou récidive : référer"
+          ],
+          "meds": [
+            "paracetamol",
+            "chlorhexidine"
+          ],
+          "source": "Togo Ord. 42 (traitement 4)"
+        }
+      },
+      "r_herpes": {
+        "res": {
+          "niveau": "ok",
+          "titre": "Herpès labial ou buccal",
+          "resume": "Antalgique et glycérine iodée.",
+          "conduite": [
+            "Paracétamol (le manuel propose l'aspirine 500 mg, 2 comprimés matin et soir)",
+            "Attouchement à la glycérine iodée pendant 7 jours",
+            "Pas d'amélioration : référer"
+          ],
+          "meds": [
+            "paracetamol"
+          ],
+          "source": "Togo Ord. 42 (traitement 5)"
+        }
+      },
+      "r_unec": {
+        "res": {
+          "niveau": "urgence",
+          "titre": "Stomatite ulcéro-nécrotique",
+          "resume": "Antibiotiques et transfert.",
+          "conduite": [
+            {
+              "g": "Adulte",
+              "t": "Amoxicilline 500 mg : 2 comprimés matin et soir"
+            },
+            {
+              "g": "Adulte",
+              "t": "Métronidazole 250 mg : 2 comprimés matin et soir"
+            },
+            {
+              "g": "Adulte",
+              "t": "Paracétamol"
+            },
+            {
+              "g": "Enfant",
+              "t": "Enfant : amoxicilline 50 mg/kg/jour en 2 prises ({mg:50} mg), métronidazole 30 mg/kg/jour en 2 prises ({mg:30} mg)"
+            },
+            "Bain de bouche à la chlorhexidine matin, midi, soir et au coucher",
+            "Référer"
+          ],
+          "meds": [
+            "amoxicilline",
+            "metronidazole",
+            "chlorhexidine",
+            "paracetamol"
+          ],
+          "source": "Togo Ord. 42 (traitement 6)"
+        }
+      },
+      "r_cancer": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Cancer buccal possible",
+          "resume": "Soins puis transfert.",
+          "conduite": [
+            {
+              "g": "Adulte",
+              "t": "Amoxicilline 500 mg : 2 comprimés matin et soir"
+            },
+            {
+              "g": "Adulte",
+              "t": "Paracétamol"
+            },
+            "Bain de bouche à la chlorhexidine matin, midi, soir et au coucher (s'il n'y a pas de saignement)",
+            "Référer"
+          ],
+          "meds": [
+            "amoxicilline",
+            "chlorhexidine",
+            "paracetamol"
+          ],
+          "source": "Togo Ord. 42 (traitement 7)"
+        }
+      },
+      "r_ref": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Référer pour avis spécialisé",
+          "resume": "Le tableau ne correspond à aucun cas traité au centre de santé.",
+          "conduite": [
+            "Référer vers l'hôpital pour examen et bilan",
+            "Avant le transfert : traiter la douleur ou la fièvre, hydrater, rassurer le patient"
+          ],
+          "meds": [
+            "paracetamol"
+          ],
+          "source": "Togo Ord. 42"
+        }
+      }
+    }
+  },
+  {
+    "id": "lymphoedeme",
+    "groupe": "Tous",
+    "titre": "Grosse jambe (lymphoedème, éléphantiasis)",
+    "sous": "Togo Ord. 44",
+    "debut": "l0",
+    "noeuds": {
+      "l0": {
+        "q": "Quel tableau ?",
+        "options": [
+          {
+            "t": "Œdème qui garde le godet (origine cardiaque, rénale ou hépatique)",
+            "vers": "algo:oedemes"
+          },
+          {
+            "t": "Rougeur, chaleur, fièvre, peau tendue (érysipèle)",
+            "vers": "algo:peau"
+          },
+          {
+            "t": "Gonflement qui ne garde pas le godet, réversible ou non, avec plis, nodules, plaies ou peau en « moquette » (lymphoedème)",
+            "vers": "l1"
+          }
+        ]
+      },
+      "l1": {
+        "q": "Crise aiguë (douleur, fièvre, rougeur, plaie infectée) ?",
+        "options": [
+          {
+            "t": "Oui",
+            "vers": "r_crise"
+          },
+          {
+            "t": "Non",
+            "vers": "r_auto"
+          }
+        ],
+        "aide": "Stades : 1 œdème réversible le matin ; 2 œdème permanent ; 3 plis peu profonds ; 4 nodules ; 5 plis profonds ; 6 peau en moquette ; 7 difficulté à se déplacer."
+      },
+      "r_auto": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Lymphoedème : auto-prise en charge",
+          "resume": "Hygiène, surélévation, exercices, chaussures.",
+          "conduite": [
+            "Hygiène : laver le membre à partir du genou vers le bas, avec de l'eau et du savon, en insistant sur les plis et entre les orteils, jusqu'à ce que l'eau de rinçage soit propre ; essuyer avec un linge propre. Laver les deux membres, en commençant par le sain",
+            "Traiter les portes d'entrée : nettoyer avec Till solution ou Cytéal solution, puis pommade antibiotique ou antimycosique selon le cas",
+            "Surélever le membre : assis, à hauteur de la hanche ; couché, plus haut que la tête",
+            "Exercices : se lever sur la pointe des pieds, mouvements d'avant en arrière, rotation du pied, 10 à 20 fois, plusieurs fois par jour (pas pendant une crise)",
+            "Porter des chaussures adaptées, pas trop serrées",
+            "Revoir régulièrement pour évaluer le stade et encourager le patient"
+          ],
+          "meds": [],
+          "source": "Togo Ord. 44 (traitement 4.1)"
+        }
+      },
+      "r_crise": {
+        "res": {
+          "niveau": "attention",
+          "titre": "Crise aiguë de lymphoedème",
+          "resume": "Refroidir, repos, antibiotique si plaie infectée.",
+          "conduite": [
+            "Refroidir le membre dans de l'eau froide propre jusqu'à l'arrêt des douleurs",
+            "Paracétamol en cas de fièvre",
+            "Continuer à laver le membre comme d'habitude ; le garder au repos et surélevé",
+            "Plaie infectée : amoxicilline par voie orale ou injection IM",
+            "À ne pas faire : réchauffer le membre, scarifier ou gratter la peau, crever les ampoules, faire des exercices pendant la crise"
+          ],
+          "meds": [
+            "paracetamol",
+            "amoxicilline"
+          ],
+          "source": "Togo Ord. 44 (traitement 4.2 et 4.3)"
+        }
+      }
+    }
   }
 ];
+
+const MOTS_CLES = {
+  "fievre_enf": [
+    "fièvre",
+    "fievre",
+    "température",
+    "temperature",
+    "paludisme",
+    "palu",
+    "corps chaud",
+    "frissons",
+    "convulsion",
+    "enfant chaud",
+    "fébrile"
+  ],
+  "toux_enf": [
+    "toux",
+    "tousse",
+    "respiration rapide",
+    "difficulté respiratoire",
+    "essoufflement",
+    "pneumonie",
+    "bronchite",
+    "rhume",
+    "nez qui coule",
+    "sifflement",
+    "bronchiolite",
+    "enfant tousse"
+  ],
+  "diarrhee_enf": [
+    "diarrhée",
+    "diarrhee",
+    "selles liquides",
+    "selles molles",
+    "dysenterie",
+    "sang dans les selles",
+    "choléra",
+    "déshydratation",
+    "ventre qui coule"
+  ],
+  "gorge_enf": [
+    "mal de gorge",
+    "douleur de gorge",
+    "gorge",
+    "dysphagie",
+    "difficulté à avaler",
+    "avaler",
+    "angine",
+    "amygdales",
+    "amygdalite",
+    "déglutition",
+    "odynophagie",
+    "gorge rouge",
+    "corps étranger gorge",
+    "pharyngite",
+    "refuse de manger douleur"
+  ],
+  "oreille_enf": [
+    "oreille",
+    "otalgie",
+    "écoulement oreille",
+    "otite",
+    "surdité",
+    "bouchon cérumen",
+    "cérumen",
+    "oreillons",
+    "parotide",
+    "tire l'oreille"
+  ],
+  "fievre_adu": [
+    "fièvre",
+    "fievre",
+    "température",
+    "paludisme",
+    "palu",
+    "corps chaud",
+    "frissons",
+    "courbatures",
+    "typhoïde",
+    "méningite",
+    "céphalées fièvre",
+    "maux de tête fièvre"
+  ],
+  "toux_adu": [
+    "toux",
+    "tousse",
+    "pneumonie",
+    "bronchite",
+    "rhume",
+    "grippe",
+    "crachats",
+    "laryngite",
+    "essoufflement",
+    "difficulté à respirer",
+    "douleur thoracique",
+    "tuberculose",
+    "voix rauque"
+  ],
+  "diarrhee_adu": [
+    "diarrhée",
+    "diarrhee",
+    "selles liquides",
+    "dysenterie",
+    "sang dans les selles",
+    "choléra",
+    "typhoïde",
+    "amibes"
+  ],
+  "gorge_adu": [
+    "mal de gorge",
+    "douleur de gorge",
+    "gorge",
+    "dysphagie",
+    "difficulté à avaler",
+    "avaler",
+    "angine",
+    "amygdales",
+    "amygdalite",
+    "déglutition",
+    "odynophagie",
+    "gorge rouge",
+    "corps étranger gorge",
+    "pharyngite",
+    "voix changée",
+    "enrouement"
+  ],
+  "ulcere_adu": [
+    "estomac",
+    "brûlure d'estomac",
+    "brulure estomac",
+    "épigastralgie",
+    "gastrite",
+    "ulcère",
+    "creux de l'estomac",
+    "acidité",
+    "reflux",
+    "pyrosis",
+    "ballonnement",
+    "pylori"
+  ],
+  "morsure": [
+    "morsure",
+    "piqûre",
+    "piqure",
+    "chien",
+    "chat",
+    "singe",
+    "serpent",
+    "scorpion",
+    "araignée",
+    "abeille",
+    "guêpe",
+    "frelon",
+    "rage",
+    "venin",
+    "anaphylaxie",
+    "allergie piqûre"
+  ],
+  "diabete": [
+    "diabète",
+    "diabete",
+    "glycémie",
+    "soif",
+    "polyurie",
+    "uriner souvent",
+    "sucre",
+    "hypoglycémie",
+    "malaise sucre",
+    "soif intense"
+  ],
+  "hta_adu": [
+    "tension",
+    "hypertension",
+    "hta",
+    "tension élevée",
+    "céphalées",
+    "vertiges",
+    "bourdonnements",
+    "maux de tête",
+    "tension artérielle"
+  ],
+  "drepano": [
+    "drépanocytose",
+    "drepanocytose",
+    "crise douloureuse",
+    "douleur des os",
+    "douleur osseuse",
+    "mains pieds gonflés",
+    "ictère",
+    "jaunisse",
+    "ss",
+    "as"
+  ],
+  "ist_adu": [
+    "ist",
+    "écoulement urétral",
+    "ecoulement uretral",
+    "écoulement vaginal",
+    "pertes vaginales",
+    "gonocoque",
+    "chaude-pisse",
+    "syphilis",
+    "chancre",
+    "ulcération génitale",
+    "bubon",
+    "testicule gonflé",
+    "scrotum",
+    "brûlure en urinant",
+    "démangeaisons génitales",
+    "herpès",
+    "pertes blanches",
+    "infection sexuellement transmissible",
+    "plaie génitale"
+  ],
+  "hemorroides": [
+    "hémorroïdes",
+    "hemorroides",
+    "anus",
+    "saignement anal",
+    "douleur anale",
+    "fissure",
+    "rectorragie",
+    "boule anale",
+    "sang selles anus"
+  ],
+  "rhumatisme": [
+    "articulations",
+    "rhumatisme",
+    "arthrose",
+    "goutte",
+    "lombalgie",
+    "lumbago",
+    "dos",
+    "genou",
+    "douleur articulaire",
+    "raa",
+    "gonflement articulation",
+    "mal de dos",
+    "douleur des jambes"
+  ],
+  "peau": [
+    "peau",
+    "démangeaisons",
+    "demangeaisons",
+    "prurit",
+    "éruption",
+    "eruption",
+    "boutons",
+    "gale",
+    "urticaire",
+    "eczéma",
+    "mycose",
+    "zona",
+    "varicelle",
+    "abcès",
+    "furoncle",
+    "érysipèle",
+    "teigne",
+    "impétigo",
+    "plaie",
+    "gratte"
+  ],
+  "abdo_enf": [
+    "douleur abdominale",
+    "ventre",
+    "mal au ventre",
+    "vers",
+    "colique",
+    "constipation",
+    "ballonnement",
+    "enfant ventre"
+  ],
+  "abdo_adu": [
+    "douleur abdominale",
+    "ventre",
+    "mal au ventre",
+    "colique",
+    "constipation",
+    "colique néphrétique",
+    "douleur lombaire",
+    "reins",
+    "appendicite",
+    "douleur du bas ventre"
+  ],
+  "vomissements": [
+    "vomissements",
+    "vomir",
+    "vomit",
+    "nausées",
+    "nausee",
+    "envie de vomir",
+    "vomissements grossesse"
+  ],
+  "dents": [
+    "dent",
+    "dents",
+    "carie",
+    "gencive",
+    "abcès dentaire",
+    "mâchoire",
+    "rage de dents",
+    "joue gonflée",
+    "douleur dentaire",
+    "mal aux dents"
+  ],
+  "oreille_adu": [
+    "oreille",
+    "otalgie",
+    "écoulement oreille",
+    "otite",
+    "surdité",
+    "bouchon cérumen",
+    "cérumen",
+    "oreillons",
+    "parotide",
+    "bourdonnement",
+    "acouphène"
+  ],
+  "asthme": [
+    "asthme",
+    "sifflement",
+    "crise d'asthme",
+    "dyspnée",
+    "essoufflement",
+    "étouffement",
+    "oppression",
+    "respiration sifflante"
+  ],
+  "anemie": [
+    "anémie",
+    "anemie",
+    "pâleur",
+    "paleur",
+    "fatigue",
+    "pâle",
+    "asthénie",
+    "paumes pâles",
+    "faiblesse",
+    "vertiges fatigue"
+  ],
+  "dyspnee_enf": [
+    "difficulté à respirer",
+    "difficultes respiratoires",
+    "dyspnée",
+    "dyspnee",
+    "essoufflement",
+    "respiration difficile",
+    "respiration rapide",
+    "détresse respiratoire",
+    "étouffement",
+    "etouffe",
+    "tirage",
+    "corps étranger gorge",
+    "fausse route"
+  ],
+  "convuls_enf": [
+    "convulsion",
+    "convulsions",
+    "crise convulsive",
+    "crise",
+    "épilepsie",
+    "epilepsie",
+    "spasmes",
+    "raideur",
+    "tétanos",
+    "tetanos",
+    "hypocalcémie",
+    "tétanie",
+    "yeux révulsés",
+    "fièvre convulsion"
+  ],
+  "ictere_enf": [
+    "ictère",
+    "ictere",
+    "jaunisse",
+    "yeux jaunes",
+    "jaune",
+    "nouveau-né jaune",
+    "hépatite",
+    "hepatite",
+    "urines foncées"
+  ],
+  "poids_enf": [
+    "poids faible",
+    "maigreur",
+    "maigre",
+    "amaigrissement",
+    "malnutrition",
+    "dénutrition",
+    "denutrition",
+    "obésité",
+    "obesite",
+    "trop gros",
+    "surpoids",
+    "retard de croissance",
+    "kwashiorkor"
+  ],
+  "oeil_enf": [
+    "œil",
+    "oeil",
+    "yeux",
+    "rouge œil",
+    "oeil rouge",
+    "conjonctivite",
+    "orgelet",
+    "paupière",
+    "vision",
+    "larmoiement",
+    "corps étranger œil",
+    "pus oeil",
+    "blépharite"
+  ],
+  "urinaire_enf": [
+    "urines",
+    "uriner",
+    "urinaire",
+    "pipi",
+    "énurésie",
+    "enurésie",
+    "brûlure en urinant",
+    "phimosis",
+    "prépuce",
+    "bilharziose",
+    "sang dans les urines",
+    "rétention urine",
+    "organes génitaux"
+  ],
+  "dyspnee_adu": [
+    "dyspnée",
+    "dyspnee",
+    "essoufflement",
+    "difficulté à respirer",
+    "respiration difficile",
+    "souffle court",
+    "œdème pulmonaire",
+    "oedeme aigu poumon",
+    "étouffement",
+    "point de côté",
+    "oppression"
+  ],
+  "convuls_adu": [
+    "convulsion",
+    "convulsions",
+    "crise convulsive",
+    "épilepsie",
+    "epilepsie",
+    "éclampsie",
+    "eclampsie",
+    "crise",
+    "perte de connaissance",
+    "mouvements involontaires",
+    "hypoglycémie",
+    "tétanie"
+  ],
+  "ictere_adu": [
+    "ictère",
+    "ictere",
+    "jaunisse",
+    "yeux jaunes",
+    "jaune",
+    "hépatite",
+    "hepatite",
+    "fièvre jaune",
+    "cirrhose",
+    "urines foncées",
+    "foie"
+  ],
+  "amaigrissement": [
+    "amaigrissement",
+    "maigrir",
+    "perte de poids",
+    "poids perdu",
+    "fonte musculaire",
+    "maigreur",
+    "je maigris"
+  ],
+  "bas_ventre_f": [
+    "bas ventre",
+    "bas-ventre",
+    "douleur pelvienne",
+    "douleurs pelviennes",
+    "règles douloureuses",
+    "femme enceinte douleur",
+    "grossesse extra utérine",
+    "avortement",
+    "fausse couche",
+    "appendicite",
+    "hernie",
+    "dysménorrhée",
+    "dysmenorrhee",
+    "endométrite",
+    "fibrome"
+  ],
+  "saignement_vag": [
+    "saignement vaginal",
+    "saignement",
+    "hémorragie vaginale",
+    "hemorragie vaginale",
+    "métrorragie",
+    "metrorragie",
+    "sang vagin",
+    "perte de sang",
+    "règles abondantes",
+    "saigne",
+    "placenta praevia"
+  ],
+  "regles": [
+    "règles",
+    "regles",
+    "menstruations",
+    "aménorrhée",
+    "amenorrhee",
+    "retard de règles",
+    "absence de règles",
+    "ménopause",
+    "menopause",
+    "dysménorrhée",
+    "règles irrégulières",
+    "cycle"
+  ],
+  "sein": [
+    "sein",
+    "seins",
+    "masse sein",
+    "boule sein",
+    "mastite",
+    "abcès sein",
+    "abces du sein",
+    "allaitement douleur",
+    "nodule sein"
+  ],
+  "post_partum": [
+    "accouchement",
+    "après accouchement",
+    "post-partum",
+    "hémorragie du post-partum",
+    "delivrance",
+    "délivrance",
+    "rétention placentaire",
+    "atonie",
+    "saignement après accouchement",
+    "suites de couches"
+  ],
+  "urinaire_adu": [
+    "urines",
+    "uriner",
+    "urinaire",
+    "brûlure en urinant",
+    "brulure mictionnelle",
+    "cystite",
+    "pyélonéphrite",
+    "prostate",
+    "prostatite",
+    "rétention urine",
+    "incontinence",
+    "sang dans les urines",
+    "phimosis",
+    "bilharziose",
+    "envie fréquente d'uriner",
+    "pollakiurie"
+  ],
+  "oeil_adu": [
+    "œil",
+    "oeil",
+    "yeux",
+    "œil rouge",
+    "conjonctivite",
+    "orgelet",
+    "paupière",
+    "vision",
+    "baisse de la vue",
+    "glaucome",
+    "larmoiement",
+    "corps étranger œil",
+    "blépharite"
+  ],
+  "bourse": [
+    "bourse",
+    "bourses",
+    "scrotum",
+    "testicule",
+    "testicules",
+    "orchite",
+    "hydrocèle",
+    "hydrocele",
+    "hernie",
+    "torsion testiculaire",
+    "testicule gonflé"
+  ],
+  "constipation": [
+    "constipation",
+    "constipé",
+    "selles dures",
+    "pas de selles",
+    "fécalome",
+    "lavement",
+    "ballonnement constipation"
+  ],
+  "oedemes": [
+    "œdème",
+    "oedème",
+    "oedeme",
+    "gonflement",
+    "gonflé",
+    "jambes gonflées",
+    "pieds gonflés",
+    "visage bouffi",
+    "ascite",
+    "kwashiorkor",
+    "prééclampsie"
+  ],
+  "intoxication": [
+    "intoxication",
+    "empoisonnement",
+    "poison",
+    "ingestion",
+    "avalé",
+    "alcool",
+    "ivresse",
+    "raticide",
+    "pesticide",
+    "pétrole",
+    "pile",
+    "surdosage",
+    "produit caustique",
+    "eau de javel",
+    "champignon"
+  ],
+  "nez": [
+    "nez",
+    "écoulement nasal",
+    "ecoulement nasal",
+    "nez qui coule",
+    "nez bouché",
+    "rhume",
+    "rhinite",
+    "sinusite",
+    "épistaxis",
+    "epistaxis",
+    "saignement de nez",
+    "éternuement",
+    "allergie nez",
+    "corps étranger nez",
+    "rhinopharyngite"
+  ],
+  "bouche": [
+    "bouche",
+    "plaie bouche",
+    "aphte",
+    "aphtes",
+    "gingivite",
+    "gencive",
+    "gencives",
+    "muguet",
+    "candidose",
+    "herpès",
+    "herpes",
+    "stomatite",
+    "langue",
+    "lèvre",
+    "ulcération bouche",
+    "plaie dans la bouche"
+  ],
+  "lymphoedeme": [
+    "grosse jambe",
+    "lymphoedème",
+    "lymphoedeme",
+    "éléphantiasis",
+    "elephantiasis",
+    "filariose",
+    "jambe gonflée",
+    "gros pied",
+    "jambe énorme"
+  ]
+};
